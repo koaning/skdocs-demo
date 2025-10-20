@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot release highlights 0 22 0</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Release%20Highlights%20for%20scikit-learn%200.22%0A%0A%20%20%20%20..%20currentmodule%3A%3A%20sklearn%0A%0A%20%20%20%20We%20are%20pleased%20to%20announce%20the%20release%20of%20scikit-learn%200.22%2C%20which%20comes%0A%20%20%20%20with%20many%20bug%20fixes%20and%20new%20features!%20We%20detail%20below%20a%20few%20of%20the%20major%0A%20%20%20%20features%20of%20this%20release.%20For%20an%20exhaustive%20list%20of%20all%20the%20changes%2C%20please%0A%20%20%20%20refer%20to%20the%20%60release%20notes%20%3Crelease_notes_0_22%3E%60.%0A%0A%20%20%20%20To%20install%20the%20latest%20version%20(with%20pip)%3A%3A%0A%0A%20%20%20%20%20%20%20%20pip%20install%20--upgrade%20scikit-learn%0A%0A%20%20%20%20or%20with%20conda%3A%3A%0A%0A%20%20%20%20%20%20%20%20conda%20install%20-c%20conda-forge%20scikit-learn%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20New%20plotting%20API%0A%0A%20%20%20%20A%20new%20plotting%20API%20is%20available%20for%20creating%20visualizations.%20This%20new%20API%0A%20%20%20%20allows%20for%20quickly%20adjusting%20the%20visuals%20of%20a%20plot%20without%20involving%20any%0A%20%20%20%20recomputation.%20It%20is%20also%20possible%20to%20add%20different%20plots%20to%20the%20same%0A%20%20%20%20figure.%20The%20following%20example%20illustrates%20%60plot_roc_curve%60%2C%0A%20%20%20%20but%20other%20plots%20utilities%20are%20supported%20like%0A%20%20%20%20%60plot_partial_dependence%60%2C%0A%20%20%20%20%60plot_precision_recall_curve%60%2C%20and%0A%20%20%20%20%60plot_confusion_matrix%60.%20Read%20more%20about%20this%20new%20API%20in%20the%0A%20%20%20%20%60User%20Guide%20%3Cvisualizations%3E%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20matplotlib%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20from%20sklearn.datasets%20import%20make_classification%0A%20%20%20%20from%20sklearn.ensemble%20import%20RandomForestClassifier%0A%20%20%20%20from%20sklearn.metrics%20import%20RocCurveDisplay%0A%20%20%20%20from%20sklearn.model_selection%20import%20train_test_split%0A%20%20%20%20%23%20from%20sklearn.metrics%20import%20plot_roc_curve%0A%20%20%20%20from%20sklearn.svm%20import%20SVC%0A%20%20%20%20from%20sklearn.utils.fixes%20import%20parse_version%0A%20%20%20%20_X%2C%20_y%20%3D%20make_classification(random_state%3D0)%0A%20%20%20%20_X_train%2C%20_X_test%2C%20_y_train%2C%20_y_test%20%3D%20train_test_split(_X%2C%20_y%2C%20random_state%3D42)%0A%20%20%20%20svc%20%3D%20SVC(random_state%3D42)%0A%20%20%20%20svc.fit(_X_train%2C%20_y_train)%0A%20%20%20%20rfc%20%3D%20RandomForestClassifier(random_state%3D42)%0A%20%20%20%20rfc.fit(_X_train%2C%20_y_train)%0A%20%20%20%20svc_disp%20%3D%20RocCurveDisplay.from_estimator(svc%2C%20_X_test%2C%20_y_test)%0A%20%20%20%20rfc_disp%20%3D%20RocCurveDisplay.from_estimator(rfc%2C%20_X_test%2C%20_y_test%2C%20ax%3Dsvc_disp.ax_)%0A%20%20%20%20rfc_disp.figure_.suptitle('ROC%20curve%20comparison')%0A%20%20%20%20%23%20plot_roc_curve%20has%20been%20removed%20in%20version%201.2.%20From%201.2%2C%20use%20RocCurveDisplay%20instead.%0A%20%20%20%20%23%20svc_disp%20%3D%20plot_roc_curve(svc%2C%20X_test%2C%20y_test)%0A%20%20%20%20%23%20rfc_disp%20%3D%20plot_roc_curve(rfc%2C%20X_test%2C%20y_test%2C%20ax%3Dsvc_disp.ax_)%0A%20%20%20%20plt.show()%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20RandomForestClassifier%2C%0A%20%20%20%20%20%20%20%20SVC%2C%0A%20%20%20%20%20%20%20%20make_classification%2C%0A%20%20%20%20%20%20%20%20matplotlib%2C%0A%20%20%20%20%20%20%20%20parse_version%2C%0A%20%20%20%20%20%20%20%20plt%2C%0A%20%20%20%20%20%20%20%20train_test_split%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Stacking%20Classifier%20and%20Regressor%0A%20%20%20%20%3Aclass%3A%60~ensemble.StackingClassifier%60%20and%0A%20%20%20%20%3Aclass%3A%60~ensemble.StackingRegressor%60%0A%20%20%20%20allow%20you%20to%20have%20a%20stack%20of%20estimators%20with%20a%20final%20classifier%20or%0A%20%20%20%20a%20regressor.%0A%20%20%20%20Stacked%20generalization%20consists%20in%20stacking%20the%20output%20of%20individual%0A%20%20%20%20estimators%20and%20use%20a%20classifier%20to%20compute%20the%20final%20prediction.%20Stacking%0A%20%20%20%20allows%20to%20use%20the%20strength%20of%20each%20individual%20estimator%20by%20using%20their%20output%0A%20%20%20%20as%20input%20of%20a%20final%20estimator.%0A%20%20%20%20Base%20estimators%20are%20fitted%20on%20the%20full%20%60%60X%60%60%20while%0A%20%20%20%20the%20final%20estimator%20is%20trained%20using%20cross-validated%20predictions%20of%20the%0A%20%20%20%20base%20estimators%20using%20%60%60cross_val_predict%60%60.%0A%0A%20%20%20%20Read%20more%20in%20the%20%60User%20Guide%20%3Cstacking%3E%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(RandomForestClassifier%2C%20train_test_split)%3A%0A%20%20%20%20from%20sklearn.datasets%20import%20load_iris%0A%20%20%20%20from%20sklearn.ensemble%20import%20StackingClassifier%0A%20%20%20%20from%20sklearn.linear_model%20import%20LogisticRegression%0A%20%20%20%20from%20sklearn.pipeline%20import%20make_pipeline%0A%20%20%20%20from%20sklearn.preprocessing%20import%20StandardScaler%0A%20%20%20%20from%20sklearn.svm%20import%20LinearSVC%0A%20%20%20%20_X%2C%20_y%20%3D%20load_iris(return_X_y%3DTrue)%0A%20%20%20%20estimators%20%3D%20%5B('rf'%2C%20RandomForestClassifier(n_estimators%3D10%2C%20random_state%3D42))%2C%20('svr'%2C%20make_pipeline(StandardScaler()%2C%20LinearSVC(dual%3D'auto'%2C%20random_state%3D42)))%5D%0A%20%20%20%20_clf%20%3D%20StackingClassifier(estimators%3Destimators%2C%20final_estimator%3DLogisticRegression())%0A%20%20%20%20_X_train%2C%20_X_test%2C%20_y_train%2C%20_y_test%20%3D%20train_test_split(_X%2C%20_y%2C%20stratify%3D_y%2C%20random_state%3D42)%0A%20%20%20%20_clf.fit(_X_train%2C%20_y_train).score(_X_test%2C%20_y_test)%0A%20%20%20%20return%20LogisticRegression%2C%20make_pipeline%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Permutation-based%20feature%20importance%0A%0A%20%20%20%20The%20%3Afunc%3A%60inspection.permutation_importance%60%20can%20be%20used%20to%20get%20an%0A%20%20%20%20estimate%20of%20the%20importance%20of%20each%20feature%2C%20for%20any%20fitted%20estimator%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20RandomForestClassifier%2C%0A%20%20%20%20make_classification%2C%0A%20%20%20%20matplotlib%2C%0A%20%20%20%20parse_version%2C%0A%20%20%20%20plt%2C%0A)%3A%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20from%20sklearn.inspection%20import%20permutation_importance%0A%20%20%20%20_X%2C%20_y%20%3D%20make_classification(random_state%3D0%2C%20n_features%3D5%2C%20n_informative%3D3)%0A%20%20%20%20feature_names%20%3D%20np.array(%5Bf'x_%7Bi%7D'%20for%20i%20in%20range(_X.shape%5B1%5D)%5D)%0A%20%20%20%20_rf%20%3D%20RandomForestClassifier(random_state%3D0).fit(_X%2C%20_y)%0A%20%20%20%20result%20%3D%20permutation_importance(_rf%2C%20_X%2C%20_y%2C%20n_repeats%3D10%2C%20random_state%3D0%2C%20n_jobs%3D2)%0A%20%20%20%20fig%2C%20ax%20%3D%20plt.subplots()%0A%20%20%20%20sorted_idx%20%3D%20result.importances_mean.argsort()%0A%20%20%20%20tick_labels_parameter_name%20%3D%20'tick_labels'%20if%20parse_version(matplotlib.__version__)%20%3E%3D%20parse_version('3.9')%20else%20'labels'%0A%20%20%20%20tick_labels_dict%20%3D%20%7Btick_labels_parameter_name%3A%20feature_names%5Bsorted_idx%5D%7D%0A%20%20%20%20ax.boxplot(result.importances%5Bsorted_idx%5D.T%2C%20vert%3DFalse%2C%20**tick_labels_dict)%0A%20%20%20%20ax.set_title('Permutation%20Importance%20of%20each%20feature')%0A%20%20%20%20ax.set_ylabel('Features')%0A%20%20%20%20fig.tight_layout()%0A%20%20%20%20plt.show()%0A%20%20%20%20return%20(np%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Native%20support%20for%20missing%20values%20for%20gradient%20boosting%0A%0A%20%20%20%20The%20%3Aclass%3A%60ensemble.HistGradientBoostingClassifier%60%0A%20%20%20%20and%20%3Aclass%3A%60ensemble.HistGradientBoostingRegressor%60%20now%20have%20native%0A%20%20%20%20support%20for%20missing%20values%20(NaNs).%20This%20means%20that%20there%20is%20no%20need%20for%0A%20%20%20%20imputing%20data%20when%20training%20or%20predicting.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(np)%3A%0A%20%20%20%20from%20sklearn.ensemble%20import%20HistGradientBoostingClassifier%0A%20%20%20%20_X%20%3D%20np.array(%5B0%2C%201%2C%202%2C%20np.nan%5D).reshape(-1%2C%201)%0A%20%20%20%20_y%20%3D%20%5B0%2C%200%2C%201%2C%201%5D%0A%20%20%20%20gbdt%20%3D%20HistGradientBoostingClassifier(min_samples_leaf%3D1).fit(_X%2C%20_y)%0A%20%20%20%20print(gbdt.predict(_X))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Precomputed%20sparse%20nearest%20neighbors%20graph%0A%20%20%20%20Most%20estimators%20based%20on%20nearest%20neighbors%20graphs%20now%20accept%20precomputed%0A%20%20%20%20sparse%20graphs%20as%20input%2C%20to%20reuse%20the%20same%20graph%20for%20multiple%20estimator%20fits.%0A%20%20%20%20To%20use%20this%20feature%20in%20a%20pipeline%2C%20one%20can%20use%20the%20%60memory%60%20parameter%2C%20along%0A%20%20%20%20with%20one%20of%20the%20two%20new%20transformers%2C%0A%20%20%20%20%3Aclass%3A%60neighbors.KNeighborsTransformer%60%20and%0A%20%20%20%20%3Aclass%3A%60neighbors.RadiusNeighborsTransformer%60.%20The%20precomputation%0A%20%20%20%20can%20also%20be%20performed%20by%20custom%20estimators%20to%20use%20alternative%0A%20%20%20%20implementations%2C%20such%20as%20approximate%20nearest%20neighbors%20methods.%0A%20%20%20%20See%20more%20details%20in%20the%20%60User%20Guide%20%3Cneighbors_transformer%3E%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(make_classification%2C%20make_pipeline)%3A%0A%20%20%20%20from%20tempfile%20import%20TemporaryDirectory%0A%20%20%20%20from%20sklearn.manifold%20import%20Isomap%0A%20%20%20%20from%20sklearn.neighbors%20import%20KNeighborsTransformer%0A%20%20%20%20_X%2C%20_y%20%3D%20make_classification(random_state%3D0)%0A%20%20%20%20with%20TemporaryDirectory(prefix%3D'sklearn_cache_')%20as%20tmpdir%3A%0A%20%20%20%20%20%20%20%20estimator%20%3D%20make_pipeline(KNeighborsTransformer(n_neighbors%3D10%2C%20mode%3D'distance')%2C%20Isomap(n_neighbors%3D10%2C%20metric%3D'precomputed')%2C%20memory%3Dtmpdir)%0A%20%20%20%20%20%20%20%20estimator.fit(_X)%0A%20%20%20%20%20%20%20%20estimator.set_params(isomap__n_neighbors%3D5)%0A%20%20%20%20%20%20%20%20estimator.fit(_X)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20KNN%20Based%20Imputation%0A%20%20%20%20We%20now%20support%20imputation%20for%20completing%20missing%20values%20using%20k-Nearest%0A%20%20%20%20Neighbors.%0A%0A%20%20%20%20Each%20sample's%20missing%20values%20are%20imputed%20using%20the%20mean%20value%20from%0A%20%20%20%20%60%60n_neighbors%60%60%20nearest%20neighbors%20found%20in%20the%20training%20set.%20Two%20samples%20are%0A%20%20%20%20close%20if%20the%20features%20that%20neither%20is%20missing%20are%20close.%0A%20%20%20%20By%20default%2C%20a%20euclidean%20distance%20metric%0A%20%20%20%20that%20supports%20missing%20values%2C%0A%20%20%20%20%3Afunc%3A%60~sklearn.metrics.pairwise.nan_euclidean_distances%60%2C%20is%20used%20to%20find%20the%20nearest%0A%20%20%20%20neighbors.%0A%0A%20%20%20%20Read%20more%20in%20the%20%60User%20Guide%20%3Cknnimpute%3E%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(np)%3A%0A%20%20%20%20from%20sklearn.impute%20import%20KNNImputer%0A%20%20%20%20_X%20%3D%20%5B%5B1%2C%202%2C%20np.nan%5D%2C%20%5B3%2C%204%2C%203%5D%2C%20%5Bnp.nan%2C%206%2C%205%5D%2C%20%5B8%2C%208%2C%207%5D%5D%0A%20%20%20%20imputer%20%3D%20KNNImputer(n_neighbors%3D2)%0A%20%20%20%20print(imputer.fit_transform(_X))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Tree%20pruning%0A%0A%20%20%20%20It%20is%20now%20possible%20to%20prune%20most%20tree-based%20estimators%20once%20the%20trees%20are%0A%20%20%20%20built.%20The%20pruning%20is%20based%20on%20minimal%20cost-complexity.%20Read%20more%20in%20the%0A%20%20%20%20%60User%20Guide%20%3Cminimal_cost_complexity_pruning%3E%60%20for%20details.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(RandomForestClassifier%2C%20make_classification%2C%20np)%3A%0A%20%20%20%20_X%2C%20_y%20%3D%20make_classification(random_state%3D0)%0A%20%20%20%20_rf%20%3D%20RandomForestClassifier(random_state%3D0%2C%20ccp_alpha%3D0).fit(_X%2C%20_y)%0A%20%20%20%20print('Average%20number%20of%20nodes%20without%20pruning%20%7B%3A.1f%7D'.format(np.mean(%5Be.tree_.node_count%20for%20e%20in%20_rf.estimators_%5D)))%0A%20%20%20%20_rf%20%3D%20RandomForestClassifier(random_state%3D0%2C%20ccp_alpha%3D0.05).fit(_X%2C%20_y)%0A%20%20%20%20print('Average%20number%20of%20nodes%20with%20pruning%20%7B%3A.1f%7D'.format(np.mean(%5Be.tree_.node_count%20for%20e%20in%20_rf.estimators_%5D)))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Retrieve%20dataframes%20from%20OpenML%0A%20%20%20%20%3Afunc%3A%60datasets.fetch_openml%60%20can%20now%20return%20pandas%20dataframe%20and%20thus%0A%20%20%20%20properly%20handle%20datasets%20with%20heterogeneous%20data%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20from%20sklearn.datasets%20import%20fetch_openml%0A%0A%20%20%20%20titanic%20%3D%20fetch_openml(%22titanic%22%2C%20version%3D1%2C%20as_frame%3DTrue%2C%20parser%3D%22pandas%22)%0A%20%20%20%20print(titanic.data.head()%5B%5B%22pclass%22%2C%20%22embarked%22%5D%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Checking%20scikit-learn%20compatibility%20of%20an%20estimator%0A%20%20%20%20Developers%20can%20check%20the%20compatibility%20of%20their%20scikit-learn%20compatible%0A%20%20%20%20estimators%20using%20%3Afunc%3A%60~utils.estimator_checks.check_estimator%60.%20For%0A%20%20%20%20instance%2C%20the%20%60%60check_estimator(LinearSVC())%60%60%20passes.%0A%0A%20%20%20%20We%20now%20provide%20a%20%60%60pytest%60%60%20specific%20decorator%20which%20allows%20%60%60pytest%60%60%0A%20%20%20%20to%20run%20all%20checks%20independently%20and%20report%20the%20checks%20that%20are%20failing.%0A%0A%20%20%20%20..note%3A%3A%0A%20%20%20%20%20%20This%20entry%20was%20slightly%20updated%20in%20version%200.24%2C%20where%20passing%20classes%0A%20%20%20%20%20%20isn't%20supported%20anymore%3A%20pass%20instances%20instead.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(LogisticRegression)%3A%0A%20%20%20%20from%20sklearn.tree%20import%20DecisionTreeRegressor%0A%20%20%20%20from%20sklearn.utils.estimator_checks%20import%20parametrize_with_checks%0A%0A%20%20%20%20%40parametrize_with_checks(%5BLogisticRegression()%2C%20DecisionTreeRegressor()%5D)%0A%20%20%20%20def%20test_sklearn_compatible_estimator(estimator%2C%20check)%3A%0A%20%20%20%20%20%20%20%20check(estimator)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20ROC%20AUC%20now%20supports%20multiclass%20classification%0A%20%20%20%20The%20%3Afunc%3A%60~sklearn.metrics.roc_auc_score%60%20function%20can%20also%20be%20used%20in%20multi-class%0A%20%20%20%20classification.%20Two%20averaging%20strategies%20are%20currently%20supported%3A%20the%0A%20%20%20%20one-vs-one%20algorithm%20computes%20the%20average%20of%20the%20pairwise%20ROC%20AUC%20scores%2C%20and%0A%20%20%20%20the%20one-vs-rest%20algorithm%20computes%20the%20average%20of%20the%20ROC%20AUC%20scores%20for%20each%0A%20%20%20%20class%20against%20all%20other%20classes.%20In%20both%20cases%2C%20the%20multiclass%20ROC%20AUC%20scores%0A%20%20%20%20are%20computed%20from%20the%20probability%20estimates%20that%20a%20sample%20belongs%20to%20a%0A%20%20%20%20particular%20class%20according%20to%20the%20model.%20The%20OvO%20and%20OvR%20algorithms%20support%0A%20%20%20%20weighting%20uniformly%20(%60%60average%3D'macro'%60%60)%20and%20weighting%20by%20the%20prevalence%0A%20%20%20%20(%60%60average%3D'weighted'%60%60).%0A%0A%20%20%20%20Read%20more%20in%20the%20%60User%20Guide%20%3Croc_metrics%3E%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(SVC%2C%20make_classification)%3A%0A%20%20%20%20from%20sklearn.metrics%20import%20roc_auc_score%0A%20%20%20%20_X%2C%20_y%20%3D%20make_classification(n_classes%3D4%2C%20n_informative%3D16)%0A%20%20%20%20_clf%20%3D%20SVC(decision_function_shape%3D'ovo'%2C%20probability%3DTrue).fit(_X%2C%20_y)%0A%20%20%20%20print(roc_auc_score(_y%2C%20_clf.predict_proba(_X)%2C%20multi_class%3D'ovo'))%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

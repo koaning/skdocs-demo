@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot gradient boosting quantile</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Prediction%20Intervals%20for%20Gradient%20Boosting%20Regression%0A%0A%20%20%20%20This%20example%20shows%20how%20quantile%20regression%20can%20be%20used%20to%20create%20prediction%0A%20%20%20%20intervals.%20See%20%60sphx_glr_auto_examples_ensemble_plot_hgbt_regression.py%60%0A%20%20%20%20for%20an%20example%20showcasing%20some%20other%20features%20of%0A%20%20%20%20%3Aclass%3A%60~ensemble.HistGradientBoostingRegressor%60.%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Generate%20some%20data%20for%20a%20synthetic%20regression%20problem%20by%20applying%20the%0A%20%20%20%20function%20f%20to%20uniformly%20sampled%20random%20inputs.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20numpy%20as%20np%0A%0A%20%20%20%20from%20sklearn.model_selection%20import%20train_test_split%0A%0A%0A%20%20%20%20def%20f(x)%3A%0A%20%20%20%20%20%20%20%20%22%22%22The%20function%20to%20predict.%22%22%22%0A%20%20%20%20%20%20%20%20return%20x%20*%20np.sin(x)%0A%0A%0A%20%20%20%20rng%20%3D%20np.random.RandomState(42)%0A%20%20%20%20X%20%3D%20np.atleast_2d(rng.uniform(0%2C%2010.0%2C%20size%3D1000)).T%0A%20%20%20%20expected_y%20%3D%20f(X).ravel()%0A%20%20%20%20return%20X%2C%20expected_y%2C%20f%2C%20np%2C%20rng%2C%20train_test_split%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20To%20make%20the%20problem%20interesting%2C%20we%20generate%20observations%20of%20the%20target%20y%20as%0A%20%20%20%20the%20sum%20of%20a%20deterministic%20term%20computed%20by%20the%20function%20f%20and%20a%20random%20noise%0A%20%20%20%20term%20that%20follows%20a%20centered%20%5Blog-normal%5D(https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FLog-normal_distribution).%20To%20make%20this%20even%0A%20%20%20%20more%20interesting%20we%20consider%20the%20case%20where%20the%20amplitude%20of%20the%20noise%0A%20%20%20%20depends%20on%20the%20input%20variable%20x%20(heteroscedastic%20noise).%0A%0A%20%20%20%20The%20lognormal%20distribution%20is%20non-symmetric%20and%20long%20tailed%3A%20observing%20large%0A%20%20%20%20outliers%20is%20likely%20but%20it%20is%20impossible%20to%20observe%20small%20outliers.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X%2C%20expected_y%2C%20np%2C%20rng)%3A%0A%20%20%20%20sigma%20%3D%200.5%20%2B%20X.ravel()%20%2F%2010%0A%20%20%20%20noise%20%3D%20rng.lognormal(sigma%3Dsigma)%20-%20np.exp(sigma**2%20%2F%202)%0A%20%20%20%20y%20%3D%20expected_y%20%2B%20noise%0A%20%20%20%20return%20(y%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Split%20into%20train%2C%20test%20datasets%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X%2C%20train_test_split%2C%20y)%3A%0A%20%20%20%20X_train%2C%20X_test%2C%20y_train%2C%20y_test%20%3D%20train_test_split(X%2C%20y%2C%20random_state%3D0)%0A%20%20%20%20return%20X_test%2C%20X_train%2C%20y_test%2C%20y_train%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Fitting%20non-linear%20quantile%20and%20least%20squares%20regressors%0A%0A%20%20%20%20Fit%20gradient%20boosting%20models%20trained%20with%20the%20quantile%20loss%20and%0A%20%20%20%20alpha%3D0.05%2C%200.5%2C%200.95.%0A%0A%20%20%20%20The%20models%20obtained%20for%20alpha%3D0.05%20and%20alpha%3D0.95%20produce%20a%2090%25%20confidence%0A%20%20%20%20interval%20(95%25%20-%205%25%20%3D%2090%25).%0A%0A%20%20%20%20The%20model%20trained%20with%20alpha%3D0.5%20produces%20a%20regression%20of%20the%20median%3A%20on%0A%20%20%20%20average%2C%20there%20should%20be%20the%20same%20number%20of%20target%20observations%20above%20and%0A%20%20%20%20below%20the%20predicted%20values.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_train%2C%20y_train)%3A%0A%20%20%20%20from%20sklearn.ensemble%20import%20GradientBoostingRegressor%0A%20%20%20%20from%20sklearn.metrics%20import%20mean_pinball_loss%2C%20mean_squared_error%0A%20%20%20%20all_models%20%3D%20%7B%7D%0A%20%20%20%20common_params%20%3D%20dict(learning_rate%3D0.05%2C%20n_estimators%3D200%2C%20max_depth%3D2%2C%20min_samples_leaf%3D9%2C%20min_samples_split%3D9)%0A%20%20%20%20for%20_alpha%20in%20%5B0.05%2C%200.5%2C%200.95%5D%3A%0A%20%20%20%20%20%20%20%20_gbr%20%3D%20GradientBoostingRegressor(loss%3D'quantile'%2C%20alpha%3D_alpha%2C%20**common_params)%0A%20%20%20%20%20%20%20%20all_models%5B'q%20%251.2f'%20%25%20_alpha%5D%20%3D%20_gbr.fit(X_train%2C%20y_train)%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20GradientBoostingRegressor%2C%0A%20%20%20%20%20%20%20%20all_models%2C%0A%20%20%20%20%20%20%20%20common_params%2C%0A%20%20%20%20%20%20%20%20mean_pinball_loss%2C%0A%20%20%20%20%20%20%20%20mean_squared_error%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Notice%20that%20%3Aclass%3A%60~sklearn.ensemble.HistGradientBoostingRegressor%60%20is%20much%0A%20%20%20%20faster%20than%20%3Aclass%3A%60~sklearn.ensemble.GradientBoostingRegressor%60%20starting%20with%0A%20%20%20%20intermediate%20datasets%20(%60n_samples%20%3E%3D%2010_000%60)%2C%20which%20is%20not%20the%20case%20of%20the%0A%20%20%20%20present%20example.%0A%0A%20%20%20%20For%20the%20sake%20of%20comparison%2C%20we%20also%20fit%20a%20baseline%20model%20trained%20with%20the%0A%20%20%20%20usual%20(mean)%20squared%20error%20(MSE).%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(GradientBoostingRegressor%2C%20X_train%2C%20all_models%2C%20common_params%2C%20y_train)%3A%0A%20%20%20%20gbr_ls%20%3D%20GradientBoostingRegressor(loss%3D%22squared_error%22%2C%20**common_params)%0A%20%20%20%20all_models%5B%22mse%22%5D%20%3D%20gbr_ls.fit(X_train%2C%20y_train)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Create%20an%20evenly%20spaced%20evaluation%20set%20of%20input%20values%20spanning%20the%20%5B0%2C%2010%5D%0A%20%20%20%20range.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(np)%3A%0A%20%20%20%20xx%20%3D%20np.atleast_2d(np.linspace(0%2C%2010%2C%201000)).T%0A%20%20%20%20return%20(xx%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Plot%20the%20true%20conditional%20mean%20function%20f%2C%20the%20predictions%20of%20the%20conditional%0A%20%20%20%20mean%20(loss%20equals%20squared%20error)%2C%20the%20conditional%20median%20and%20the%20conditional%0A%20%20%20%2090%25%20interval%20(from%205th%20to%2095th%20conditional%20percentiles).%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_test%2C%20all_models%2C%20f%2C%20xx%2C%20y_test)%3A%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20_y_pred%20%3D%20all_models%5B'mse'%5D.predict(xx)%0A%20%20%20%20_y_lower%20%3D%20all_models%5B'q%200.05'%5D.predict(xx)%0A%20%20%20%20_y_upper%20%3D%20all_models%5B'q%200.95'%5D.predict(xx)%0A%20%20%20%20y_med%20%3D%20all_models%5B'q%200.50'%5D.predict(xx)%0A%20%20%20%20_fig%20%3D%20plt.figure(figsize%3D(10%2C%2010))%0A%20%20%20%20plt.plot(xx%2C%20f(xx)%2C%20'black'%2C%20linewidth%3D3%2C%20label%3D'%24f(x)%20%3D%20x%5C%5C%2C%5C%5Csin(x)%24')%0A%20%20%20%20plt.plot(X_test%2C%20y_test%2C%20'b.'%2C%20markersize%3D10%2C%20label%3D'Test%20observations')%0A%20%20%20%20plt.plot(xx%2C%20y_med%2C%20'tab%3Aorange'%2C%20linewidth%3D3%2C%20label%3D'Predicted%20median')%0A%20%20%20%20plt.plot(xx%2C%20_y_pred%2C%20'tab%3Agreen'%2C%20linewidth%3D3%2C%20label%3D'Predicted%20mean')%0A%20%20%20%20plt.fill_between(xx.ravel()%2C%20_y_lower%2C%20_y_upper%2C%20alpha%3D0.4%2C%20label%3D'Predicted%2090%25%20interval')%0A%20%20%20%20plt.xlabel('%24x%24')%0A%20%20%20%20plt.ylabel('%24f(x)%24')%0A%20%20%20%20plt.ylim(-10%2C%2025)%0A%20%20%20%20plt.legend(loc%3D'upper%20left')%0A%20%20%20%20plt.show()%0A%20%20%20%20return%20(plt%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Comparing%20the%20predicted%20median%20with%20the%20predicted%20mean%2C%20we%20note%20that%20the%0A%20%20%20%20median%20is%20on%20average%20below%20the%20mean%20as%20the%20noise%20is%20skewed%20towards%20high%0A%20%20%20%20values%20(large%20outliers).%20The%20median%20estimate%20also%20seems%20to%20be%20smoother%0A%20%20%20%20because%20of%20its%20natural%20robustness%20to%20outliers.%0A%0A%20%20%20%20Also%20observe%20that%20the%20inductive%20bias%20of%20gradient%20boosting%20trees%20is%0A%20%20%20%20unfortunately%20preventing%20our%200.05%20quantile%20to%20fully%20capture%20the%20sinoisoidal%0A%20%20%20%20shape%20of%20the%20signal%2C%20in%20particular%20around%20x%3D8.%20Tuning%20hyper-parameters%20can%0A%20%20%20%20reduce%20this%20effect%20as%20shown%20in%20the%20last%20part%20of%20this%20notebook.%0A%0A%20%20%20%20%23%23%20Analysis%20of%20the%20error%20metrics%0A%0A%20%20%20%20Measure%20the%20models%20with%20%3Afunc%3A%60~sklearn.metrics.mean_squared_error%60%20and%0A%20%20%20%20%3Afunc%3A%60~sklearn.metrics.mean_pinball_loss%60%20metrics%20on%20the%20training%20dataset.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_train%2C%20all_models%2C%20mean_pinball_loss%2C%20mean_squared_error%2C%20y_train)%3A%0A%20%20%20%20import%20pandas%20as%20pd%0A%0A%20%20%20%20def%20highlight_min(x)%3A%0A%20%20%20%20%20%20%20%20x_min%20%3D%20x.min()%0A%20%20%20%20%20%20%20%20return%20%5B'font-weight%3A%20bold'%20if%20v%20%3D%3D%20x_min%20else%20''%20for%20v%20in%20x%5D%0A%20%20%20%20_results%20%3D%20%5B%5D%0A%20%20%20%20for%20_name%2C%20_gbr%20in%20sorted(all_models.items())%3A%0A%20%20%20%20%20%20%20%20_metrics%20%3D%20%7B'model'%3A%20_name%7D%0A%20%20%20%20%20%20%20%20_y_pred%20%3D%20_gbr.predict(X_train)%0A%20%20%20%20%20%20%20%20for%20_alpha%20in%20%5B0.05%2C%200.5%2C%200.95%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_metrics%5B'pbl%3D%251.2f'%20%25%20_alpha%5D%20%3D%20mean_pinball_loss(y_train%2C%20_y_pred%2C%20alpha%3D_alpha)%0A%20%20%20%20%20%20%20%20_metrics%5B'MSE'%5D%20%3D%20mean_squared_error(y_train%2C%20_y_pred)%0A%20%20%20%20%20%20%20%20_results.append(_metrics)%0A%20%20%20%20pd.DataFrame(_results).set_index('model').style.apply(highlight_min)%0A%20%20%20%20return%20highlight_min%2C%20pd%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20One%20column%20shows%20all%20models%20evaluated%20by%20the%20same%20metric.%20The%20minimum%20number%0A%20%20%20%20on%20a%20column%20should%20be%20obtained%20when%20the%20model%20is%20trained%20and%20measured%20with%0A%20%20%20%20the%20same%20metric.%20This%20should%20be%20always%20the%20case%20on%20the%20training%20set%20if%20the%0A%20%20%20%20training%20converged.%0A%0A%20%20%20%20Note%20that%20because%20the%20target%20distribution%20is%20asymmetric%2C%20the%20expected%0A%20%20%20%20conditional%20mean%20and%20conditional%20median%20are%20significantly%20different%20and%0A%20%20%20%20therefore%20one%20could%20not%20use%20the%20squared%20error%20model%20get%20a%20good%20estimation%20of%0A%20%20%20%20the%20conditional%20median%20nor%20the%20converse.%0A%0A%20%20%20%20If%20the%20target%20distribution%20were%20symmetric%20and%20had%20no%20outliers%20(e.g.%20with%20a%0A%20%20%20%20Gaussian%20noise)%2C%20then%20median%20estimator%20and%20the%20least%20squares%20estimator%20would%0A%20%20%20%20have%20yielded%20similar%20predictions.%0A%0A%20%20%20%20We%20then%20do%20the%20same%20on%20the%20test%20set.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20X_test%2C%0A%20%20%20%20all_models%2C%0A%20%20%20%20highlight_min%2C%0A%20%20%20%20mean_pinball_loss%2C%0A%20%20%20%20mean_squared_error%2C%0A%20%20%20%20pd%2C%0A%20%20%20%20y_test%2C%0A)%3A%0A%20%20%20%20_results%20%3D%20%5B%5D%0A%20%20%20%20for%20_name%2C%20_gbr%20in%20sorted(all_models.items())%3A%0A%20%20%20%20%20%20%20%20_metrics%20%3D%20%7B'model'%3A%20_name%7D%0A%20%20%20%20%20%20%20%20_y_pred%20%3D%20_gbr.predict(X_test)%0A%20%20%20%20%20%20%20%20for%20_alpha%20in%20%5B0.05%2C%200.5%2C%200.95%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_metrics%5B'pbl%3D%251.2f'%20%25%20_alpha%5D%20%3D%20mean_pinball_loss(y_test%2C%20_y_pred%2C%20alpha%3D_alpha)%0A%20%20%20%20%20%20%20%20_metrics%5B'MSE'%5D%20%3D%20mean_squared_error(y_test%2C%20_y_pred)%0A%20%20%20%20%20%20%20%20_results.append(_metrics)%0A%20%20%20%20pd.DataFrame(_results).set_index('model').style.apply(highlight_min)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Errors%20are%20higher%20meaning%20the%20models%20slightly%20overfitted%20the%20data.%20It%20still%0A%20%20%20%20shows%20that%20the%20best%20test%20metric%20is%20obtained%20when%20the%20model%20is%20trained%20by%0A%20%20%20%20minimizing%20this%20same%20metric.%0A%0A%20%20%20%20Note%20that%20the%20conditional%20median%20estimator%20is%20competitive%20with%20the%20squared%0A%20%20%20%20error%20estimator%20in%20terms%20of%20MSE%20on%20the%20test%20set%3A%20this%20can%20be%20explained%20by%0A%20%20%20%20the%20fact%20the%20squared%20error%20estimator%20is%20very%20sensitive%20to%20large%20outliers%0A%20%20%20%20which%20can%20cause%20significant%20overfitting.%20This%20can%20be%20seen%20on%20the%20right%20hand%0A%20%20%20%20side%20of%20the%20previous%20plot.%20The%20conditional%20median%20estimator%20is%20biased%0A%20%20%20%20(underestimation%20for%20this%20asymmetric%20noise)%20but%20is%20also%20naturally%20robust%20to%0A%20%20%20%20outliers%20and%20overfits%20less.%0A%0A%0A%20%20%20%20%23%23%20Calibration%20of%20the%20confidence%20interval%0A%0A%20%20%20%20We%20can%20also%20evaluate%20the%20ability%20of%20the%20two%20extreme%20quantile%20estimators%20at%0A%20%20%20%20producing%20a%20well-calibrated%20conditional%2090%25-confidence%20interval.%0A%0A%20%20%20%20To%20do%20this%20we%20can%20compute%20the%20fraction%20of%20observations%20that%20fall%20between%20the%0A%20%20%20%20predictions%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_train%2C%20all_models%2C%20np%2C%20y_train)%3A%0A%20%20%20%20def%20coverage_fraction(y%2C%20y_low%2C%20y_high)%3A%0A%20%20%20%20%20%20%20%20return%20np.mean(np.logical_and(y%20%3E%3D%20y_low%2C%20y%20%3C%3D%20y_high))%0A%0A%0A%20%20%20%20coverage_fraction(%0A%20%20%20%20%20%20%20%20y_train%2C%0A%20%20%20%20%20%20%20%20all_models%5B%22q%200.05%22%5D.predict(X_train)%2C%0A%20%20%20%20%20%20%20%20all_models%5B%22q%200.95%22%5D.predict(X_train)%2C%0A%20%20%20%20)%0A%20%20%20%20return%20(coverage_fraction%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20On%20the%20training%20set%20the%20calibration%20is%20very%20close%20to%20the%20expected%20coverage%0A%20%20%20%20value%20for%20a%2090%25%20confidence%20interval.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_test%2C%20all_models%2C%20coverage_fraction%2C%20y_test)%3A%0A%20%20%20%20coverage_fraction(%0A%20%20%20%20%20%20%20%20y_test%2C%20all_models%5B%22q%200.05%22%5D.predict(X_test)%2C%20all_models%5B%22q%200.95%22%5D.predict(X_test)%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20On%20the%20test%20set%2C%20the%20estimated%20confidence%20interval%20is%20slightly%20too%20narrow.%0A%20%20%20%20Note%2C%20however%2C%20that%20we%20would%20need%20to%20wrap%20those%20metrics%20in%20a%20cross-validation%0A%20%20%20%20loop%20to%20assess%20their%20variability%20under%20data%20resampling.%0A%0A%20%20%20%20%23%23%20Tuning%20the%20hyper-parameters%20of%20the%20quantile%20regressors%0A%0A%20%20%20%20In%20the%20plot%20above%2C%20we%20observed%20that%20the%205th%20percentile%20regressor%20seems%20to%0A%20%20%20%20underfit%20and%20could%20not%20adapt%20to%20sinusoidal%20shape%20of%20the%20signal.%0A%0A%20%20%20%20The%20hyper-parameters%20of%20the%20model%20were%20approximately%20hand-tuned%20for%20the%0A%20%20%20%20median%20regressor%20and%20there%20is%20no%20reason%20that%20the%20same%20hyper-parameters%20are%0A%20%20%20%20suitable%20for%20the%205th%20percentile%20regressor.%0A%0A%20%20%20%20To%20confirm%20this%20hypothesis%2C%20we%20tune%20the%20hyper-parameters%20of%20a%20new%20regressor%0A%20%20%20%20of%20the%205th%20percentile%20by%20selecting%20the%20best%20model%20parameters%20by%0A%20%20%20%20cross-validation%20on%20the%20pinball%20loss%20with%20alpha%3D0.05%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(GradientBoostingRegressor%2C%20X_train%2C%20mean_pinball_loss%2C%20y_train)%3A%0A%20%20%20%20from%20pprint%20import%20pprint%0A%20%20%20%20from%20sklearn.experimental%20import%20enable_halving_search_cv%0A%20%20%20%20from%20sklearn.metrics%20import%20make_scorer%20%20%23%20noqa%3A%20F401%0A%20%20%20%20from%20sklearn.model_selection%20import%20HalvingRandomSearchCV%0A%20%20%20%20param_grid%20%3D%20dict(learning_rate%3D%5B0.05%2C%200.1%2C%200.2%5D%2C%20max_depth%3D%5B2%2C%205%2C%2010%5D%2C%20min_samples_leaf%3D%5B1%2C%205%2C%2010%2C%2020%5D%2C%20min_samples_split%3D%5B5%2C%2010%2C%2020%2C%2030%2C%2050%5D)%0A%20%20%20%20_alpha%20%3D%200.05%0A%20%20%20%20neg_mean_pinball_loss_05p_scorer%20%3D%20make_scorer(mean_pinball_loss%2C%20alpha%3D_alpha%2C%20greater_is_better%3DFalse)%0A%20%20%20%20_gbr%20%3D%20GradientBoostingRegressor(loss%3D'quantile'%2C%20alpha%3D_alpha%2C%20random_state%3D0)%0A%20%20%20%20search_05p%20%3D%20HalvingRandomSearchCV(_gbr%2C%20param_grid%2C%20resource%3D'n_estimators'%2C%20max_resources%3D250%2C%20min_resources%3D50%2C%20scoring%3Dneg_mean_pinball_loss_05p_scorer%2C%20n_jobs%3D2%2C%20random_state%3D0).fit(X_train%2C%20y_train)%0A%20%20%20%20pprint(search_05p.best_params_)%20%20%23%20maximize%20the%20negative%20loss%0A%20%20%20%20return%20make_scorer%2C%20pprint%2C%20search_05p%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20We%20observe%20that%20the%20hyper-parameters%20that%20were%20hand-tuned%20for%20the%20median%0A%20%20%20%20regressor%20are%20in%20the%20same%20range%20as%20the%20hyper-parameters%20suitable%20for%20the%205th%0A%20%20%20%20percentile%20regressor.%0A%0A%20%20%20%20Let's%20now%20tune%20the%20hyper-parameters%20for%20the%2095th%20percentile%20regressor.%20We%0A%20%20%20%20need%20to%20redefine%20the%20%60scoring%60%20metric%20used%20to%20select%20the%20best%20model%2C%20along%0A%20%20%20%20with%20adjusting%20the%20alpha%20parameter%20of%20the%20inner%20gradient%20boosting%20estimator%0A%20%20%20%20itself%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_train%2C%20make_scorer%2C%20mean_pinball_loss%2C%20pprint%2C%20search_05p%2C%20y_train)%3A%0A%20%20%20%20from%20sklearn.base%20import%20clone%0A%20%20%20%20_alpha%20%3D%200.95%0A%20%20%20%20neg_mean_pinball_loss_95p_scorer%20%3D%20make_scorer(mean_pinball_loss%2C%20alpha%3D_alpha%2C%20greater_is_better%3DFalse)%0A%20%20%20%20search_95p%20%3D%20clone(search_05p).set_params(estimator__alpha%3D_alpha%2C%20scoring%3Dneg_mean_pinball_loss_95p_scorer)%0A%20%20%20%20search_95p.fit(X_train%2C%20y_train)%0A%20%20%20%20pprint(search_95p.best_params_)%20%20%23%20maximize%20the%20negative%20loss%0A%20%20%20%20return%20(search_95p%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20The%20result%20shows%20that%20the%20hyper-parameters%20for%20the%2095th%20percentile%20regressor%0A%20%20%20%20identified%20by%20the%20search%20procedure%20are%20roughly%20in%20the%20same%20range%20as%20the%20hand-tuned%0A%20%20%20%20hyper-parameters%20for%20the%20median%20regressor%20and%20the%20hyper-parameters%0A%20%20%20%20identified%20by%20the%20search%20procedure%20for%20the%205th%20percentile%20regressor.%20However%2C%0A%20%20%20%20the%20hyper-parameter%20searches%20did%20lead%20to%20an%20improved%2090%25%20confidence%20interval%0A%20%20%20%20that%20is%20comprised%20by%20the%20predictions%20of%20those%20two%20tuned%20quantile%20regressors.%0A%20%20%20%20Note%20that%20the%20prediction%20of%20the%20upper%2095th%20percentile%20has%20a%20much%20coarser%20shape%0A%20%20%20%20than%20the%20prediction%20of%20the%20lower%205th%20percentile%20because%20of%20the%20outliers%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_test%2C%20f%2C%20plt%2C%20search_05p%2C%20search_95p%2C%20xx%2C%20y_test)%3A%0A%20%20%20%20_y_lower%20%3D%20search_05p.predict(xx)%0A%20%20%20%20_y_upper%20%3D%20search_95p.predict(xx)%0A%20%20%20%20_fig%20%3D%20plt.figure(figsize%3D(10%2C%2010))%0A%20%20%20%20plt.plot(xx%2C%20f(xx)%2C%20'black'%2C%20linewidth%3D3%2C%20label%3D'%24f(x)%20%3D%20x%5C%5C%2C%5C%5Csin(x)%24')%0A%20%20%20%20plt.plot(X_test%2C%20y_test%2C%20'b.'%2C%20markersize%3D10%2C%20label%3D'Test%20observations')%0A%20%20%20%20plt.fill_between(xx.ravel()%2C%20_y_lower%2C%20_y_upper%2C%20alpha%3D0.4%2C%20label%3D'Predicted%2090%25%20interval')%0A%20%20%20%20plt.xlabel('%24x%24')%0A%20%20%20%20plt.ylabel('%24f(x)%24')%0A%20%20%20%20plt.ylim(-10%2C%2025)%0A%20%20%20%20plt.legend(loc%3D'upper%20left')%0A%20%20%20%20plt.title('Prediction%20with%20tuned%20hyper-parameters')%0A%20%20%20%20plt.show()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20The%20plot%20looks%20qualitatively%20better%20than%20for%20the%20untuned%20models%2C%20especially%0A%20%20%20%20for%20the%20shape%20of%20the%20of%20lower%20quantile.%0A%0A%20%20%20%20We%20now%20quantitatively%20evaluate%20the%20joint-calibration%20of%20the%20pair%20of%0A%20%20%20%20estimators%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_train%2C%20coverage_fraction%2C%20search_05p%2C%20search_95p%2C%20y_train)%3A%0A%20%20%20%20coverage_fraction(y_train%2C%20search_05p.predict(X_train)%2C%20search_95p.predict(X_train))%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_test%2C%20coverage_fraction%2C%20search_05p%2C%20search_95p%2C%20y_test)%3A%0A%20%20%20%20coverage_fraction(y_test%2C%20search_05p.predict(X_test)%2C%20search_95p.predict(X_test))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20The%20calibration%20of%20the%20tuned%20pair%20is%20sadly%20not%20better%20on%20the%20test%20set%3A%20the%0A%20%20%20%20width%20of%20the%20estimated%20confidence%20interval%20is%20still%20too%20narrow.%0A%0A%20%20%20%20Again%2C%20we%20would%20need%20to%20wrap%20this%20study%20in%20a%20cross-validation%20loop%20to%0A%20%20%20%20better%20assess%20the%20variability%20of%20those%20estimates.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

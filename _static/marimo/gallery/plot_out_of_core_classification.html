@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot out of core classification</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Out-of-core%20classification%20of%20text%20documents%0A%0A%20%20%20%20This%20is%20an%20example%20showing%20how%20scikit-learn%20can%20be%20used%20for%20classification%0A%20%20%20%20using%20an%20out-of-core%20approach%3A%20learning%20from%20data%20that%20doesn't%20fit%20into%20main%0A%20%20%20%20memory.%20We%20make%20use%20of%20an%20online%20classifier%2C%20i.e.%2C%20one%20that%20supports%20the%0A%20%20%20%20partial_fit%20method%2C%20that%20will%20be%20fed%20with%20batches%20of%20examples.%20To%20guarantee%0A%20%20%20%20that%20the%20features%20space%20remains%20the%20same%20over%20time%20we%20leverage%20a%0A%20%20%20%20HashingVectorizer%20that%20will%20project%20each%20example%20into%20the%20same%20feature%20space.%0A%20%20%20%20This%20is%20especially%20useful%20in%20the%20case%20of%20text%20classification%20where%20new%0A%20%20%20%20features%20(words)%20may%20appear%20in%20each%20batch.%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%0A%20%20%20%20import%20itertools%0A%20%20%20%20import%20re%0A%20%20%20%20import%20sys%0A%20%20%20%20import%20tarfile%0A%20%20%20%20import%20time%0A%20%20%20%20from%20hashlib%20import%20sha256%0A%20%20%20%20from%20html.parser%20import%20HTMLParser%0A%20%20%20%20from%20pathlib%20import%20Path%0A%20%20%20%20from%20urllib.request%20import%20urlretrieve%0A%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20from%20matplotlib%20import%20rcParams%0A%0A%20%20%20%20from%20sklearn.datasets%20import%20get_data_home%0A%20%20%20%20from%20sklearn.feature_extraction.text%20import%20HashingVectorizer%0A%20%20%20%20from%20sklearn.linear_model%20import%20Perceptron%2C%20SGDClassifier%0A%20%20%20%20from%20sklearn.naive_bayes%20import%20MultinomialNB%0A%0A%0A%20%20%20%20def%20_not_in_sphinx()%3A%0A%20%20%20%20%20%20%20%20%23%20Hack%20to%20detect%20whether%20we%20are%20running%20by%20the%20sphinx%20builder%0A%20%20%20%20%20%20%20%20return%20%22__file__%22%20in%20globals()%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20HTMLParser%2C%0A%20%20%20%20%20%20%20%20HashingVectorizer%2C%0A%20%20%20%20%20%20%20%20MultinomialNB%2C%0A%20%20%20%20%20%20%20%20Path%2C%0A%20%20%20%20%20%20%20%20Perceptron%2C%0A%20%20%20%20%20%20%20%20SGDClassifier%2C%0A%20%20%20%20%20%20%20%20get_data_home%2C%0A%20%20%20%20%20%20%20%20itertools%2C%0A%20%20%20%20%20%20%20%20np%2C%0A%20%20%20%20%20%20%20%20plt%2C%0A%20%20%20%20%20%20%20%20rcParams%2C%0A%20%20%20%20%20%20%20%20re%2C%0A%20%20%20%20%20%20%20%20sha256%2C%0A%20%20%20%20%20%20%20%20sys%2C%0A%20%20%20%20%20%20%20%20tarfile%2C%0A%20%20%20%20%20%20%20%20time%2C%0A%20%20%20%20%20%20%20%20urlretrieve%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Reuters%20Dataset%20related%20routines%0A%0A%20%20%20%20The%20dataset%20used%20in%20this%20example%20is%20Reuters-21578%20as%20provided%20by%20the%20UCI%20ML%0A%20%20%20%20repository.%20It%20will%20be%20automatically%20downloaded%20and%20uncompressed%20on%20first%0A%20%20%20%20run.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(HTMLParser%2C%20Path%2C%20get_data_home%2C%20re%2C%20sha256%2C%20sys%2C%20tarfile%2C%20urlretrieve)%3A%0A%20%20%20%20class%20ReutersParser(HTMLParser)%3A%0A%20%20%20%20%20%20%20%20%22%22%22Utility%20class%20to%20parse%20a%20SGML%20file%20and%20yield%20documents%20one%20at%20a%20time.%22%22%22%0A%0A%20%20%20%20%20%20%20%20def%20__init__(self%2C%20encoding%3D%22latin-1%22)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20HTMLParser.__init__(self)%0A%20%20%20%20%20%20%20%20%20%20%20%20self._reset()%0A%20%20%20%20%20%20%20%20%20%20%20%20self.encoding%20%3D%20encoding%0A%0A%20%20%20%20%20%20%20%20def%20handle_starttag(self%2C%20tag%2C%20attrs)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20method%20%3D%20%22start_%22%20%2B%20tag%0A%20%20%20%20%20%20%20%20%20%20%20%20getattr(self%2C%20method%2C%20lambda%20x%3A%20None)(attrs)%0A%0A%20%20%20%20%20%20%20%20def%20handle_endtag(self%2C%20tag)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20method%20%3D%20%22end_%22%20%2B%20tag%0A%20%20%20%20%20%20%20%20%20%20%20%20getattr(self%2C%20method%2C%20lambda%3A%20None)()%0A%0A%20%20%20%20%20%20%20%20def%20_reset(self)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.in_title%20%3D%200%0A%20%20%20%20%20%20%20%20%20%20%20%20self.in_body%20%3D%200%0A%20%20%20%20%20%20%20%20%20%20%20%20self.in_topics%20%3D%200%0A%20%20%20%20%20%20%20%20%20%20%20%20self.in_topic_d%20%3D%200%0A%20%20%20%20%20%20%20%20%20%20%20%20self.title%20%3D%20%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20self.body%20%3D%20%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20self.topics%20%3D%20%5B%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20self.topic_d%20%3D%20%22%22%0A%0A%20%20%20%20%20%20%20%20def%20parse(self%2C%20fd)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.docs%20%3D%20%5B%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20chunk%20in%20fd%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20self.feed(chunk.decode(self.encoding))%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20for%20doc%20in%20self.docs%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20yield%20doc%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20self.docs%20%3D%20%5B%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20self.close()%0A%0A%20%20%20%20%20%20%20%20def%20handle_data(self%2C%20data)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20self.in_body%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20self.body%20%2B%3D%20data%0A%20%20%20%20%20%20%20%20%20%20%20%20elif%20self.in_title%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20self.title%20%2B%3D%20data%0A%20%20%20%20%20%20%20%20%20%20%20%20elif%20self.in_topic_d%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20self.topic_d%20%2B%3D%20data%0A%0A%20%20%20%20%20%20%20%20def%20start_reuters(self%2C%20attributes)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20pass%0A%0A%20%20%20%20%20%20%20%20def%20end_reuters(self)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.body%20%3D%20re.sub(r%22%5Cs%2B%22%2C%20r%22%20%22%2C%20self.body)%0A%20%20%20%20%20%20%20%20%20%20%20%20self.docs.append(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%22title%22%3A%20self.title%2C%20%22body%22%3A%20self.body%2C%20%22topics%22%3A%20self.topics%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20self._reset()%0A%0A%20%20%20%20%20%20%20%20def%20start_title(self%2C%20attributes)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.in_title%20%3D%201%0A%0A%20%20%20%20%20%20%20%20def%20end_title(self)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.in_title%20%3D%200%0A%0A%20%20%20%20%20%20%20%20def%20start_body(self%2C%20attributes)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.in_body%20%3D%201%0A%0A%20%20%20%20%20%20%20%20def%20end_body(self)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.in_body%20%3D%200%0A%0A%20%20%20%20%20%20%20%20def%20start_topics(self%2C%20attributes)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.in_topics%20%3D%201%0A%0A%20%20%20%20%20%20%20%20def%20end_topics(self)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.in_topics%20%3D%200%0A%0A%20%20%20%20%20%20%20%20def%20start_d(self%2C%20attributes)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.in_topic_d%20%3D%201%0A%0A%20%20%20%20%20%20%20%20def%20end_d(self)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.in_topic_d%20%3D%200%0A%20%20%20%20%20%20%20%20%20%20%20%20self.topics.append(self.topic_d)%0A%20%20%20%20%20%20%20%20%20%20%20%20self.topic_d%20%3D%20%22%22%0A%0A%0A%20%20%20%20def%20stream_reuters_documents(data_path%3DNone)%3A%0A%20%20%20%20%20%20%20%20%22%22%22Iterate%20over%20documents%20of%20the%20Reuters%20dataset.%0A%0A%20%20%20%20%20%20%20%20The%20Reuters%20archive%20will%20automatically%20be%20downloaded%20and%20uncompressed%20if%0A%20%20%20%20%20%20%20%20the%20%60data_path%60%20directory%20does%20not%20exist.%0A%0A%20%20%20%20%20%20%20%20Documents%20are%20represented%20as%20dictionaries%20with%20'body'%20(str)%2C%0A%20%20%20%20%20%20%20%20'title'%20(str)%2C%20'topics'%20(list(str))%20keys.%0A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%0A%20%20%20%20%20%20%20%20DOWNLOAD_URL%20%3D%20%22https%3A%2F%2Fkdd.ics.uci.edu%2Fdatabases%2Freuters21578%2Freuters21578.tar.gz%22%0A%20%20%20%20%20%20%20%20ARCHIVE_SHA256%20%3D%20%223bae43c9b14e387f76a61b6d82bf98a4fb5d3ef99ef7e7075ff2ccbcf59f9d30%22%0A%20%20%20%20%20%20%20%20ARCHIVE_FILENAME%20%3D%20%22reuters21578.tar.gz%22%0A%0A%20%20%20%20%20%20%20%20if%20data_path%20is%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20data_path%20%3D%20Path(get_data_home())%20%2F%20%22reuters%22%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20data_path%20%3D%20Path(data_path)%0A%20%20%20%20%20%20%20%20if%20not%20data_path.exists()%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22Download%20the%20dataset.%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%22downloading%20dataset%20(once%20and%20for%20all)%20into%20%25s%22%20%25%20data_path)%0A%20%20%20%20%20%20%20%20%20%20%20%20data_path.mkdir(parents%3DTrue%2C%20exist_ok%3DTrue)%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20def%20progress(blocknum%2C%20bs%2C%20size)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20total_sz_mb%20%3D%20%22%25.2f%20MB%22%20%25%20(size%20%2F%201e6)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20current_sz_mb%20%3D%20%22%25.2f%20MB%22%20%25%20((blocknum%20*%20bs)%20%2F%201e6)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20_not_in_sphinx()%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20sys.stdout.write(%22%5Crdownloaded%20%25s%20%2F%20%25s%22%20%25%20(current_sz_mb%2C%20total_sz_mb))%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20archive_path%20%3D%20data_path%20%2F%20ARCHIVE_FILENAME%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20urlretrieve(DOWNLOAD_URL%2C%20filename%3Darchive_path%2C%20reporthook%3Dprogress)%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20_not_in_sphinx()%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20sys.stdout.write(%22%5Cr%22)%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Check%20that%20the%20archive%20was%20not%20tampered%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20assert%20sha256(archive_path.read_bytes()).hexdigest()%20%3D%3D%20ARCHIVE_SHA256%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%22untarring%20Reuters%20dataset...%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20with%20tarfile.open(archive_path%2C%20%22r%3Agz%22)%20as%20fp%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20fp.extractall(data_path%2C%20filter%3D%22data%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%22done.%22)%0A%0A%20%20%20%20%20%20%20%20parser%20%3D%20ReutersParser()%0A%20%20%20%20%20%20%20%20for%20filename%20in%20data_path.glob(%22*.sgm%22)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20doc%20in%20parser.parse(open(filename%2C%20%22rb%22))%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20yield%20doc%0A%20%20%20%20return%20(stream_reuters_documents%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Main%0A%0A%20%20%20%20Create%20the%20vectorizer%20and%20limit%20the%20number%20of%20features%20to%20a%20reasonable%0A%20%20%20%20maximum%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20HashingVectorizer%2C%0A%20%20%20%20MultinomialNB%2C%0A%20%20%20%20Perceptron%2C%0A%20%20%20%20SGDClassifier%2C%0A%20%20%20%20itertools%2C%0A%20%20%20%20np%2C%0A%20%20%20%20stream_reuters_documents%2C%0A%20%20%20%20time%2C%0A)%3A%0A%20%20%20%20vectorizer%20%3D%20HashingVectorizer(decode_error%3D'ignore'%2C%20n_features%3D2%20**%2018%2C%20alternate_sign%3DFalse)%0A%20%20%20%20data_stream%20%3D%20stream_reuters_documents()%0A%20%20%20%20all_classes%20%3D%20np.array(%5B0%2C%201%5D)%0A%20%20%20%20positive_class%20%3D%20'acq'%0A%20%20%20%20partial_fit_classifiers%20%3D%20%7B'SGD'%3A%20SGDClassifier(max_iter%3D5)%2C%20'Perceptron'%3A%20Perceptron()%2C%20'NB%20Multinomial'%3A%20MultinomialNB(alpha%3D0.01)%2C%20'Passive-Aggressive'%3A%20SGDClassifier(loss%3D'hinge'%2C%20penalty%3DNone%2C%20learning_rate%3D'pa1'%2C%20eta0%3D1.0)%7D%0A%20%20%20%20%23%20Iterator%20over%20parsed%20Reuters%20SGML%20files.%0A%0A%20%20%20%20def%20get_minibatch(doc_iter%2C%20size%2C%20pos_class%3Dpositive_class)%3A%0A%20%20%20%20%23%20We%20learn%20a%20binary%20classification%20between%20the%20%22acq%22%20class%20and%20all%20the%20others.%0A%20%20%20%20%23%20%22acq%22%20was%20chosen%20as%20it%20is%20more%20or%20less%20evenly%20distributed%20in%20the%20Reuters%0A%20%20%20%20%23%20files.%20For%20other%20datasets%2C%20one%20should%20take%20care%20of%20creating%20a%20test%20set%20with%0A%20%20%20%20%23%20a%20realistic%20portion%20of%20positive%20instances.%0A%20%20%20%20%20%20%20%20%22%22%22Extract%20a%20minibatch%20of%20examples%2C%20return%20a%20tuple%20X_text%2C%20y.%0A%0A%20%20%20%20%20%20%20%20Note%3A%20size%20is%20before%20excluding%20invalid%20docs%20with%20no%20topics%20assigned.%0A%20%20%20%20%23%20Here%20are%20some%20classifiers%20that%20support%20the%20%60partial_fit%60%20method%0A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20data%20%3D%20%5B('%7Btitle%7D%5Cn%5Cn%7Bbody%7D'.format(**doc)%2C%20pos_class%20in%20doc%5B'topics'%5D)%20for%20doc%20in%20itertools.islice(doc_iter%2C%20size)%20if%20doc%5B'topics'%5D%5D%0A%20%20%20%20%20%20%20%20if%20not%20len(data)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20(np.asarray(%5B%5D%2C%20dtype%3Dint)%2C%20np.asarray(%5B%5D%2C%20dtype%3Dint))%0A%20%20%20%20%20%20%20%20X_text%2C%20y%20%3D%20zip(*data)%0A%20%20%20%20%20%20%20%20return%20(X_text%2C%20np.asarray(y%2C%20dtype%3Dint))%0A%0A%20%20%20%20def%20iter_minibatches(doc_iter%2C%20minibatch_size)%3A%0A%20%20%20%20%20%20%20%20%22%22%22Generator%20of%20minibatches.%22%22%22%0A%20%20%20%20%20%20%20%20X_text%2C%20y%20%3D%20get_minibatch(doc_iter%2C%20minibatch_size)%0A%20%20%20%20%20%20%20%20while%20len(X_text)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20yield%20(X_text%2C%20y)%0A%20%20%20%20%20%20%20%20%20%20%20%20X_text%2C%20y%20%3D%20get_minibatch(doc_iter%2C%20minibatch_size)%0A%20%20%20%20test_stats%20%3D%20%7B'n_test'%3A%200%2C%20'n_test_pos'%3A%200%7D%0A%20%20%20%20n_test_documents%20%3D%201000%0A%20%20%20%20tick%20%3D%20time.time()%0A%20%20%20%20X_test_text%2C%20y_test%20%3D%20get_minibatch(data_stream%2C%201000)%0A%20%20%20%20parsing_time%20%3D%20time.time()%20-%20tick%0A%20%20%20%20tick%20%3D%20time.time()%0A%20%20%20%20X_test%20%3D%20vectorizer.transform(X_test_text)%0A%20%20%20%20vectorizing_time%20%3D%20time.time()%20-%20tick%0A%20%20%20%20test_stats%5B'n_test'%5D%20%2B%3D%20len(y_test)%0A%20%20%20%20test_stats%5B'n_test_pos'%5D%20%2B%3D%20sum(y_test)%0A%20%20%20%20print('Test%20set%20is%20%25d%20documents%20(%25d%20positive)'%20%25%20(len(y_test)%2C%20sum(y_test)))%0A%0A%20%20%20%20def%20progress(cls_name%2C%20stats)%3A%0A%20%20%20%20%20%20%20%20%22%22%22Report%20progress%20information%2C%20return%20a%20string.%22%22%22%0A%20%20%20%20%20%20%20%20duration%20%3D%20time.time()%20-%20_stats%5B't0'%5D%0A%20%20%20%20%20%20%20%20s%20%3D%20'%2520s%20classifier%20%3A%20%5Ct'%20%25%20_cls_name%0A%20%20%20%20%20%20%20%20s%20%2B%3D%20'%25(n_train)6d%20train%20docs%20(%25(n_train_pos)6d%20positive)%20'%20%25%20_stats%0A%20%20%20%20%20%20%20%20s%20%2B%3D%20'%25(n_test)6d%20test%20docs%20(%25(n_test_pos)6d%20positive)%20'%20%25%20test_stats%0A%20%20%20%20%20%20%20%20s%20%2B%3D%20'accuracy%3A%20%25(accuracy).3f%20'%20%25%20_stats%0A%20%20%20%20%20%20%20%20s%20%2B%3D%20'in%20%25.2fs%20(%255d%20docs%2Fs)'%20%25%20(duration%2C%20_stats%5B'n_train'%5D%20%2F%20duration)%0A%20%20%20%20%20%20%20%20return%20s%0A%20%20%20%20%23%20test%20data%20statistics%0A%20%20%20%20cls_stats%20%3D%20%7B%7D%0A%20%20%20%20for%20_cls_name%20in%20partial_fit_classifiers%3A%0A%20%20%20%20%23%20First%20we%20hold%20out%20a%20number%20of%20examples%20to%20estimate%20accuracy%0A%20%20%20%20%20%20%20%20_stats%20%3D%20%7B'n_train'%3A%200%2C%20'n_train_pos'%3A%200%2C%20'accuracy'%3A%200.0%2C%20'accuracy_history'%3A%20%5B(0%2C%200)%5D%2C%20't0'%3A%20time.time()%2C%20'runtime_history'%3A%20%5B(0%2C%200)%5D%2C%20'total_fit_time'%3A%200.0%7D%0A%20%20%20%20%20%20%20%20cls_stats%5B_cls_name%5D%20%3D%20_stats%0A%20%20%20%20get_minibatch(data_stream%2C%20n_test_documents)%0A%20%20%20%20minibatch_size%20%3D%201000%0A%20%20%20%20minibatch_iterators%20%3D%20iter_minibatches(data_stream%2C%20minibatch_size)%0A%20%20%20%20total_vect_time%20%3D%200.0%0A%20%20%20%20for%20i%2C%20(X_train_text%2C%20y_train)%20in%20enumerate(minibatch_iterators)%3A%0A%20%20%20%20%20%20%20%20tick%20%3D%20time.time()%0A%20%20%20%20%20%20%20%20X_train%20%3D%20vectorizer.transform(X_train_text)%0A%20%20%20%20%20%20%20%20total_vect_time%20%2B%3D%20time.time()%20-%20tick%0A%20%20%20%20%20%20%20%20for%20_cls_name%2C%20cls%20in%20partial_fit_classifiers.items()%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20tick%20%3D%20time.time()%0A%20%20%20%20%20%20%20%20%20%20%20%20cls.partial_fit(X_train%2C%20y_train%2C%20classes%3Dall_classes)%0A%20%20%20%20%20%20%20%20%20%20%20%20cls_stats%5B_cls_name%5D%5B'total_fit_time'%5D%20%2B%3D%20time.time()%20-%20tick%0A%20%20%20%20%20%20%20%20%20%20%20%20cls_stats%5B_cls_name%5D%5B'n_train'%5D%20%2B%3D%20X_train.shape%5B0%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20cls_stats%5B_cls_name%5D%5B'n_train_pos'%5D%20%2B%3D%20sum(y_train)%0A%20%20%20%20%20%20%20%20%20%20%20%20tick%20%3D%20time.time()%0A%20%20%20%20%20%20%20%20%20%20%20%20cls_stats%5B_cls_name%5D%5B'accuracy'%5D%20%3D%20cls.score(X_test%2C%20y_test)%0A%20%20%20%20%20%20%20%20%20%20%20%20cls_stats%5B_cls_name%5D%5B'prediction_time'%5D%20%3D%20time.time()%20-%20tick%0A%20%20%20%20%20%20%20%20%20%20%20%20acc_history%20%3D%20(cls_stats%5B_cls_name%5D%5B'accuracy'%5D%2C%20cls_stats%5B_cls_name%5D%5B'n_train'%5D)%0A%20%20%20%20%20%20%20%20%20%20%20%20cls_stats%5B_cls_name%5D%5B'accuracy_history'%5D.append(acc_history)%0A%20%20%20%20%20%20%20%20%20%20%20%20run_history%20%3D%20(cls_stats%5B_cls_name%5D%5B'accuracy'%5D%2C%20total_vect_time%20%2B%20cls_stats%5B_cls_name%5D%5B'total_fit_time'%5D)%0A%20%20%20%20%20%20%20%20%20%20%20%20cls_stats%5B_cls_name%5D%5B'runtime_history'%5D.append(run_history)%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20i%20%25%203%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20print(progress(_cls_name%2C%20cls_stats%5B_cls_name%5D))%0A%20%20%20%20%20%20%20%20if%20i%20%25%203%20%3D%3D%200%3A%0A%20%20%20%20%23%20Discard%20test%20set%0A%20%20%20%20%23%20We%20will%20feed%20the%20classifier%20with%20mini-batches%20of%201000%20documents%3B%20this%20means%0A%20%20%20%20%23%20we%20have%20at%20most%201000%20docs%20in%20memory%20at%20any%20time.%20%20The%20smaller%20the%20document%0A%20%20%20%20%23%20batch%2C%20the%20bigger%20the%20relative%20overhead%20of%20the%20partial%20fit%20methods.%0A%20%20%20%20%23%20Create%20the%20data_stream%20that%20parses%20Reuters%20SGML%20files%20and%20iterates%20on%0A%20%20%20%20%23%20documents%20as%20a%20stream.%0A%20%20%20%20%23%20Main%20loop%20%3A%20iterate%20on%20mini-batches%20of%20examples%0A%20%20%20%20%20%20%20%20%20%20%20%20print('%5Cn')%20%20%23%20update%20estimator%20with%20examples%20in%20the%20current%20mini-batch%20%20%23%20accumulate%20test%20accuracy%20stats%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20cls_stats%2C%0A%20%20%20%20%20%20%20%20n_test_documents%2C%0A%20%20%20%20%20%20%20%20parsing_time%2C%0A%20%20%20%20%20%20%20%20total_vect_time%2C%0A%20%20%20%20%20%20%20%20vectorizing_time%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Plot%20results%0A%0A%20%20%20%20The%20plot%20represents%20the%20learning%20curve%20of%20the%20classifier%3A%20the%20evolution%0A%20%20%20%20of%20classification%20accuracy%20over%20the%20course%20of%20the%20mini-batches.%20Accuracy%20is%0A%20%20%20%20measured%20on%20the%20first%201000%20samples%2C%20held%20out%20as%20a%20validation%20set.%0A%0A%20%20%20%20To%20limit%20the%20memory%20consumption%2C%20we%20queue%20examples%20up%20to%20a%20fixed%20amount%0A%20%20%20%20before%20feeding%20them%20to%20the%20learner.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20cls_stats%2C%0A%20%20%20%20n_test_documents%2C%0A%20%20%20%20np%2C%0A%20%20%20%20parsing_time%2C%0A%20%20%20%20plt%2C%0A%20%20%20%20rcParams%2C%0A%20%20%20%20total_vect_time%2C%0A%20%20%20%20vectorizing_time%2C%0A)%3A%0A%20%20%20%20def%20plot_accuracy(x%2C%20y%2C%20x_legend)%3A%0A%20%20%20%20%20%20%20%20%22%22%22Plot%20accuracy%20as%20a%20function%20of%20x.%22%22%22%0A%20%20%20%20%20%20%20%20x%20%3D%20np.array(x)%0A%20%20%20%20%20%20%20%20y%20%3D%20np.array(y)%0A%20%20%20%20%20%20%20%20plt.title('Classification%20accuracy%20as%20a%20function%20of%20%25s'%20%25%20x_legend)%0A%20%20%20%20%20%20%20%20plt.xlabel('%25s'%20%25%20x_legend)%0A%20%20%20%20%20%20%20%20plt.ylabel('Accuracy')%0A%20%20%20%20%20%20%20%20plt.grid(True)%0A%20%20%20%20%20%20%20%20plt.plot(x%2C%20y)%0A%20%20%20%20rcParams%5B'legend.fontsize'%5D%20%3D%2010%0A%20%20%20%20cls_names%20%3D%20list(sorted(cls_stats.keys()))%0A%20%20%20%20plt.figure()%0A%20%20%20%20for%20_%2C%20_stats%20in%20sorted(cls_stats.items())%3A%0A%20%20%20%20%20%20%20%20accuracy%2C%20n_examples%20%3D%20zip(*_stats%5B'accuracy_history'%5D)%0A%20%20%20%20%23%20Plot%20accuracy%20evolution%0A%20%20%20%20%20%20%20%20plot_accuracy(n_examples%2C%20accuracy%2C%20'training%20examples%20(%23)')%0A%20%20%20%20%20%20%20%20ax%20%3D%20plt.gca()%0A%20%20%20%20%20%20%20%20ax.set_ylim((0.8%2C%201))%20%20%23%20Plot%20accuracy%20evolution%20with%20%23examples%0A%20%20%20%20plt.legend(cls_names%2C%20loc%3D'best')%0A%20%20%20%20plt.figure()%0A%20%20%20%20for%20_%2C%20_stats%20in%20sorted(cls_stats.items())%3A%0A%20%20%20%20%20%20%20%20accuracy%2C%20runtime%20%3D%20zip(*_stats%5B'runtime_history'%5D)%0A%20%20%20%20%20%20%20%20plot_accuracy(runtime%2C%20accuracy%2C%20'runtime%20(s)')%0A%20%20%20%20%20%20%20%20ax%20%3D%20plt.gca()%0A%20%20%20%20%20%20%20%20ax.set_ylim((0.8%2C%201))%0A%20%20%20%20plt.legend(cls_names%2C%20loc%3D'best')%0A%20%20%20%20plt.figure()%20%20%23%20Plot%20accuracy%20evolution%20with%20runtime%0A%20%20%20%20fig%20%3D%20plt.gcf()%0A%20%20%20%20cls_runtime%20%3D%20%5B_stats%5B'total_fit_time'%5D%20for%20_cls_name%2C%20_stats%20in%20sorted(cls_stats.items())%5D%0A%20%20%20%20cls_runtime.append(total_vect_time)%0A%20%20%20%20cls_names.append('Vectorization')%0A%20%20%20%20bar_colors%20%3D%20%5B'b'%2C%20'g'%2C%20'r'%2C%20'c'%2C%20'm'%2C%20'y'%5D%0A%20%20%20%20ax%20%3D%20plt.subplot(111)%0A%20%20%20%20%23%20Plot%20fitting%20times%0A%20%20%20%20rectangles%20%3D%20plt.bar(range(len(cls_names))%2C%20cls_runtime%2C%20width%3D0.5%2C%20color%3Dbar_colors)%0A%20%20%20%20ax.set_xticks(np.linspace(0%2C%20len(cls_names)%20-%201%2C%20len(cls_names)))%0A%20%20%20%20ax.set_xticklabels(cls_names%2C%20fontsize%3D10)%0A%20%20%20%20ymax%20%3D%20max(cls_runtime)%20*%201.2%0A%20%20%20%20ax.set_ylim((0%2C%20ymax))%0A%20%20%20%20ax.set_ylabel('runtime%20(s)')%0A%20%20%20%20ax.set_title('Training%20Times')%0A%0A%20%20%20%20def%20autolabel(rectangles)%3A%0A%20%20%20%20%20%20%20%20%22%22%22attach%20some%20text%20vi%20autolabel%20on%20rectangles.%22%22%22%0A%20%20%20%20%20%20%20%20for%20rect%20in%20rectangles%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20height%20%3D%20rect.get_height()%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.text(rect.get_x()%20%2B%20rect.get_width()%20%2F%202.0%2C%201.05%20*%20height%2C%20'%25.4f'%20%25%20height%2C%20ha%3D'center'%2C%20va%3D'bottom')%0A%20%20%20%20%20%20%20%20%20%20%20%20plt.setp(plt.xticks()%5B1%5D%2C%20rotation%3D30)%0A%20%20%20%20autolabel(rectangles)%0A%20%20%20%20plt.tight_layout()%0A%20%20%20%20plt.show()%0A%20%20%20%20plt.figure()%0A%20%20%20%20cls_runtime%20%3D%20%5B%5D%0A%20%20%20%20cls_names%20%3D%20list(sorted(cls_stats.keys()))%0A%20%20%20%20for%20_cls_name%2C%20_stats%20in%20sorted(cls_stats.items())%3A%0A%20%20%20%20%20%20%20%20cls_runtime.append(_stats%5B'prediction_time'%5D)%0A%20%20%20%20cls_runtime.append(parsing_time)%0A%20%20%20%20cls_names.append('Read%2FParse%5Cn%2BFeat.Extr.')%0A%20%20%20%20cls_runtime.append(vectorizing_time)%0A%20%20%20%20cls_names.append('Hashing%5Cn%2BVect.')%0A%20%20%20%20ax%20%3D%20plt.subplot(111)%0A%20%20%20%20rectangles%20%3D%20plt.bar(range(len(cls_names))%2C%20cls_runtime%2C%20width%3D0.5%2C%20color%3Dbar_colors)%0A%20%20%20%20ax.set_xticks(np.linspace(0%2C%20len(cls_names)%20-%201%2C%20len(cls_names)))%0A%20%20%20%20ax.set_xticklabels(cls_names%2C%20fontsize%3D8)%0A%20%20%20%20plt.setp(plt.xticks()%5B1%5D%2C%20rotation%3D30)%0A%20%20%20%20ymax%20%3D%20max(cls_runtime)%20*%201.2%0A%20%20%20%20ax.set_ylim((0%2C%20ymax))%0A%20%20%20%20ax.set_ylabel('runtime%20(s)')%0A%20%20%20%20ax.set_title('Prediction%20Times%20(%25d%20instances)'%20%25%20n_test_documents)%0A%20%20%20%20autolabel(rectangles)%0A%20%20%20%20plt.tight_layout()%0A%20%20%20%20%23%20Plot%20prediction%20times%0A%20%20%20%20plt.show()%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

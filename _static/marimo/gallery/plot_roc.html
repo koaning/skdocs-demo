@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot roc</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Multiclass%20Receiver%20Operating%20Characteristic%20(ROC)%0A%0A%20%20%20%20This%20example%20describes%20the%20use%20of%20the%20Receiver%20Operating%20Characteristic%20(ROC)%0A%20%20%20%20metric%20to%20evaluate%20the%20quality%20of%20multiclass%20classifiers.%0A%0A%20%20%20%20ROC%20curves%20typically%20feature%20true%20positive%20rate%20(TPR)%20on%20the%20Y%20axis%2C%20and%20false%0A%20%20%20%20positive%20rate%20(FPR)%20on%20the%20X%20axis.%20This%20means%20that%20the%20top%20left%20corner%20of%20the%0A%20%20%20%20plot%20is%20the%20%22ideal%22%20point%20-%20a%20FPR%20of%20zero%2C%20and%20a%20TPR%20of%20one.%20This%20is%20not%20very%0A%20%20%20%20realistic%2C%20but%20it%20does%20mean%20that%20a%20larger%20area%20under%20the%20curve%20(AUC)%20is%20usually%0A%20%20%20%20better.%20The%20%22steepness%22%20of%20ROC%20curves%20is%20also%20important%2C%20since%20it%20is%20ideal%20to%0A%20%20%20%20maximize%20the%20TPR%20while%20minimizing%20the%20FPR.%0A%0A%20%20%20%20ROC%20curves%20are%20typically%20used%20in%20binary%20classification%2C%20where%20the%20TPR%20and%20FPR%0A%20%20%20%20can%20be%20defined%20unambiguously.%20In%20the%20case%20of%20multiclass%20classification%2C%20a%20notion%0A%20%20%20%20of%20TPR%20or%20FPR%20is%20obtained%20only%20after%20binarizing%20the%20output.%20This%20can%20be%20done%20in%0A%20%20%20%202%20different%20ways%3A%0A%0A%20%20%20%20-%20the%20One-vs-Rest%20scheme%20compares%20each%20class%20against%20all%20the%20others%20(assumed%20as%0A%20%20%20%20%20%20one)%3B%0A%20%20%20%20-%20the%20One-vs-One%20scheme%20compares%20every%20unique%20pairwise%20combination%20of%20classes.%0A%0A%20%20%20%20In%20this%20example%20we%20explore%20both%20schemes%20and%20demo%20the%20concepts%20of%20micro%20and%20macro%0A%20%20%20%20averaging%20as%20different%20ways%20of%20summarizing%20the%20information%20of%20the%20multiclass%20ROC%0A%20%20%20%20curves.%0A%0A%20%20%20%20%3Cdiv%20class%3D%22alert%20alert-info%22%3E%3Ch4%3ENote%3C%2Fh4%3E%3Cp%3ESee%20%60sphx_glr_auto_examples_model_selection_plot_roc_crossval.py%60%20for%0A%20%20%20%20%20%20%20%20an%20extension%20of%20the%20present%20example%20estimating%20the%20variance%20of%20the%20ROC%0A%20%20%20%20%20%20%20%20curves%20and%20their%20respective%20AUC.%3C%2Fp%3E%3C%2Fdiv%3E%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Load%20and%20prepare%20data%0A%0A%20%20%20%20We%20import%20the%20%60iris_dataset%60%20which%20contains%203%20classes%2C%20each%20one%0A%20%20%20%20corresponding%20to%20a%20type%20of%20iris%20plant.%20One%20class%20is%20linearly%20separable%20from%0A%20%20%20%20the%20other%202%3B%20the%20latter%20are%20**not**%20linearly%20separable%20from%20each%20other.%0A%0A%20%20%20%20Here%20we%20binarize%20the%20output%20and%20add%20noisy%20features%20to%20make%20the%20problem%20harder.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20numpy%20as%20np%0A%0A%20%20%20%20from%20sklearn.datasets%20import%20load_iris%0A%20%20%20%20from%20sklearn.model_selection%20import%20train_test_split%0A%0A%20%20%20%20iris%20%3D%20load_iris()%0A%20%20%20%20target_names%20%3D%20iris.target_names%0A%20%20%20%20X%2C%20y%20%3D%20iris.data%2C%20iris.target%0A%20%20%20%20y%20%3D%20iris.target_names%5By%5D%0A%0A%20%20%20%20random_state%20%3D%20np.random.RandomState(0)%0A%20%20%20%20n_samples%2C%20n_features%20%3D%20X.shape%0A%20%20%20%20n_classes%20%3D%20len(np.unique(y))%0A%20%20%20%20X%20%3D%20np.concatenate(%5BX%2C%20random_state.randn(n_samples%2C%20200%20*%20n_features)%5D%2C%20axis%3D1)%0A%20%20%20%20(%0A%20%20%20%20%20%20%20%20X_train%2C%0A%20%20%20%20%20%20%20%20X_test%2C%0A%20%20%20%20%20%20%20%20y_train%2C%0A%20%20%20%20%20%20%20%20y_test%2C%0A%20%20%20%20)%20%3D%20train_test_split(X%2C%20y%2C%20test_size%3D0.5%2C%20stratify%3Dy%2C%20random_state%3D0)%0A%20%20%20%20return%20X_test%2C%20X_train%2C%20n_classes%2C%20np%2C%20target_names%2C%20y%2C%20y_test%2C%20y_train%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20We%20train%20a%20%3Aclass%3A%60~sklearn.linear_model.LogisticRegression%60%20model%20which%20can%0A%20%20%20%20naturally%20handle%20multiclass%20problems%2C%20thanks%20to%20the%20use%20of%20the%20multinomial%0A%20%20%20%20formulation.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_test%2C%20X_train%2C%20y_train)%3A%0A%20%20%20%20from%20sklearn.linear_model%20import%20LogisticRegression%0A%0A%20%20%20%20classifier%20%3D%20LogisticRegression()%0A%20%20%20%20y_score%20%3D%20classifier.fit(X_train%2C%20y_train).predict_proba(X_test)%0A%20%20%20%20return%20(y_score%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20One-vs-Rest%20multiclass%20ROC%0A%0A%20%20%20%20The%20One-vs-the-Rest%20(OvR)%20multiclass%20strategy%2C%20also%20known%20as%20one-vs-all%2C%0A%20%20%20%20consists%20in%20computing%20a%20ROC%20curve%20per%20each%20of%20the%20%60n_classes%60.%20In%20each%20step%2C%20a%0A%20%20%20%20given%20class%20is%20regarded%20as%20the%20positive%20class%20and%20the%20remaining%20classes%20are%0A%20%20%20%20regarded%20as%20the%20negative%20class%20as%20a%20bulk.%0A%0A%20%20%20%20%3Cdiv%20class%3D%22alert%20alert-info%22%3E%3Ch4%3ENote%3C%2Fh4%3E%3Cp%3EOne%20should%20not%20confuse%20the%20OvR%20strategy%20used%20for%20the%20**evaluation**%0A%20%20%20%20%20%20%20%20of%20multiclass%20classifiers%20with%20the%20OvR%20strategy%20used%20to%20**train**%20a%0A%20%20%20%20%20%20%20%20multiclass%20classifier%20by%20fitting%20a%20set%20of%20binary%20classifiers%20(for%20instance%0A%20%20%20%20%20%20%20%20via%20the%20%3Aclass%3A%60~sklearn.multiclass.OneVsRestClassifier%60%20meta-estimator).%0A%20%20%20%20%20%20%20%20The%20OvR%20ROC%20evaluation%20can%20be%20used%20to%20scrutinize%20any%20kind%20of%20classification%0A%20%20%20%20%20%20%20%20models%20irrespectively%20of%20how%20they%20were%20trained%20(see%20%60multiclass%60).%3C%2Fp%3E%3C%2Fdiv%3E%0A%0A%20%20%20%20In%20this%20section%20we%20use%20a%20%3Aclass%3A%60~sklearn.preprocessing.LabelBinarizer%60%20to%0A%20%20%20%20binarize%20the%20target%20by%20one-hot-encoding%20in%20a%20OvR%20fashion.%20This%20means%20that%20the%0A%20%20%20%20target%20of%20shape%20(%60n_samples%60%2C)%20is%20mapped%20to%20a%20target%20of%20shape%20(%60n_samples%60%2C%0A%20%20%20%20%60n_classes%60).%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(y_test%2C%20y_train)%3A%0A%20%20%20%20from%20sklearn.preprocessing%20import%20LabelBinarizer%0A%0A%20%20%20%20label_binarizer%20%3D%20LabelBinarizer().fit(y_train)%0A%20%20%20%20y_onehot_test%20%3D%20label_binarizer.transform(y_test)%0A%20%20%20%20y_onehot_test.shape%20%20%23%20(n_samples%2C%20n_classes)%0A%20%20%20%20return%20label_binarizer%2C%20y_onehot_test%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20We%20can%20as%20well%20easily%20check%20the%20encoding%20of%20a%20specific%20class%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(label_binarizer)%3A%0A%20%20%20%20label_binarizer.transform(%5B%22virginica%22%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20ROC%20curve%20showing%20a%20specific%20class%0A%0A%20%20%20%20In%20the%20following%20plot%20we%20show%20the%20resulting%20ROC%20curve%20when%20regarding%20the%20iris%0A%20%20%20%20flowers%20as%20either%20%22virginica%22%20(%60class_id%3D2%60)%20or%20%22non-virginica%22%20(the%20rest).%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(label_binarizer%2C%20np)%3A%0A%20%20%20%20class_of_interest%20%3D%20%22virginica%22%0A%20%20%20%20class_id%20%3D%20np.flatnonzero(label_binarizer.classes_%20%3D%3D%20class_of_interest)%5B0%5D%0A%20%20%20%20class_id%0A%20%20%20%20return%20class_id%2C%20class_of_interest%0A%0A%0A%40app.cell%0Adef%20_(class_id%2C%20class_of_interest%2C%20y_onehot_test%2C%20y_score)%3A%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20from%20sklearn.metrics%20import%20RocCurveDisplay%0A%20%20%20%20_display%20%3D%20RocCurveDisplay.from_predictions(y_onehot_test%5B%3A%2C%20class_id%5D%2C%20y_score%5B%3A%2C%20class_id%5D%2C%20name%3Df'%7Bclass_of_interest%7D%20vs%20the%20rest'%2C%20curve_kwargs%3Ddict(color%3D'darkorange')%2C%20plot_chance_level%3DTrue%2C%20despine%3DTrue)%0A%20%20%20%20_%20%3D%20_display.ax_.set(xlabel%3D'False%20Positive%20Rate'%2C%20ylabel%3D'True%20Positive%20Rate'%2C%20title%3D'One-vs-Rest%20ROC%20curves%3A%5CnVirginica%20vs%20(Setosa%20%26%20Versicolor)')%0A%20%20%20%20return%20RocCurveDisplay%2C%20plt%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20ROC%20curve%20using%20micro-averaged%20OvR%0A%0A%20%20%20%20Micro-averaging%20aggregates%20the%20contributions%20from%20all%20the%20classes%20(using%0A%20%20%20%20%3Afunc%3A%60numpy.ravel%60)%20to%20compute%20the%20average%20metrics%20as%20follows%3A%0A%0A%20%20%20%20%24TPR%3D%5Cfrac%7B%5Csum_%7Bc%7DTP_c%7D%7B%5Csum_%7Bc%7D(TP_c%20%2B%20FN_c)%7D%24%20%3B%0A%0A%20%20%20%20%24FPR%3D%5Cfrac%7B%5Csum_%7Bc%7DFP_c%7D%7B%5Csum_%7Bc%7D(FP_c%20%2B%20TN_c)%7D%24%20.%0A%0A%20%20%20%20We%20can%20briefly%20demo%20the%20effect%20of%20%3Afunc%3A%60numpy.ravel%60%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(y_score)%3A%0A%20%20%20%20print(f%22y_score%3A%5Cn%7By_score%5B0%3A2%2C%20%3A%5D%7D%22)%0A%20%20%20%20print()%0A%20%20%20%20print(f%22y_score.ravel()%3A%5Cn%7By_score%5B0%3A2%2C%20%3A%5D.ravel()%7D%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20In%20a%20multi-class%20classification%20setup%20with%20highly%20imbalanced%20classes%2C%0A%20%20%20%20micro-averaging%20is%20preferable%20over%20macro-averaging.%20In%20such%20cases%2C%20one%20can%0A%20%20%20%20alternatively%20use%20a%20weighted%20macro-averaging%2C%20not%20demonstrated%20here.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(RocCurveDisplay%2C%20y_onehot_test%2C%20y_score)%3A%0A%20%20%20%20_display%20%3D%20RocCurveDisplay.from_predictions(y_onehot_test.ravel()%2C%20y_score.ravel()%2C%20name%3D'micro-average%20OvR'%2C%20curve_kwargs%3Ddict(color%3D'darkorange')%2C%20plot_chance_level%3DTrue%2C%20despine%3DTrue)%0A%20%20%20%20_%20%3D%20_display.ax_.set(xlabel%3D'False%20Positive%20Rate'%2C%20ylabel%3D'True%20Positive%20Rate'%2C%20title%3D'Micro-averaged%20One-vs-Rest%5CnReceiver%20Operating%20Characteristic')%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20In%20the%20case%20where%20the%20main%20interest%20is%20not%20the%20plot%20but%20the%20ROC-AUC%20score%0A%20%20%20%20itself%2C%20we%20can%20reproduce%20the%20value%20shown%20in%20the%20plot%20using%0A%20%20%20%20%3Aclass%3A%60~sklearn.metrics.roc_auc_score%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(y_score%2C%20y_test)%3A%0A%20%20%20%20from%20sklearn.metrics%20import%20roc_auc_score%0A%0A%20%20%20%20micro_roc_auc_ovr%20%3D%20roc_auc_score(%0A%20%20%20%20%20%20%20%20y_test%2C%0A%20%20%20%20%20%20%20%20y_score%2C%0A%20%20%20%20%20%20%20%20multi_class%3D%22ovr%22%2C%0A%20%20%20%20%20%20%20%20average%3D%22micro%22%2C%0A%20%20%20%20)%0A%0A%20%20%20%20print(f%22Micro-averaged%20One-vs-Rest%20ROC%20AUC%20score%3A%5Cn%7Bmicro_roc_auc_ovr%3A.2f%7D%22)%0A%20%20%20%20return%20(roc_auc_score%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20This%20is%20equivalent%20to%20computing%20the%20ROC%20curve%20with%0A%20%20%20%20%3Aclass%3A%60~sklearn.metrics.roc_curve%60%20and%20then%20the%20area%20under%20the%20curve%20with%0A%20%20%20%20%3Aclass%3A%60~sklearn.metrics.auc%60%20for%20the%20raveled%20true%20and%20predicted%20classes.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(y_onehot_test%2C%20y_score)%3A%0A%20%20%20%20from%20sklearn.metrics%20import%20auc%2C%20roc_curve%0A%0A%20%20%20%20%23%20store%20the%20fpr%2C%20tpr%2C%20and%20roc_auc%20for%20all%20averaging%20strategies%0A%20%20%20%20fpr%2C%20tpr%2C%20roc_auc%20%3D%20dict()%2C%20dict()%2C%20dict()%0A%20%20%20%20%23%20Compute%20micro-average%20ROC%20curve%20and%20ROC%20area%0A%20%20%20%20fpr%5B%22micro%22%5D%2C%20tpr%5B%22micro%22%5D%2C%20_%20%3D%20roc_curve(y_onehot_test.ravel()%2C%20y_score.ravel())%0A%20%20%20%20roc_auc%5B%22micro%22%5D%20%3D%20auc(fpr%5B%22micro%22%5D%2C%20tpr%5B%22micro%22%5D)%0A%0A%20%20%20%20print(f%22Micro-averaged%20One-vs-Rest%20ROC%20AUC%20score%3A%5Cn%7Broc_auc%5B'micro'%5D%3A.2f%7D%22)%0A%20%20%20%20return%20auc%2C%20fpr%2C%20roc_auc%2C%20roc_curve%2C%20tpr%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%3Cdiv%20class%3D%22alert%20alert-info%22%3E%3Ch4%3ENote%3C%2Fh4%3E%3Cp%3EBy%20default%2C%20the%20computation%20of%20the%20ROC%20curve%20adds%20a%20single%20point%20at%0A%20%20%20%20%20%20%20%20the%20maximal%20false%20positive%20rate%20by%20using%20linear%20interpolation%20and%20the%0A%20%20%20%20%20%20%20%20McClish%20correction%20%5B%3Adoi%3A%60Analyzing%20a%20portion%20of%20the%20ROC%20curve%20Med%20Decis%0A%20%20%20%20%20%20%20%20Making.%201989%20Jul-Sep%3B%209(3)%3A190-5.%3C10.1177%2F0272989x8900900307%3E%60%5D.%3C%2Fp%3E%3C%2Fdiv%3E%0A%0A%20%20%20%20%23%23%23%20ROC%20curve%20using%20the%20OvR%20macro-average%0A%0A%20%20%20%20Obtaining%20the%20macro-average%20requires%20computing%20the%20metric%20independently%20for%0A%20%20%20%20each%20class%20and%20then%20taking%20the%20average%20over%20them%2C%20hence%20treating%20all%20classes%0A%20%20%20%20equally%20a%20priori.%20We%20first%20aggregate%20the%20true%2Ffalse%20positive%20rates%20per%20class%3A%0A%0A%20%20%20%20%24TPR%3D%5Cfrac%7B1%7D%7BC%7D%5Csum_%7Bc%7D%5Cfrac%7BTP_c%7D%7BTP_c%20%2B%20FN_c%7D%24%20%3B%0A%0A%20%20%20%20%24FPR%3D%5Cfrac%7B1%7D%7BC%7D%5Csum_%7Bc%7D%5Cfrac%7BFP_c%7D%7BFP_c%20%2B%20TN_c%7D%24%20.%0A%0A%20%20%20%20where%20%60C%60%20is%20the%20total%20number%20of%20classes.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20auc%2C%0A%20%20%20%20fpr%2C%0A%20%20%20%20n_classes%2C%0A%20%20%20%20np%2C%0A%20%20%20%20roc_auc%2C%0A%20%20%20%20roc_curve%2C%0A%20%20%20%20tpr%2C%0A%20%20%20%20y_onehot_test%2C%0A%20%20%20%20y_score%2C%0A)%3A%0A%20%20%20%20for%20i%20in%20range(n_classes)%3A%0A%20%20%20%20%20%20%20%20fpr%5Bi%5D%2C%20tpr%5Bi%5D%2C%20_%20%3D%20roc_curve(y_onehot_test%5B%3A%2C%20i%5D%2C%20y_score%5B%3A%2C%20i%5D)%0A%20%20%20%20%20%20%20%20roc_auc%5Bi%5D%20%3D%20auc(fpr%5Bi%5D%2C%20tpr%5Bi%5D)%0A%20%20%20%20fpr_grid%20%3D%20np.linspace(0.0%2C%201.0%2C%201000)%0A%20%20%20%20mean_tpr%20%3D%20np.zeros_like(fpr_grid)%0A%20%20%20%20for%20i%20in%20range(n_classes)%3A%0A%20%20%20%20%23%20Interpolate%20all%20ROC%20curves%20at%20these%20points%0A%20%20%20%20%20%20%20%20mean_tpr%20%3D%20mean_tpr%20%2B%20np.interp(fpr_grid%2C%20fpr%5Bi%5D%2C%20tpr%5Bi%5D)%0A%20%20%20%20mean_tpr%20%3D%20mean_tpr%20%2F%20n_classes%0A%20%20%20%20fpr%5B'macro'%5D%20%3D%20fpr_grid%0A%20%20%20%20tpr%5B'macro'%5D%20%3D%20mean_tpr%20%20%23%20linear%20interpolation%0A%20%20%20%20roc_auc%5B'macro'%5D%20%3D%20auc(fpr%5B'macro'%5D%2C%20tpr%5B'macro'%5D)%0A%20%20%20%20%23%20Average%20it%20and%20compute%20AUC%0A%20%20%20%20print(f%22Macro-averaged%20One-vs-Rest%20ROC%20AUC%20score%3A%5Cn%7Broc_auc%5B'macro'%5D%3A.2f%7D%22)%0A%20%20%20%20return%20(fpr_grid%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20This%20computation%20is%20equivalent%20to%20simply%20calling%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(roc_auc_score%2C%20y_score%2C%20y_test)%3A%0A%20%20%20%20macro_roc_auc_ovr%20%3D%20roc_auc_score(%0A%20%20%20%20%20%20%20%20y_test%2C%0A%20%20%20%20%20%20%20%20y_score%2C%0A%20%20%20%20%20%20%20%20multi_class%3D%22ovr%22%2C%0A%20%20%20%20%20%20%20%20average%3D%22macro%22%2C%0A%20%20%20%20)%0A%0A%20%20%20%20print(f%22Macro-averaged%20One-vs-Rest%20ROC%20AUC%20score%3A%5Cn%7Bmacro_roc_auc_ovr%3A.2f%7D%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Plot%20all%20OvR%20ROC%20curves%20together%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20RocCurveDisplay%2C%0A%20%20%20%20fpr%2C%0A%20%20%20%20n_classes%2C%0A%20%20%20%20plt%2C%0A%20%20%20%20roc_auc%2C%0A%20%20%20%20target_names%2C%0A%20%20%20%20tpr%2C%0A%20%20%20%20y_onehot_test%2C%0A%20%20%20%20y_score%2C%0A)%3A%0A%20%20%20%20from%20itertools%20import%20cycle%0A%20%20%20%20_fig%2C%20_ax%20%3D%20plt.subplots(figsize%3D(6%2C%206))%0A%20%20%20%20plt.plot(fpr%5B'micro'%5D%2C%20tpr%5B'micro'%5D%2C%20label%3Df%22micro-average%20ROC%20curve%20(AUC%20%3D%20%7Broc_auc%5B'micro'%5D%3A.2f%7D)%22%2C%20color%3D'deeppink'%2C%20linestyle%3D'%3A'%2C%20linewidth%3D4)%0A%20%20%20%20plt.plot(fpr%5B'macro'%5D%2C%20tpr%5B'macro'%5D%2C%20label%3Df%22macro-average%20ROC%20curve%20(AUC%20%3D%20%7Broc_auc%5B'macro'%5D%3A.2f%7D)%22%2C%20color%3D'navy'%2C%20linestyle%3D'%3A'%2C%20linewidth%3D4)%0A%20%20%20%20colors%20%3D%20cycle(%5B'aqua'%2C%20'darkorange'%2C%20'cornflowerblue'%5D)%0A%20%20%20%20for%20class_id_1%2C%20color%20in%20zip(range(n_classes)%2C%20colors)%3A%0A%20%20%20%20%20%20%20%20RocCurveDisplay.from_predictions(y_onehot_test%5B%3A%2C%20class_id_1%5D%2C%20y_score%5B%3A%2C%20class_id_1%5D%2C%20name%3Df'ROC%20curve%20for%20%7Btarget_names%5Bclass_id_1%5D%7D'%2C%20curve_kwargs%3Ddict(color%3Dcolor)%2C%20ax%3D_ax%2C%20plot_chance_level%3Dclass_id_1%20%3D%3D%202%2C%20despine%3DTrue)%0A%20%20%20%20_%20%3D%20_ax.set(xlabel%3D'False%20Positive%20Rate'%2C%20ylabel%3D'True%20Positive%20Rate'%2C%20title%3D'Extension%20of%20Receiver%20Operating%20Characteristic%5Cnto%20One-vs-Rest%20multiclass')%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20One-vs-One%20multiclass%20ROC%0A%0A%20%20%20%20The%20One-vs-One%20(OvO)%20multiclass%20strategy%20consists%20in%20fitting%20one%20classifier%0A%20%20%20%20per%20class%20pair.%20Since%20it%20requires%20to%20train%20%60n_classes%60%20*%20(%60n_classes%60%20-%201)%20%2F%202%0A%20%20%20%20classifiers%2C%20this%20method%20is%20usually%20slower%20than%20One-vs-Rest%20due%20to%20its%0A%20%20%20%20O(%60n_classes%60%20%5E2)%20complexity.%0A%0A%20%20%20%20In%20this%20section%2C%20we%20demonstrate%20the%20macro-averaged%20AUC%20using%20the%20OvO%20scheme%0A%20%20%20%20for%20the%203%20possible%20combinations%20in%20the%20%60iris_dataset%60%3A%20%22setosa%22%20vs%0A%20%20%20%20%22versicolor%22%2C%20%22versicolor%22%20vs%20%22virginica%22%20and%20%20%22virginica%22%20vs%20%22setosa%22.%20Notice%0A%20%20%20%20that%20micro-averaging%20is%20not%20defined%20for%20the%20OvO%20scheme.%0A%0A%20%20%20%20%23%23%23%20ROC%20curve%20using%20the%20OvO%20macro-average%0A%0A%20%20%20%20In%20the%20OvO%20scheme%2C%20the%20first%20step%20is%20to%20identify%20all%20possible%20unique%0A%20%20%20%20combinations%20of%20pairs.%20The%20computation%20of%20scores%20is%20done%20by%20treating%20one%20of%0A%20%20%20%20the%20elements%20in%20a%20given%20pair%20as%20the%20positive%20class%20and%20the%20other%20element%20as%0A%20%20%20%20the%20negative%20class%2C%20then%20re-computing%20the%20score%20by%20inversing%20the%20roles%20and%0A%20%20%20%20taking%20the%20mean%20of%20both%20scores.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(np%2C%20y)%3A%0A%20%20%20%20from%20itertools%20import%20combinations%0A%0A%20%20%20%20pair_list%20%3D%20list(combinations(np.unique(y)%2C%202))%0A%20%20%20%20print(pair_list)%0A%20%20%20%20return%20(pair_list%2C)%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20RocCurveDisplay%2C%0A%20%20%20%20auc%2C%0A%20%20%20%20fpr_grid%2C%0A%20%20%20%20label_binarizer%2C%0A%20%20%20%20np%2C%0A%20%20%20%20pair_list%2C%0A%20%20%20%20plt%2C%0A%20%20%20%20roc_curve%2C%0A%20%20%20%20target_names%2C%0A%20%20%20%20y_score%2C%0A%20%20%20%20y_test%2C%0A)%3A%0A%20%20%20%20pair_scores%20%3D%20%5B%5D%0A%20%20%20%20mean_tpr_1%20%3D%20dict()%0A%20%20%20%20for%20_ix%2C%20(_label_a%2C%20_label_b)%20in%20enumerate(pair_list)%3A%0A%20%20%20%20%20%20%20%20a_mask%20%3D%20y_test%20%3D%3D%20_label_a%0A%20%20%20%20%20%20%20%20b_mask%20%3D%20y_test%20%3D%3D%20_label_b%0A%20%20%20%20%20%20%20%20ab_mask%20%3D%20np.logical_or(a_mask%2C%20b_mask)%0A%20%20%20%20%20%20%20%20a_true%20%3D%20a_mask%5Bab_mask%5D%0A%20%20%20%20%20%20%20%20b_true%20%3D%20b_mask%5Bab_mask%5D%0A%20%20%20%20%20%20%20%20idx_a%20%3D%20np.flatnonzero(label_binarizer.classes_%20%3D%3D%20_label_a)%5B0%5D%0A%20%20%20%20%20%20%20%20idx_b%20%3D%20np.flatnonzero(label_binarizer.classes_%20%3D%3D%20_label_b)%5B0%5D%0A%20%20%20%20%20%20%20%20fpr_a%2C%20tpr_a%2C%20_%20%3D%20roc_curve(a_true%2C%20y_score%5Bab_mask%2C%20idx_a%5D)%0A%20%20%20%20%20%20%20%20fpr_b%2C%20tpr_b%2C%20_%20%3D%20roc_curve(b_true%2C%20y_score%5Bab_mask%2C%20idx_b%5D)%0A%20%20%20%20%20%20%20%20mean_tpr_1%5B_ix%5D%20%3D%20np.zeros_like(fpr_grid)%0A%20%20%20%20%20%20%20%20mean_tpr_1%5B_ix%5D%20%3D%20mean_tpr_1%5B_ix%5D%20%2B%20np.interp(fpr_grid%2C%20fpr_a%2C%20tpr_a)%0A%20%20%20%20%20%20%20%20mean_tpr_1%5B_ix%5D%20%3D%20mean_tpr_1%5B_ix%5D%20%2B%20np.interp(fpr_grid%2C%20fpr_b%2C%20tpr_b)%0A%20%20%20%20%20%20%20%20mean_tpr_1%5B_ix%5D%20%3D%20mean_tpr_1%5B_ix%5D%20%2F%202%0A%20%20%20%20%20%20%20%20mean_score%20%3D%20auc(fpr_grid%2C%20mean_tpr_1%5B_ix%5D)%0A%20%20%20%20%20%20%20%20pair_scores.append(mean_score)%0A%20%20%20%20%20%20%20%20_fig%2C%20_ax%20%3D%20plt.subplots(figsize%3D(6%2C%206))%0A%20%20%20%20%20%20%20%20plt.plot(fpr_grid%2C%20mean_tpr_1%5B_ix%5D%2C%20label%3Df'Mean%20%7B_label_a%7D%20vs%20%7B_label_b%7D%20(AUC%20%3D%20%7Bmean_score%3A.2f%7D)'%2C%20linestyle%3D'%3A'%2C%20linewidth%3D4)%0A%20%20%20%20%20%20%20%20RocCurveDisplay.from_predictions(a_true%2C%20y_score%5Bab_mask%2C%20idx_a%5D%2C%20ax%3D_ax%2C%20name%3Df'%7B_label_a%7D%20as%20positive%20class')%0A%20%20%20%20%20%20%20%20RocCurveDisplay.from_predictions(b_true%2C%20y_score%5Bab_mask%2C%20idx_b%5D%2C%20ax%3D_ax%2C%20name%3Df'%7B_label_b%7D%20as%20positive%20class'%2C%20plot_chance_level%3DTrue%2C%20despine%3DTrue)%0A%20%20%20%20%20%20%20%20_ax.set(xlabel%3D'False%20Positive%20Rate'%2C%20ylabel%3D'True%20Positive%20Rate'%2C%20title%3Df'%7Btarget_names%5Bidx_a%5D%7D%20vs%20%7B_label_b%7D%20ROC%20curves')%0A%20%20%20%20print(f'Macro-averaged%20One-vs-One%20ROC%20AUC%20score%3A%5Cn%7Bnp.average(pair_scores)%3A.2f%7D')%0A%20%20%20%20return%20mean_tpr_1%2C%20pair_scores%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20One%20can%20also%20assert%20that%20the%20macro-average%20we%20computed%20%22by%20hand%22%20is%20equivalent%0A%20%20%20%20to%20the%20implemented%20%60average%3D%22macro%22%60%20option%20of%20the%0A%20%20%20%20%3Aclass%3A%60~sklearn.metrics.roc_auc_score%60%20function.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(roc_auc_score%2C%20y_score%2C%20y_test)%3A%0A%20%20%20%20macro_roc_auc_ovo%20%3D%20roc_auc_score(%0A%20%20%20%20%20%20%20%20y_test%2C%0A%20%20%20%20%20%20%20%20y_score%2C%0A%20%20%20%20%20%20%20%20multi_class%3D%22ovo%22%2C%0A%20%20%20%20%20%20%20%20average%3D%22macro%22%2C%0A%20%20%20%20)%0A%0A%20%20%20%20print(f%22Macro-averaged%20One-vs-One%20ROC%20AUC%20score%3A%5Cn%7Bmacro_roc_auc_ovo%3A.2f%7D%22)%0A%20%20%20%20return%20(macro_roc_auc_ovo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Plot%20all%20OvO%20ROC%20curves%20together%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20fpr_grid%2C%0A%20%20%20%20macro_roc_auc_ovo%2C%0A%20%20%20%20mean_tpr_1%2C%0A%20%20%20%20np%2C%0A%20%20%20%20pair_list%2C%0A%20%20%20%20pair_scores%2C%0A%20%20%20%20plt%2C%0A)%3A%0A%20%20%20%20ovo_tpr%20%3D%20np.zeros_like(fpr_grid)%0A%20%20%20%20_fig%2C%20_ax%20%3D%20plt.subplots(figsize%3D(6%2C%206))%0A%20%20%20%20for%20_ix%2C%20(_label_a%2C%20_label_b)%20in%20enumerate(pair_list)%3A%0A%20%20%20%20%20%20%20%20ovo_tpr%20%3D%20ovo_tpr%20%2B%20mean_tpr_1%5B_ix%5D%0A%20%20%20%20%20%20%20%20_ax.plot(fpr_grid%2C%20mean_tpr_1%5B_ix%5D%2C%20label%3Df'Mean%20%7B_label_a%7D%20vs%20%7B_label_b%7D%20(AUC%20%3D%20%7Bpair_scores%5B_ix%5D%3A.2f%7D)')%0A%20%20%20%20ovo_tpr%20%3D%20ovo_tpr%20%2F%20sum((1%20for%20pair%20in%20enumerate(pair_list)))%0A%20%20%20%20_ax.plot(fpr_grid%2C%20ovo_tpr%2C%20label%3Df'One-vs-One%20macro-average%20(AUC%20%3D%20%7Bmacro_roc_auc_ovo%3A.2f%7D)'%2C%20linestyle%3D'%3A'%2C%20linewidth%3D4)%0A%20%20%20%20_ax.plot(%5B0%2C%201%5D%2C%20%5B0%2C%201%5D%2C%20'k--'%2C%20label%3D'Chance%20level%20(AUC%20%3D%200.5)')%0A%20%20%20%20_%20%3D%20_ax.set(xlabel%3D'False%20Positive%20Rate'%2C%20ylabel%3D'True%20Positive%20Rate'%2C%20title%3D'Extension%20of%20Receiver%20Operating%20Characteristic%5Cnto%20One-vs-One%20multiclass'%2C%20aspect%3D'equal'%2C%20xlim%3D(-0.01%2C%201.01)%2C%20ylim%3D(-0.01%2C%201.01))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20We%20confirm%20that%20the%20classes%20%22versicolor%22%20and%20%22virginica%22%20are%20not%20well%0A%20%20%20%20identified%20by%20a%20linear%20classifier.%20Notice%20that%20the%20%22virginica%22-vs-the-rest%0A%20%20%20%20ROC-AUC%20score%20(0.77)%20is%20between%20the%20OvO%20ROC-AUC%20scores%20for%20%22versicolor%22%20vs%0A%20%20%20%20%22virginica%22%20(0.64)%20and%20%22setosa%22%20vs%20%22virginica%22%20(0.90).%20Indeed%2C%20the%20OvO%0A%20%20%20%20strategy%20gives%20additional%20information%20on%20the%20confusion%20between%20a%20pair%20of%0A%20%20%20%20classes%2C%20at%20the%20expense%20of%20computational%20cost%20when%20the%20number%20of%20classes%0A%20%20%20%20is%20large.%0A%0A%20%20%20%20The%20OvO%20strategy%20is%20recommended%20if%20the%20user%20is%20mainly%20interested%20in%20correctly%0A%20%20%20%20identifying%20a%20particular%20class%20or%20subset%20of%20classes%2C%20whereas%20evaluating%20the%0A%20%20%20%20global%20performance%20of%20a%20classifier%20can%20still%20be%20summarized%20via%20a%20given%0A%20%20%20%20averaging%20strategy.%0A%0A%20%20%20%20When%20dealing%20with%20imbalanced%20datasets%2C%20choosing%20the%20appropriate%20metric%20based%20on%0A%20%20%20%20the%20business%20context%20or%20problem%20you%20are%20addressing%20is%20crucial.%0A%20%20%20%20It%20is%20also%20essential%20to%20select%20an%20appropriate%20averaging%20method%20(micro%20vs.%20macro)%0A%20%20%20%20depending%20on%20the%20desired%20outcome%3A%0A%0A%20%20%20%20-%20Micro-averaging%20aggregates%20metrics%20across%20all%20instances%2C%20treating%20each%0A%20%20%20%20%20%20individual%20instance%20equally%2C%20regardless%20of%20its%20class.%20This%20approach%20is%20useful%0A%20%20%20%20%20%20when%20evaluating%20overall%20performance%2C%20but%20note%20that%20it%20can%20be%20dominated%20by%0A%20%20%20%20%20%20the%20majority%20class%20in%20imbalanced%20datasets.%0A%0A%20%20%20%20-%20Macro-averaging%20calculates%20metrics%20for%20each%20class%20independently%20and%20then%0A%20%20%20%20%20%20averages%20them%2C%20giving%20equal%20weight%20to%20each%20class.%20This%20is%20particularly%20useful%0A%20%20%20%20%20%20when%20you%20want%20under-represented%20classes%20to%20be%20considered%20as%20important%20as%20highly%0A%20%20%20%20%20%20populated%20classes.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>
