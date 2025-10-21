@@ -1,0 +1,43 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2025-10-20T14:56:13.926401Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2025-10-20T14:56:11.545902Z",
+      "mimetype": null,
+      "name": "plot_iterative_imputer_variants_comparison.ipynb",
+      "path": "auto_examples/impute/plot_iterative_imputer_variants_comparison.ipynb",
+      "size": 8286,
+      "type": "notebook",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2025-10-20T14:56:13.926636Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2025-10-20T14:56:11.546185Z",
+      "mimetype": null,
+      "name": "plot_missing_values.ipynb",
+      "path": "auto_examples/impute/plot_missing_values.ipynb",
+      "size": 12330,
+      "type": "notebook",
+      "writable": true
+    }
+  ],
+  "created": "2025-10-20T14:56:13.926530Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2025-10-20T14:56:13.926530Z",
+  "mimetype": null,
+  "name": "impute",
+  "path": "auto_examples/impute",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

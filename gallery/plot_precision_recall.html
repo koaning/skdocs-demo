@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot precision recall</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Precision-Recall%0A%0A%20%20%20%20Example%20of%20Precision-Recall%20metric%20to%20evaluate%20classifier%20output%20quality.%0A%0A%20%20%20%20Precision-Recall%20is%20a%20useful%20measure%20of%20success%20of%20prediction%20when%20the%0A%20%20%20%20classes%20are%20very%20imbalanced.%20In%20information%20retrieval%2C%20precision%20is%20a%0A%20%20%20%20measure%20of%20the%20fraction%20of%20relevant%20items%20among%20actually%20returned%20items%20while%20recall%0A%20%20%20%20is%20a%20measure%20of%20the%20fraction%20of%20items%20that%20were%20returned%20among%20all%20items%20that%20should%0A%20%20%20%20have%20been%20returned.%20'Relevancy'%20here%20refers%20to%20items%20that%20are%0A%20%20%20%20positively%20labeled%2C%20i.e.%2C%20true%20positives%20and%20false%20negatives.%0A%0A%20%20%20%20Precision%20(%24P%24)%20is%20defined%20as%20the%20number%20of%20true%20positives%20(%24T_p%24)%0A%20%20%20%20over%20the%20number%20of%20true%20positives%20plus%20the%20number%20of%20false%20positives%0A%20%20%20%20(%24F_p%24).%0A%0A%20%20%20%20%5Cbegin%7Balign%7DP%20%3D%20%5Cfrac%7BT_p%7D%7BT_p%2BF_p%7D%5Cend%7Balign%7D%0A%0A%20%20%20%20Recall%20(%24R%24)%20is%20defined%20as%20the%20number%20of%20true%20positives%20(%24T_p%24)%0A%20%20%20%20over%20the%20number%20of%20true%20positives%20plus%20the%20number%20of%20false%20negatives%0A%20%20%20%20(%24F_n%24).%0A%0A%20%20%20%20%5Cbegin%7Balign%7DR%20%3D%20%5Cfrac%7BT_p%7D%7BT_p%20%2B%20F_n%7D%5Cend%7Balign%7D%0A%0A%20%20%20%20The%20precision-recall%20curve%20shows%20the%20tradeoff%20between%20precision%20and%0A%20%20%20%20recall%20for%20different%20thresholds.%20A%20high%20area%20under%20the%20curve%20represents%0A%20%20%20%20both%20high%20recall%20and%20high%20precision.%20High%20precision%20is%20achieved%20by%20having%0A%20%20%20%20few%20false%20positives%20in%20the%20returned%20results%2C%20and%20high%20recall%20is%20achieved%20by%0A%20%20%20%20having%20few%20false%20negatives%20in%20the%20relevant%20results.%0A%20%20%20%20High%20scores%20for%20both%20show%20that%20the%20classifier%20is%20returning%0A%20%20%20%20accurate%20results%20(high%20precision)%2C%20as%20well%20as%20returning%20a%20majority%20of%20all%20relevant%0A%20%20%20%20results%20(high%20recall).%0A%0A%20%20%20%20A%20system%20with%20high%20recall%20but%20low%20precision%20returns%20most%20of%20the%20relevant%20items%2C%20but%0A%20%20%20%20the%20proportion%20of%20returned%20results%20that%20are%20incorrectly%20labeled%20is%20high.%20A%0A%20%20%20%20system%20with%20high%20precision%20but%20low%20recall%20is%20just%20the%20opposite%2C%20returning%20very%0A%20%20%20%20few%20of%20the%20relevant%20items%2C%20but%20most%20of%20its%20predicted%20labels%20are%20correct%20when%20compared%0A%20%20%20%20to%20the%20actual%20labels.%20An%20ideal%20system%20with%20high%20precision%20and%20high%20recall%20will%0A%20%20%20%20return%20most%20of%20the%20relevant%20items%2C%20with%20most%20results%20labeled%20correctly.%0A%0A%20%20%20%20The%20definition%20of%20precision%20(%24%5Cfrac%7BT_p%7D%7BT_p%20%2B%20F_p%7D%24)%20shows%20that%20lowering%0A%20%20%20%20the%20threshold%20of%20a%20classifier%20may%20increase%20the%20denominator%2C%20by%20increasing%20the%0A%20%20%20%20number%20of%20results%20returned.%20If%20the%20threshold%20was%20previously%20set%20too%20high%2C%20the%0A%20%20%20%20new%20results%20may%20all%20be%20true%20positives%2C%20which%20will%20increase%20precision.%20If%20the%0A%20%20%20%20previous%20threshold%20was%20about%20right%20or%20too%20low%2C%20further%20lowering%20the%20threshold%0A%20%20%20%20will%20introduce%20false%20positives%2C%20decreasing%20precision.%0A%0A%20%20%20%20Recall%20is%20defined%20as%20%24%5Cfrac%7BT_p%7D%7BT_p%2BF_n%7D%24%2C%20where%20%24T_p%2BF_n%24%20does%0A%20%20%20%20not%20depend%20on%20the%20classifier%20threshold.%20Changing%20the%20classifier%20threshold%20can%20only%0A%20%20%20%20change%20the%20numerator%2C%20%24T_p%24.%20Lowering%20the%20classifier%0A%20%20%20%20threshold%20may%20increase%20recall%2C%20by%20increasing%20the%20number%20of%20true%20positive%0A%20%20%20%20results.%20It%20is%20also%20possible%20that%20lowering%20the%20threshold%20may%20leave%20recall%0A%20%20%20%20unchanged%2C%20while%20the%20precision%20fluctuates.%20Thus%2C%20precision%20does%20not%20necessarily%0A%20%20%20%20decrease%20with%20recall.%0A%0A%20%20%20%20The%20relationship%20between%20recall%20and%20precision%20can%20be%20observed%20in%20the%0A%20%20%20%20stairstep%20area%20of%20the%20plot%20-%20at%20the%20edges%20of%20these%20steps%20a%20small%20change%0A%20%20%20%20in%20the%20threshold%20considerably%20reduces%20precision%2C%20with%20only%20a%20minor%20gain%20in%0A%20%20%20%20recall.%0A%0A%20%20%20%20**Average%20precision**%20(AP)%20summarizes%20such%20a%20plot%20as%20the%20weighted%20mean%20of%0A%20%20%20%20precisions%20achieved%20at%20each%20threshold%2C%20with%20the%20increase%20in%20recall%20from%20the%0A%20%20%20%20previous%20threshold%20used%20as%20the%20weight%3A%0A%0A%20%20%20%20%24%5Ctext%7BAP%7D%20%3D%20%5Csum_n%20(R_n%20-%20R_%7Bn-1%7D)%20P_n%24%0A%0A%20%20%20%20where%20%24P_n%24%20and%20%24R_n%24%20are%20the%20precision%20and%20recall%20at%20the%0A%20%20%20%20nth%20threshold.%20A%20pair%20%24(R_k%2C%20P_k)%24%20is%20referred%20to%20as%20an%0A%20%20%20%20*operating%20point*.%0A%0A%20%20%20%20AP%20and%20the%20trapezoidal%20area%20under%20the%20operating%20points%0A%20%20%20%20(%3Afunc%3A%60sklearn.metrics.auc%60)%20are%20common%20ways%20to%20summarize%20a%20precision-recall%0A%20%20%20%20curve%20that%20lead%20to%20different%20results.%20Read%20more%20in%20the%0A%20%20%20%20%60User%20Guide%20%3Cprecision_recall_f_measure_metrics%3E%60.%0A%0A%20%20%20%20Precision-recall%20curves%20are%20typically%20used%20in%20binary%20classification%20to%20study%0A%20%20%20%20the%20output%20of%20a%20classifier.%20In%20order%20to%20extend%20the%20precision-recall%20curve%20and%0A%20%20%20%20average%20precision%20to%20multi-class%20or%20multi-label%20classification%2C%20it%20is%20necessary%0A%20%20%20%20to%20binarize%20the%20output.%20One%20curve%20can%20be%20drawn%20per%20label%2C%20but%20one%20can%20also%20draw%0A%20%20%20%20a%20precision-recall%20curve%20by%20considering%20each%20element%20of%20the%20label%20indicator%0A%20%20%20%20matrix%20as%20a%20binary%20prediction%20(%60micro-averaging%20%3Caverage%3E%60).%0A%0A%20%20%20%20%3Cdiv%20class%3D%22alert%20alert-info%22%3E%3Ch4%3ENote%3C%2Fh4%3E%3Cp%3ESee%20also%20%3Afunc%3A%60sklearn.metrics.average_precision_score%60%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Afunc%3A%60sklearn.metrics.recall_score%60%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Afunc%3A%60sklearn.metrics.precision_score%60%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Afunc%3A%60sklearn.metrics.f1_score%60%3C%2Fp%3E%3C%2Fdiv%3E%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20In%20binary%20classification%20settings%0A%0A%20%20%20%20%23%23%23%20Dataset%20and%20model%0A%0A%20%20%20%20We%20will%20use%20a%20Linear%20SVC%20classifier%20to%20differentiate%20two%20types%20of%20irises.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20numpy%20as%20np%0A%0A%20%20%20%20from%20sklearn.datasets%20import%20load_iris%0A%20%20%20%20from%20sklearn.model_selection%20import%20train_test_split%0A%0A%20%20%20%20X%2C%20y%20%3D%20load_iris(return_X_y%3DTrue)%0A%0A%20%20%20%20%23%20Add%20noisy%20features%0A%20%20%20%20random_state%20%3D%20np.random.RandomState(0)%0A%20%20%20%20n_samples%2C%20n_features%20%3D%20X.shape%0A%20%20%20%20X%20%3D%20np.concatenate(%5BX%2C%20random_state.randn(n_samples%2C%20200%20*%20n_features)%5D%2C%20axis%3D1)%0A%0A%20%20%20%20%23%20Limit%20to%20the%20two%20first%20classes%2C%20and%20split%20into%20training%20and%20test%0A%20%20%20%20X_train%2C%20X_test%2C%20y_train%2C%20y_test%20%3D%20train_test_split(%0A%20%20%20%20%20%20%20%20X%5By%20%3C%202%5D%2C%20y%5By%20%3C%202%5D%2C%20test_size%3D0.5%2C%20random_state%3Drandom_state%0A%20%20%20%20)%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20X%2C%0A%20%20%20%20%20%20%20%20X_test%2C%0A%20%20%20%20%20%20%20%20X_train%2C%0A%20%20%20%20%20%20%20%20np%2C%0A%20%20%20%20%20%20%20%20random_state%2C%0A%20%20%20%20%20%20%20%20train_test_split%2C%0A%20%20%20%20%20%20%20%20y%2C%0A%20%20%20%20%20%20%20%20y_test%2C%0A%20%20%20%20%20%20%20%20y_train%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Linear%20SVC%20will%20expect%20each%20feature%20to%20have%20a%20similar%20range%20of%20values.%20Thus%2C%0A%20%20%20%20we%20will%20first%20scale%20the%20data%20using%20a%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.StandardScaler%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_train%2C%20random_state%2C%20y_train)%3A%0A%20%20%20%20from%20sklearn.pipeline%20import%20make_pipeline%0A%20%20%20%20from%20sklearn.preprocessing%20import%20StandardScaler%0A%20%20%20%20from%20sklearn.svm%20import%20LinearSVC%0A%0A%20%20%20%20classifier%20%3D%20make_pipeline(StandardScaler()%2C%20LinearSVC(random_state%3Drandom_state))%0A%20%20%20%20classifier.fit(X_train%2C%20y_train)%0A%20%20%20%20return%20LinearSVC%2C%20StandardScaler%2C%20classifier%2C%20make_pipeline%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Plot%20the%20Precision-Recall%20curve%0A%0A%20%20%20%20To%20plot%20the%20precision-recall%20curve%2C%20you%20should%20use%0A%20%20%20%20%3Aclass%3A%60~sklearn.metrics.PrecisionRecallDisplay%60.%20Indeed%2C%20there%20is%20two%0A%20%20%20%20methods%20available%20depending%20if%20you%20already%20computed%20the%20predictions%20of%20the%0A%20%20%20%20classifier%20or%20not.%0A%0A%20%20%20%20Let's%20first%20plot%20the%20precision-recall%20curve%20without%20the%20classifier%0A%20%20%20%20predictions.%20We%20use%0A%20%20%20%20%3Afunc%3A%60~sklearn.metrics.PrecisionRecallDisplay.from_estimator%60%20that%0A%20%20%20%20computes%20the%20predictions%20for%20us%20before%20plotting%20the%20curve.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_test%2C%20classifier%2C%20y_test)%3A%0A%20%20%20%20from%20sklearn.metrics%20import%20PrecisionRecallDisplay%0A%20%20%20%20_display%20%3D%20PrecisionRecallDisplay.from_estimator(classifier%2C%20X_test%2C%20y_test%2C%20name%3D'LinearSVC'%2C%20plot_chance_level%3DTrue%2C%20despine%3DTrue)%0A%20%20%20%20_%20%3D%20_display.ax_.set_title('2-class%20Precision-Recall%20curve')%0A%20%20%20%20return%20(PrecisionRecallDisplay%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20If%20we%20already%20got%20the%20estimated%20probabilities%20or%20scores%20for%0A%20%20%20%20our%20model%2C%20then%20we%20can%20use%0A%20%20%20%20%3Afunc%3A%60~sklearn.metrics.PrecisionRecallDisplay.from_predictions%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(PrecisionRecallDisplay%2C%20X_test%2C%20classifier%2C%20y_test)%3A%0A%20%20%20%20y_score%20%3D%20classifier.decision_function(X_test)%0A%20%20%20%20_display%20%3D%20PrecisionRecallDisplay.from_predictions(y_test%2C%20y_score%2C%20name%3D'LinearSVC'%2C%20plot_chance_level%3DTrue%2C%20despine%3DTrue)%0A%20%20%20%20_%20%3D%20_display.ax_.set_title('2-class%20Precision-Recall%20curve')%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20In%20multi-label%20settings%0A%0A%20%20%20%20The%20precision-recall%20curve%20does%20not%20support%20the%20multilabel%20setting.%20However%2C%0A%20%20%20%20one%20can%20decide%20how%20to%20handle%20this%20case.%20We%20show%20such%20an%20example%20below.%0A%0A%20%20%20%20%23%23%23%20Create%20multi-label%20data%2C%20fit%2C%20and%20predict%0A%0A%20%20%20%20We%20create%20a%20multi-label%20dataset%2C%20to%20illustrate%20the%20precision-recall%20in%0A%20%20%20%20multi-label%20settings.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X%2C%20random_state%2C%20train_test_split%2C%20y)%3A%0A%20%20%20%20from%20sklearn.preprocessing%20import%20label_binarize%0A%20%20%20%20Y%20%3D%20label_binarize(y%2C%20classes%3D%5B0%2C%201%2C%202%5D)%0A%20%20%20%20%23%20Use%20label_binarize%20to%20be%20multi-label%20like%20settings%0A%20%20%20%20n_classes%20%3D%20Y.shape%5B1%5D%0A%20%20%20%20%23%20Split%20into%20training%20and%20test%0A%20%20%20%20X_train_1%2C%20X_test_1%2C%20Y_train%2C%20Y_test%20%3D%20train_test_split(X%2C%20Y%2C%20test_size%3D0.5%2C%20random_state%3Drandom_state)%0A%20%20%20%20return%20X_test_1%2C%20X_train_1%2C%20Y_test%2C%20Y_train%2C%20n_classes%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20We%20use%20%3Aclass%3A%60~sklearn.multiclass.OneVsRestClassifier%60%20for%20multi-label%0A%20%20%20%20prediction.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20LinearSVC%2C%0A%20%20%20%20StandardScaler%2C%0A%20%20%20%20X_test_1%2C%0A%20%20%20%20X_train_1%2C%0A%20%20%20%20Y_train%2C%0A%20%20%20%20make_pipeline%2C%0A%20%20%20%20random_state%2C%0A)%3A%0A%20%20%20%20from%20sklearn.multiclass%20import%20OneVsRestClassifier%0A%20%20%20%20classifier_1%20%3D%20OneVsRestClassifier(make_pipeline(StandardScaler()%2C%20LinearSVC(random_state%3Drandom_state)))%0A%20%20%20%20classifier_1.fit(X_train_1%2C%20Y_train)%0A%20%20%20%20y_score_1%20%3D%20classifier_1.decision_function(X_test_1)%0A%20%20%20%20return%20(y_score_1%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20The%20average%20precision%20score%20in%20multi-label%20settings%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(Y_test%2C%20n_classes%2C%20y_score_1)%3A%0A%20%20%20%20from%20sklearn.metrics%20import%20average_precision_score%2C%20precision_recall_curve%0A%20%20%20%20precision%20%3D%20dict()%0A%20%20%20%20recall%20%3D%20dict()%0A%20%20%20%20average_precision%20%3D%20dict()%0A%20%20%20%20for%20_i%20in%20range(n_classes)%3A%0A%20%20%20%20%20%20%20%20precision%5B_i%5D%2C%20recall%5B_i%5D%2C%20_%20%3D%20precision_recall_curve(Y_test%5B%3A%2C%20_i%5D%2C%20y_score_1%5B%3A%2C%20_i%5D)%0A%20%20%20%20%20%20%20%20average_precision%5B_i%5D%20%3D%20average_precision_score(Y_test%5B%3A%2C%20_i%5D%2C%20y_score_1%5B%3A%2C%20_i%5D)%0A%20%20%20%20precision%5B'micro'%5D%2C%20recall%5B'micro'%5D%2C%20_%20%3D%20precision_recall_curve(Y_test.ravel()%2C%20y_score_1.ravel())%0A%20%20%20%20average_precision%5B'micro'%5D%20%3D%20average_precision_score(Y_test%2C%20y_score_1%2C%20average%3D'micro')%0A%20%20%20%20return%20average_precision%2C%20precision%2C%20recall%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Plot%20the%20micro-averaged%20Precision-Recall%20curve%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(PrecisionRecallDisplay%2C%20Y_test%2C%20average_precision%2C%20precision%2C%20recall)%3A%0A%20%20%20%20from%20collections%20import%20Counter%0A%20%20%20%20_display%20%3D%20PrecisionRecallDisplay(recall%3Drecall%5B'micro'%5D%2C%20precision%3Dprecision%5B'micro'%5D%2C%20average_precision%3Daverage_precision%5B'micro'%5D%2C%20prevalence_pos_label%3DCounter(Y_test.ravel())%5B1%5D%20%2F%20Y_test.size)%0A%20%20%20%20_display.plot(plot_chance_level%3DTrue%2C%20despine%3DTrue)%0A%20%20%20%20_%20%3D%20_display.ax_.set_title('Micro-averaged%20over%20all%20classes')%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Plot%20Precision-Recall%20curve%20for%20each%20class%20and%20iso-f1%20curves%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20PrecisionRecallDisplay%2C%0A%20%20%20%20average_precision%2C%0A%20%20%20%20n_classes%2C%0A%20%20%20%20np%2C%0A%20%20%20%20precision%2C%0A%20%20%20%20recall%2C%0A)%3A%0A%20%20%20%20from%20itertools%20import%20cycle%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20colors%20%3D%20cycle(%5B'navy'%2C%20'turquoise'%2C%20'darkorange'%2C%20'cornflowerblue'%2C%20'teal'%5D)%0A%20%20%20%20_%2C%20ax%20%3D%20plt.subplots(figsize%3D(7%2C%208))%0A%20%20%20%20f_scores%20%3D%20np.linspace(0.2%2C%200.8%2C%20num%3D4)%0A%20%20%20%20lines%2C%20labels%20%3D%20(%5B%5D%2C%20%5B%5D)%0A%20%20%20%20for%20f_score%20in%20f_scores%3A%0A%20%20%20%20%20%20%20%20x%20%3D%20np.linspace(0.01%2C%201)%0A%20%20%20%20%20%20%20%20y_1%20%3D%20f_score%20*%20x%20%2F%20(2%20*%20x%20-%20f_score)%0A%20%20%20%20%20%20%20%20l%2C%20%3D%20plt.plot(x%5By_1%20%3E%3D%200%5D%2C%20y_1%5By_1%20%3E%3D%200%5D%2C%20color%3D'gray'%2C%20alpha%3D0.2)%0A%20%20%20%20%20%20%20%20plt.annotate('f1%3D%7B0%3A0.1f%7D'.format(f_score)%2C%20xy%3D(0.9%2C%20y_1%5B45%5D%20%2B%200.02))%0A%20%20%20%20_display%20%3D%20PrecisionRecallDisplay(recall%3Drecall%5B'micro'%5D%2C%20precision%3Dprecision%5B'micro'%5D%2C%20average_precision%3Daverage_precision%5B'micro'%5D)%0A%20%20%20%20_display.plot(ax%3Dax%2C%20name%3D'Micro-average%20precision-recall'%2C%20color%3D'gold')%0A%20%20%20%20for%20_i%2C%20color%20in%20zip(range(n_classes)%2C%20colors)%3A%0A%20%20%20%20%20%20%20%20_display%20%3D%20PrecisionRecallDisplay(recall%3Drecall%5B_i%5D%2C%20precision%3Dprecision%5B_i%5D%2C%20average_precision%3Daverage_precision%5B_i%5D)%0A%20%20%20%20%20%20%20%20_display.plot(ax%3Dax%2C%20name%3Df'Precision-recall%20for%20class%20%7B_i%7D'%2C%20color%3Dcolor%2C%20despine%3DTrue)%0A%20%20%20%20handles%2C%20labels%20%3D%20_display.ax_.get_legend_handles_labels()%0A%20%20%20%20handles.extend(%5Bl%5D)%0A%20%20%20%20labels.extend(%5B'iso-f1%20curves'%5D)%0A%20%20%20%20ax.legend(handles%3Dhandles%2C%20labels%3Dlabels%2C%20loc%3D'best')%0A%20%20%20%20ax.set_title('Extension%20of%20Precision-Recall%20curve%20to%20multi-class')%0A%20%20%20%20plt.show()%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

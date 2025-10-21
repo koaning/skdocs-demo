@@ -1,0 +1,71 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2025-10-20T14:56:13.959916Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2025-10-20T14:56:11.576498Z",
+      "mimetype": null,
+      "name": "plot_mlp_training_curves.ipynb",
+      "path": "auto_examples/neural_networks/plot_mlp_training_curves.ipynb",
+      "size": 6134,
+      "type": "notebook",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2025-10-20T14:56:13.959623Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2025-10-20T14:56:11.576294Z",
+      "mimetype": null,
+      "name": "plot_mlp_alpha.ipynb",
+      "path": "auto_examples/neural_networks/plot_mlp_alpha.ipynb",
+      "size": 6473,
+      "type": "notebook",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2025-10-20T14:56:13.960388Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2025-10-20T14:56:11.576913Z",
+      "mimetype": null,
+      "name": "plot_rbm_logistic_classification.ipynb",
+      "path": "auto_examples/neural_networks/plot_rbm_logistic_classification.ipynb",
+      "size": 7662,
+      "type": "notebook",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2025-10-20T14:56:13.960171Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2025-10-20T14:56:11.576680Z",
+      "mimetype": null,
+      "name": "plot_mnist_filters.ipynb",
+      "path": "auto_examples/neural_networks/plot_mnist_filters.ipynb",
+      "size": 4641,
+      "type": "notebook",
+      "writable": true
+    }
+  ],
+  "created": "2025-10-20T14:56:13.960279Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2025-10-20T14:56:13.960279Z",
+  "mimetype": null,
+  "name": "neural_networks",
+  "path": "auto_examples/neural_networks",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

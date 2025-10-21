@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot gradient boosting categorical</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Categorical%20Feature%20Support%20in%20Gradient%20Boosting%0A%0A%20%20%20%20..%20currentmodule%3A%3A%20sklearn%0A%0A%20%20%20%20In%20this%20example%2C%20we%20compare%20the%20training%20times%20and%20prediction%20performances%20of%0A%20%20%20%20%3Aclass%3A%60~ensemble.HistGradientBoostingRegressor%60%20with%20different%20encoding%0A%20%20%20%20strategies%20for%20categorical%20features.%20In%20particular%2C%20we%20evaluate%3A%0A%0A%20%20%20%20-%20%22Dropped%22%3A%20dropping%20the%20categorical%20features%3B%0A%20%20%20%20-%20%22One%20Hot%22%3A%20using%20a%20%3Aclass%3A%60~preprocessing.OneHotEncoder%60%3B%0A%20%20%20%20-%20%22Ordinal%22%3A%20using%20an%20%3Aclass%3A%60~preprocessing.OrdinalEncoder%60%20and%20treat%0A%20%20%20%20%20%20categories%20as%20ordered%2C%20equidistant%20quantities%3B%0A%20%20%20%20-%20%22Target%22%3A%20using%20a%20%3Aclass%3A%60~preprocessing.TargetEncoder%60%3B%0A%20%20%20%20-%20%22Native%22%3A%20relying%20on%20the%20%60native%20category%20support%0A%20%20%20%20%20%20%3Ccategorical_support_gbdt%3E%60%20of%20the%0A%20%20%20%20%20%20%3Aclass%3A%60~ensemble.HistGradientBoostingRegressor%60%20estimator.%0A%0A%20%20%20%20For%20such%20purpose%20we%20use%20the%20Ames%20Iowa%20Housing%20dataset%2C%20which%20consists%20of%0A%20%20%20%20numerical%20and%20categorical%20features%2C%20where%20the%20target%20is%20the%20house%20sale%20price.%0A%0A%20%20%20%20See%20%60sphx_glr_auto_examples_ensemble_plot_hgbt_regression.py%60%20for%20an%0A%20%20%20%20example%20showcasing%20some%20other%20features%20of%0A%20%20%20%20%3Aclass%3A%60~ensemble.HistGradientBoostingRegressor%60.%0A%0A%20%20%20%20See%20%60sphx_glr_auto_examples_preprocessing_plot_target_encoder.py%60%20for%20a%0A%20%20%20%20comparison%20of%20encoding%20strategies%20in%20the%20presence%20of%20high%20cardinality%0A%20%20%20%20categorical%20features.%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Load%20Ames%20Housing%20dataset%0A%20%20%20%20First%2C%20we%20load%20the%20Ames%20Housing%20data%20as%20a%20pandas%20dataframe.%20The%20features%0A%20%20%20%20are%20either%20categorical%20or%20numerical%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20from%20sklearn.datasets%20import%20fetch_openml%0A%0A%20%20%20%20X%2C%20y%20%3D%20fetch_openml(data_id%3D42165%2C%20as_frame%3DTrue%2C%20return_X_y%3DTrue)%0A%0A%20%20%20%20%23%20Select%20only%20a%20subset%20of%20features%20of%20X%20to%20make%20the%20example%20faster%20to%20run%0A%20%20%20%20categorical_columns_subset%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%22BldgType%22%2C%0A%20%20%20%20%20%20%20%20%22GarageFinish%22%2C%0A%20%20%20%20%20%20%20%20%22LotConfig%22%2C%0A%20%20%20%20%20%20%20%20%22Functional%22%2C%0A%20%20%20%20%20%20%20%20%22MasVnrType%22%2C%0A%20%20%20%20%20%20%20%20%22HouseStyle%22%2C%0A%20%20%20%20%20%20%20%20%22FireplaceQu%22%2C%0A%20%20%20%20%20%20%20%20%22ExterCond%22%2C%0A%20%20%20%20%20%20%20%20%22ExterQual%22%2C%0A%20%20%20%20%20%20%20%20%22PoolQC%22%2C%0A%20%20%20%20%5D%0A%0A%20%20%20%20numerical_columns_subset%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%223SsnPorch%22%2C%0A%20%20%20%20%20%20%20%20%22Fireplaces%22%2C%0A%20%20%20%20%20%20%20%20%22BsmtHalfBath%22%2C%0A%20%20%20%20%20%20%20%20%22HalfBath%22%2C%0A%20%20%20%20%20%20%20%20%22GarageCars%22%2C%0A%20%20%20%20%20%20%20%20%22TotRmsAbvGrd%22%2C%0A%20%20%20%20%20%20%20%20%22BsmtFinSF1%22%2C%0A%20%20%20%20%20%20%20%20%22BsmtFinSF2%22%2C%0A%20%20%20%20%20%20%20%20%22GrLivArea%22%2C%0A%20%20%20%20%20%20%20%20%22ScreenPorch%22%2C%0A%20%20%20%20%5D%0A%0A%20%20%20%20X%20%3D%20X%5Bcategorical_columns_subset%20%2B%20numerical_columns_subset%5D%0A%20%20%20%20X%5Bcategorical_columns_subset%5D%20%3D%20X%5Bcategorical_columns_subset%5D.astype(%22category%22)%0A%0A%20%20%20%20categorical_columns%20%3D%20X.select_dtypes(include%3D%22category%22).columns%0A%20%20%20%20n_categorical_features%20%3D%20len(categorical_columns)%0A%20%20%20%20n_numerical_features%20%3D%20X.select_dtypes(include%3D%22number%22).shape%5B1%5D%0A%0A%20%20%20%20print(f%22Number%20of%20samples%3A%20%7BX.shape%5B0%5D%7D%22)%0A%20%20%20%20print(f%22Number%20of%20features%3A%20%7BX.shape%5B1%5D%7D%22)%0A%20%20%20%20print(f%22Number%20of%20categorical%20features%3A%20%7Bn_categorical_features%7D%22)%0A%20%20%20%20print(f%22Number%20of%20numerical%20features%3A%20%7Bn_numerical_features%7D%22)%0A%20%20%20%20return%20X%2C%20y%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Gradient%20boosting%20estimator%20with%20dropped%20categorical%20features%0A%20%20%20%20As%20a%20baseline%2C%20we%20create%20an%20estimator%20where%20the%20categorical%20features%20are%0A%20%20%20%20dropped%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20from%20sklearn.compose%20import%20make_column_selector%2C%20make_column_transformer%0A%20%20%20%20from%20sklearn.ensemble%20import%20HistGradientBoostingRegressor%0A%20%20%20%20from%20sklearn.pipeline%20import%20make_pipeline%0A%0A%20%20%20%20dropper%20%3D%20make_column_transformer(%0A%20%20%20%20%20%20%20%20(%22drop%22%2C%20make_column_selector(dtype_include%3D%22category%22))%2C%20remainder%3D%22passthrough%22%0A%20%20%20%20)%0A%20%20%20%20hist_dropped%20%3D%20make_pipeline(dropper%2C%20HistGradientBoostingRegressor(random_state%3D42))%0A%20%20%20%20hist_dropped%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20HistGradientBoostingRegressor%2C%0A%20%20%20%20%20%20%20%20hist_dropped%2C%0A%20%20%20%20%20%20%20%20make_column_selector%2C%0A%20%20%20%20%20%20%20%20make_column_transformer%2C%0A%20%20%20%20%20%20%20%20make_pipeline%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Gradient%20boosting%20estimator%20with%20one-hot%20encoding%0A%20%20%20%20Next%2C%20we%20create%20a%20pipeline%20to%20one-hot%20encode%20the%20categorical%20features%2C%0A%20%20%20%20while%20letting%20the%20remaining%20features%20%60%22passthrough%22%60%20unchanged%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20HistGradientBoostingRegressor%2C%0A%20%20%20%20make_column_selector%2C%0A%20%20%20%20make_column_transformer%2C%0A%20%20%20%20make_pipeline%2C%0A)%3A%0A%20%20%20%20from%20sklearn.preprocessing%20import%20OneHotEncoder%0A%0A%20%20%20%20one_hot_encoder%20%3D%20make_column_transformer(%0A%20%20%20%20%20%20%20%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20OneHotEncoder(sparse_output%3DFalse%2C%20handle_unknown%3D%22ignore%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20make_column_selector(dtype_include%3D%22category%22)%2C%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20remainder%3D%22passthrough%22%2C%0A%20%20%20%20)%0A%0A%20%20%20%20hist_one_hot%20%3D%20make_pipeline(%0A%20%20%20%20%20%20%20%20one_hot_encoder%2C%20HistGradientBoostingRegressor(random_state%3D42)%0A%20%20%20%20)%0A%20%20%20%20hist_one_hot%0A%20%20%20%20return%20(hist_one_hot%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Gradient%20boosting%20estimator%20with%20ordinal%20encoding%0A%20%20%20%20Next%2C%20we%20create%20a%20pipeline%20that%20treats%20categorical%20features%20as%20ordered%0A%20%20%20%20quantities%2C%20i.e.%20the%20categories%20are%20encoded%20as%200%2C%201%2C%202%2C%20etc.%2C%20and%20treated%20as%0A%20%20%20%20continuous%20features.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20HistGradientBoostingRegressor%2C%0A%20%20%20%20make_column_selector%2C%0A%20%20%20%20make_column_transformer%2C%0A%20%20%20%20make_pipeline%2C%0A)%3A%0A%20%20%20%20import%20numpy%20as%20np%0A%0A%20%20%20%20from%20sklearn.preprocessing%20import%20OrdinalEncoder%0A%0A%20%20%20%20ordinal_encoder%20%3D%20make_column_transformer(%0A%20%20%20%20%20%20%20%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20OrdinalEncoder(handle_unknown%3D%22use_encoded_value%22%2C%20unknown_value%3Dnp.nan)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20make_column_selector(dtype_include%3D%22category%22)%2C%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20remainder%3D%22passthrough%22%2C%0A%20%20%20%20)%0A%0A%20%20%20%20hist_ordinal%20%3D%20make_pipeline(%0A%20%20%20%20%20%20%20%20ordinal_encoder%2C%20HistGradientBoostingRegressor(random_state%3D42)%0A%20%20%20%20)%0A%20%20%20%20hist_ordinal%0A%20%20%20%20return%20hist_ordinal%2C%20np%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Gradient%20boosting%20estimator%20with%20target%20encoding%0A%20%20%20%20Another%20possibility%20is%20to%20use%20the%20%3Aclass%3A%60~preprocessing.TargetEncoder%60%2C%20which%0A%20%20%20%20encodes%20the%20categories%20computed%20from%20the%20mean%20of%20the%20(training)%20target%0A%20%20%20%20variable%2C%20as%20computed%20using%20a%20smoothed%20%60np.mean(y%2C%20axis%3D0)%60%20i.e.%3A%0A%0A%20%20%20%20-%20in%20regression%20it%20uses%20the%20mean%20of%20%60y%60%3B%0A%20%20%20%20-%20in%20binary%20classification%2C%20the%20positive-class%20rate%3B%0A%20%20%20%20-%20in%20multiclass%2C%20a%20vector%20of%20class%20rates%20(one%20per%20class).%0A%0A%20%20%20%20For%20each%20category%2C%20it%20computes%20these%20target%20averages%20using%20%3Aterm%3A%60cross%0A%20%20%20%20fitting%60%2C%20meaning%20that%20the%20training%20data%20are%20split%20into%20folds%3A%20in%20each%20fold%0A%20%20%20%20the%20averages%20are%20calculated%20only%20on%20a%20subset%20of%20data%20and%20then%20applied%20to%20the%0A%20%20%20%20held-out%20part.%20This%20way%2C%20each%20sample%20is%20encoded%20using%20statistics%20from%20data%20it%0A%20%20%20%20was%20not%20part%20of%2C%20preventing%20information%20leakage%20from%20the%20target.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20HistGradientBoostingRegressor%2C%0A%20%20%20%20make_column_selector%2C%0A%20%20%20%20make_column_transformer%2C%0A%20%20%20%20make_pipeline%2C%0A)%3A%0A%20%20%20%20from%20sklearn.preprocessing%20import%20TargetEncoder%0A%0A%20%20%20%20target_encoder%20%3D%20make_column_transformer(%0A%20%20%20%20%20%20%20%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20TargetEncoder(target_type%3D%22continuous%22%2C%20random_state%3D42)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20make_column_selector(dtype_include%3D%22category%22)%2C%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20remainder%3D%22passthrough%22%2C%0A%20%20%20%20)%0A%0A%20%20%20%20hist_target%20%3D%20make_pipeline(%0A%20%20%20%20%20%20%20%20target_encoder%2C%20HistGradientBoostingRegressor(random_state%3D42)%0A%20%20%20%20)%0A%20%20%20%20hist_target%0A%20%20%20%20return%20(hist_target%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Gradient%20boosting%20estimator%20with%20native%20categorical%20support%0A%20%20%20%20We%20now%20create%20a%20%3Aclass%3A%60~ensemble.HistGradientBoostingRegressor%60%20estimator%0A%20%20%20%20that%20can%20natively%20handle%20categorical%20features%20without%20explicit%20encoding.%20Such%0A%20%20%20%20functionality%20can%20be%20enabled%20by%20setting%20%60categorical_features%3D%22from_dtype%22%60%2C%0A%20%20%20%20which%20automatically%20detects%20features%20with%20categorical%20dtypes%2C%20or%20more%20explicitly%0A%20%20%20%20by%20%60categorical_features%3Dcategorical_columns_subset%60.%0A%0A%20%20%20%20Unlike%20previous%20encoding%20approaches%2C%20the%20estimator%20natively%20deals%20with%20the%0A%20%20%20%20categorical%20features.%20At%20each%20split%2C%20it%20partitions%20the%20categories%20of%20such%20a%0A%20%20%20%20feature%20into%20disjoint%20sets%20using%20a%20heuristic%20that%20sorts%20them%20by%20their%20effect%0A%20%20%20%20on%20the%20target%20variable%2C%20see%20%5BSplit%20finding%20with%20categorical%20features%5D(https%3A%2F%2Fscikit-learn.org%2Fstable%2Fmodules%2Fensemble.html%23split-finding-with-categorical-features)%0A%20%20%20%20for%20details.%0A%0A%20%20%20%20While%20ordinal%20encoding%20may%20work%20well%20for%20low-cardinality%20features%20even%20if%0A%20%20%20%20categories%20have%20no%20natural%20order%2C%20reaching%20meaningful%20splits%20requires%20deeper%0A%20%20%20%20trees%20as%20the%20cardinality%20increases.%20The%20native%20categorical%20support%20avoids%20this%0A%20%20%20%20by%20directly%20working%20with%20unordered%20categories.%20The%20advantage%20over%20one-hot%0A%20%20%20%20encoding%20is%20the%20omitted%20preprocessing%20and%20faster%20fit%20and%20predict%20time.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(HistGradientBoostingRegressor)%3A%0A%20%20%20%20hist_native%20%3D%20HistGradientBoostingRegressor(%0A%20%20%20%20%20%20%20%20random_state%3D42%2C%20categorical_features%3D%22from_dtype%22%0A%20%20%20%20)%0A%20%20%20%20hist_native%0A%20%20%20%20return%20(hist_native%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Model%20comparison%0A%20%20%20%20Here%20we%20use%20%3Aterm%3A%60cross%20validation%60%20to%20compare%20the%20models%20performance%20in%0A%20%20%20%20terms%20of%20%3Afunc%3A%60~metrics.mean_absolute_percentage_error%60%20and%20fit%20times.%20In%20the%0A%20%20%20%20upcoming%20plots%2C%20error%20bars%20represent%201%20standard%20deviation%20as%20computed%20across%0A%20%20%20%20cross-validation%20splits.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20X%2C%0A%20%20%20%20hist_dropped%2C%0A%20%20%20%20hist_native%2C%0A%20%20%20%20hist_one_hot%2C%0A%20%20%20%20hist_ordinal%2C%0A%20%20%20%20hist_target%2C%0A%20%20%20%20y%2C%0A)%3A%0A%20%20%20%20from%20sklearn.model_selection%20import%20cross_validate%0A%20%20%20%20common_params%20%3D%20%7B'cv'%3A%205%2C%20'scoring'%3A%20'neg_mean_absolute_percentage_error'%2C%20'n_jobs'%3A%20-1%7D%0A%20%20%20%20_dropped_result%20%3D%20cross_validate(hist_dropped%2C%20X%2C%20y%2C%20**common_params)%0A%20%20%20%20_one_hot_result%20%3D%20cross_validate(hist_one_hot%2C%20X%2C%20y%2C%20**common_params)%0A%20%20%20%20_ordinal_result%20%3D%20cross_validate(hist_ordinal%2C%20X%2C%20y%2C%20**common_params)%0A%20%20%20%20_target_result%20%3D%20cross_validate(hist_target%2C%20X%2C%20y%2C%20**common_params)%0A%20%20%20%20_native_result%20%3D%20cross_validate(hist_native%2C%20X%2C%20y%2C%20**common_params)%0A%20%20%20%20results%20%3D%20%5B('Dropped'%2C%20_dropped_result)%2C%20('One%20Hot'%2C%20_one_hot_result)%2C%20('Ordinal'%2C%20_ordinal_result)%2C%20('Target'%2C%20_target_result)%2C%20('Native'%2C%20_native_result)%5D%0A%20%20%20%20return%20common_params%2C%20cross_validate%2C%20results%0A%0A%0A%40app.cell%0Adef%20_(np%2C%20results)%3A%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20import%20matplotlib.ticker%20as%20ticker%0A%0A%0A%20%20%20%20def%20plot_performance_tradeoff(results%2C%20title)%3A%0A%20%20%20%20%20%20%20%20fig%2C%20ax%20%3D%20plt.subplots()%0A%20%20%20%20%20%20%20%20markers%20%3D%20%5B%22s%22%2C%20%22o%22%2C%20%22%5E%22%2C%20%22x%22%2C%20%22D%22%5D%0A%0A%20%20%20%20%20%20%20%20for%20idx%2C%20(name%2C%20result)%20in%20enumerate(results)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20test_error%20%3D%20-result%5B%22test_score%22%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20mean_fit_time%20%3D%20np.mean(result%5B%22fit_time%22%5D)%0A%20%20%20%20%20%20%20%20%20%20%20%20mean_score%20%3D%20np.mean(test_error)%0A%20%20%20%20%20%20%20%20%20%20%20%20std_fit_time%20%3D%20np.std(result%5B%22fit_time%22%5D)%0A%20%20%20%20%20%20%20%20%20%20%20%20std_score%20%3D%20np.std(test_error)%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.scatter(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20result%5B%22fit_time%22%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20test_error%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3Dname%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20marker%3Dmarkers%5Bidx%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.scatter(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20mean_fit_time%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20mean_score%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%3D%22k%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20marker%3Dmarkers%5Bidx%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.errorbar(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20x%3Dmean_fit_time%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20y%3Dmean_score%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20yerr%3Dstd_score%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20c%3D%22k%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20capsize%3D2%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.errorbar(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20x%3Dmean_fit_time%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20y%3Dmean_score%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20xerr%3Dstd_fit_time%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20c%3D%22k%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20capsize%3D2%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20ax.set_xscale(%22log%22)%0A%0A%20%20%20%20%20%20%20%20nticks%20%3D%207%0A%20%20%20%20%20%20%20%20x0%2C%20x1%20%3D%20np.log10(ax.get_xlim())%0A%20%20%20%20%20%20%20%20ticks%20%3D%20np.logspace(x0%2C%20x1%2C%20nticks)%0A%20%20%20%20%20%20%20%20ax.set_xticks(ticks)%0A%20%20%20%20%20%20%20%20ax.xaxis.set_major_formatter(ticker.FormatStrFormatter(%22%251.1e%22))%0A%20%20%20%20%20%20%20%20ax.minorticks_off()%0A%0A%20%20%20%20%20%20%20%20ax.annotate(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%20%20best%5Cnmodels%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20xy%3D(0.04%2C%200.04)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20xycoords%3D%22axes%20fraction%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20xytext%3D(0.09%2C%200.14)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20textcoords%3D%22axes%20fraction%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20arrowprops%3Ddict(arrowstyle%3D%22-%3E%22%2C%20lw%3D1.5)%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20ax.set_xlabel(%22Time%20to%20fit%20(seconds)%22)%0A%20%20%20%20%20%20%20%20ax.set_ylabel(%22Mean%20Absolute%20Percentage%20Error%22)%0A%20%20%20%20%20%20%20%20ax.set_title(title)%0A%20%20%20%20%20%20%20%20ax.legend()%0A%20%20%20%20%20%20%20%20plt.show()%0A%0A%0A%20%20%20%20plot_performance_tradeoff(results%2C%20%22Gradient%20Boosting%20on%20Ames%20Housing%22)%0A%20%20%20%20return%20(plot_performance_tradeoff%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20In%20the%20plot%20above%2C%20the%20%22best%20models%22%20are%20those%20that%20are%20closer%20to%20the%0A%20%20%20%20down-left%20corner%2C%20as%20indicated%20by%20the%20arrow.%20Those%20models%20would%20indeed%0A%20%20%20%20correspond%20to%20faster%20fitting%20and%20lower%20error.%0A%0A%20%20%20%20The%20model%20using%20one-hot%20encoded%20data%20is%20the%20slowest.%20This%20is%20to%20be%20expected%2C%0A%20%20%20%20as%20one-hot%20encoding%20creates%20an%20additional%20feature%20for%20each%20category%20value%20of%0A%20%20%20%20every%20categorical%20feature%2C%20greatly%20increasing%20the%20number%20of%20split%20candidates%0A%20%20%20%20during%20training.%20In%20theory%2C%20we%20expect%20the%20native%20handling%20of%20categorical%0A%20%20%20%20features%20to%20be%20slightly%20slower%20than%20treating%20categories%20as%20ordered%20quantities%0A%20%20%20%20('Ordinal')%2C%20since%20native%20handling%20requires%20%60sorting%20categories%0A%20%20%20%20%3Ccategorical_support_gbdt%3E%60.%20Fitting%20times%20should%20however%20be%20close%20when%20the%0A%20%20%20%20number%20of%20categories%20is%20small%2C%20and%20this%20may%20not%20always%20be%20reflected%20in%0A%20%20%20%20practice.%0A%0A%20%20%20%20The%20time%20required%20to%20fit%20when%20using%20the%20%60TargetEncoder%60%20depends%20on%20the%0A%20%20%20%20cross%20fitting%20parameter%20%60cv%60%2C%20as%20adding%20splits%20come%20at%20a%20computational%20cost.%0A%0A%20%20%20%20In%20terms%20of%20prediction%20performance%2C%20dropping%20the%20categorical%20features%20leads%20to%0A%20%20%20%20the%20worst%20performance.%20The%20four%20models%20that%20make%20use%20of%20the%20categorical%0A%20%20%20%20features%20have%20comparable%20error%20rates%2C%20with%20a%20slight%20edge%20for%20the%20native%0A%20%20%20%20handling.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Limiting%20the%20number%20of%20splits%0A%20%20%20%20In%20general%2C%20one%20can%20expect%20poorer%20predictions%20from%20one-hot-encoded%20data%2C%0A%20%20%20%20especially%20when%20the%20tree%20depths%20or%20the%20number%20of%20nodes%20are%20limited%3A%20with%0A%20%20%20%20one-hot-encoded%20data%2C%20one%20needs%20more%20split%20points%2C%20i.e.%20more%20depth%2C%20in%20order%0A%20%20%20%20to%20recover%20an%20equivalent%20split%20that%20could%20be%20obtained%20in%20one%20single%20split%0A%20%20%20%20point%20with%20native%20handling.%0A%0A%20%20%20%20This%20is%20also%20true%20when%20categories%20are%20treated%20as%20ordinal%20quantities%3A%20if%0A%20%20%20%20categories%20are%20%60A..F%60%20and%20the%20best%20split%20is%20%60ACF%20-%20BDE%60%20the%20one-hot-encoder%0A%20%20%20%20model%20would%20need%203%20split%20points%20(one%20per%20category%20in%20the%20left%20node)%2C%20and%20the%0A%20%20%20%20ordinal%20non-native%20model%20would%20need%204%20splits%3A%201%20split%20to%20isolate%20%60A%60%2C%201%20split%0A%20%20%20%20to%20isolate%20%60F%60%2C%20and%202%20splits%20to%20isolate%20%60C%60%20from%20%60BCDE%60.%0A%0A%20%20%20%20How%20strongly%20the%20models'%20performances%20differ%20in%20practice%20depends%20on%20the%0A%20%20%20%20dataset%20and%20on%20the%20flexibility%20of%20the%20trees.%0A%0A%20%20%20%20To%20see%20this%2C%20let%20us%20re-run%20the%20same%20analysis%20with%20under-fitting%20models%20where%0A%20%20%20%20we%20artificially%20limit%20the%20total%20number%20of%20splits%20by%20both%20limiting%20the%20number%0A%20%20%20%20of%20trees%20and%20the%20depth%20of%20each%20tree.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20X%2C%0A%20%20%20%20common_params%2C%0A%20%20%20%20cross_validate%2C%0A%20%20%20%20hist_dropped%2C%0A%20%20%20%20hist_native%2C%0A%20%20%20%20hist_one_hot%2C%0A%20%20%20%20hist_ordinal%2C%0A%20%20%20%20hist_target%2C%0A%20%20%20%20y%2C%0A)%3A%0A%20%20%20%20for%20pipe%20in%20(hist_dropped%2C%20hist_one_hot%2C%20hist_ordinal%2C%20hist_target%2C%20hist_native)%3A%0A%20%20%20%20%20%20%20%20if%20pipe%20is%20hist_native%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20pipe.set_params(max_depth%3D3%2C%20max_iter%3D15)%20%20%23%20The%20native%20model%20does%20not%20use%20a%20pipeline%20so%2C%20we%20can%20set%20the%20parameters%0A%20%20%20%20%20%20%20%20else%3A%20%20%23%20directly.%0A%20%20%20%20%20%20%20%20%20%20%20%20pipe.set_params(histgradientboostingregressor__max_depth%3D3%2C%20histgradientboostingregressor__max_iter%3D15)%0A%20%20%20%20_dropped_result%20%3D%20cross_validate(hist_dropped%2C%20X%2C%20y%2C%20**common_params)%0A%20%20%20%20_one_hot_result%20%3D%20cross_validate(hist_one_hot%2C%20X%2C%20y%2C%20**common_params)%0A%20%20%20%20_ordinal_result%20%3D%20cross_validate(hist_ordinal%2C%20X%2C%20y%2C%20**common_params)%0A%20%20%20%20_target_result%20%3D%20cross_validate(hist_target%2C%20X%2C%20y%2C%20**common_params)%0A%20%20%20%20_native_result%20%3D%20cross_validate(hist_native%2C%20X%2C%20y%2C%20**common_params)%0A%20%20%20%20results_underfit%20%3D%20%5B('Dropped'%2C%20_dropped_result)%2C%20('One%20Hot'%2C%20_one_hot_result)%2C%20('Ordinal'%2C%20_ordinal_result)%2C%20('Target'%2C%20_target_result)%2C%20('Native'%2C%20_native_result)%5D%0A%20%20%20%20return%20(results_underfit%2C)%0A%0A%0A%40app.cell%0Adef%20_(plot_performance_tradeoff%2C%20results_underfit)%3A%0A%20%20%20%20plot_performance_tradeoff(%0A%20%20%20%20%20%20%20%20results_underfit%2C%20%22Gradient%20Boosting%20on%20Ames%20Housing%20(few%20and%20shallow%20trees)%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20The%20results%20for%20these%20underfitting%20models%20confirm%20our%20previous%20intuition%3A%20the%0A%20%20%20%20native%20category%20handling%20strategy%20performs%20the%20best%20when%20the%20splitting%20budget%0A%20%20%20%20is%20constrained.%20The%20three%20explicit%20encoding%20strategies%20(one-hot%2C%20ordinal%20and%0A%20%20%20%20target%20encoding)%20lead%20to%20slightly%20larger%20errors%20than%20the%20estimator's%20native%0A%20%20%20%20handling%2C%20but%20still%20perform%20better%20than%20the%20baseline%20model%20that%20just%20dropped%0A%20%20%20%20the%20categorical%20features%20altogether.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

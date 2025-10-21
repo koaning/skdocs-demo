@@ -1,0 +1,1 @@
+import"./dist-CoL9j4yJ.js";import"./dist-DIuPmJ5w.js";import{i as o,n as a,r as t,t as p}from"./dist-CL0hPMY6.js";export{p as globalCompletion,a as localCompletionSource,t as python,o as pythonLanguage};

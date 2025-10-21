@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>approximate nearest neighbors</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Approximate%20nearest%20neighbors%20in%20TSNE%0A%0A%20%20%20%20This%20example%20presents%20how%20to%20chain%20KNeighborsTransformer%20and%20TSNE%20in%20a%20pipeline.%0A%20%20%20%20It%20also%20shows%20how%20to%20wrap%20the%20packages%20%60nmslib%60%20and%20%60pynndescent%60%20to%20replace%0A%20%20%20%20KNeighborsTransformer%20and%20perform%20approximate%20nearest%20neighbors.%20These%20packages%0A%20%20%20%20can%20be%20installed%20with%20%60pip%20install%20nmslib%20pynndescent%60.%0A%0A%20%20%20%20Note%3A%20In%20KNeighborsTransformer%20we%20use%20the%20definition%20which%20includes%20each%0A%20%20%20%20training%20point%20as%20its%20own%20neighbor%20in%20the%20count%20of%20%60n_neighbors%60%2C%20and%20for%0A%20%20%20%20compatibility%20reasons%2C%20one%20extra%20neighbor%20is%20computed%20when%20%60mode%20%3D%3D%20'distance'%60.%0A%20%20%20%20Please%20note%20that%20we%20do%20the%20same%20in%20the%20proposed%20%60nmslib%60%20wrapper.%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20First%20we%20try%20to%20import%20the%20packages%20and%20warn%20the%20user%20in%20case%20they%20are%0A%20%20%20%20missing.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20sys%0A%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20import%20nmslib%0A%20%20%20%20except%20ImportError%3A%0A%20%20%20%20%20%20%20%20print(%22The%20package%20'nmslib'%20is%20required%20to%20run%20this%20example.%22)%0A%20%20%20%20%20%20%20%20sys.exit()%0A%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20from%20pynndescent%20import%20PyNNDescentTransformer%0A%20%20%20%20except%20ImportError%3A%0A%20%20%20%20%20%20%20%20print(%22The%20package%20'pynndescent'%20is%20required%20to%20run%20this%20example.%22)%0A%20%20%20%20%20%20%20%20sys.exit()%0A%20%20%20%20return%20PyNNDescentTransformer%2C%20nmslib%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20We%20define%20a%20wrapper%20class%20for%20implementing%20the%20scikit-learn%20API%20to%20the%0A%20%20%20%20%60nmslib%60%2C%20as%20well%20as%20a%20loading%20function.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(nmslib)%3A%0A%20%20%20%20import%20joblib%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20from%20scipy.sparse%20import%20csr_matrix%0A%20%20%20%20from%20sklearn.base%20import%20BaseEstimator%2C%20TransformerMixin%0A%20%20%20%20from%20sklearn.datasets%20import%20fetch_openml%0A%20%20%20%20from%20sklearn.utils%20import%20shuffle%0A%0A%20%20%20%20class%20NMSlibTransformer(TransformerMixin%2C%20BaseEstimator)%3A%0A%20%20%20%20%20%20%20%20%22%22%22Wrapper%20for%20using%20nmslib%20as%20sklearn's%20KNeighborsTransformer%22%22%22%0A%0A%20%20%20%20%20%20%20%20def%20__init__(self%2C%20n_neighbors%3D5%2C%20metric%3D'euclidean'%2C%20method%3D'sw-graph'%2C%20n_jobs%3D-1)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.n_neighbors%20%3D%20n_neighbors%0A%20%20%20%20%20%20%20%20%20%20%20%20self.method%20%3D%20method%0A%20%20%20%20%20%20%20%20%20%20%20%20self.metric%20%3D%20metric%0A%20%20%20%20%20%20%20%20%20%20%20%20self.n_jobs%20%3D%20n_jobs%0A%0A%20%20%20%20%20%20%20%20def%20fit(self%2C%20X)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.n_samples_fit_%20%3D%20_X.shape%5B0%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20space%20%3D%20%7B'euclidean'%3A%20'l2'%2C%20'cosine'%3A%20'cosinesimil'%2C%20'l1'%3A%20'l1'%2C%20'l2'%3A%20'l2'%7D%5Bself.metric%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20self.nmslib_%20%3D%20nmslib.init(method%3Dself.method%2C%20space%3Dspace)%0A%20%20%20%20%20%20%20%20%20%20%20%20self.nmslib_.addDataPointBatch(_X.copy())%0A%20%20%20%20%20%20%20%20%20%20%20%20self.nmslib_.createIndex()%20%20%23%20see%20more%20metric%20in%20the%20manual%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20self%20%20%23%20https%3A%2F%2Fgithub.com%2Fnmslib%2Fnmslib%2Ftree%2Fmaster%2Fmanual%0A%0A%20%20%20%20%20%20%20%20def%20transform(self%2C%20X)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20n_samples_transform%20%3D%20_X.shape%5B0%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20n_neighbors%20%3D%20self.n_neighbors%20%2B%201%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20self.n_jobs%20%3C%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20num_threads%20%3D%20joblib.cpu_count()%20%2B%20self.n_jobs%20%2B%201%0A%20%20%20%20%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20num_threads%20%3D%20self.n_jobs%0A%20%20%20%20%20%20%20%20%20%20%20%20results%20%3D%20self.nmslib_.knnQueryBatch(_X.copy()%2C%20k%3Dn_neighbors%2C%20num_threads%3Dnum_threads)%0A%20%20%20%20%20%20%20%20%20%20%20%20indices%2C%20distances%20%3D%20zip(*results)%0A%20%20%20%20%20%20%20%20%20%20%20%20indices%2C%20distances%20%3D%20(np.vstack(indices)%2C%20np.vstack(distances))%0A%20%20%20%20%20%20%20%20%20%20%20%20indptr%20%3D%20np.arange(0%2C%20n_samples_transform%20*%20n_neighbors%20%2B%201%2C%20n_neighbors)%0A%20%20%20%20%20%20%20%20%20%20%20%20kneighbors_graph%20%3D%20csr_matrix((distances.ravel()%2C%20indices.ravel()%2C%20indptr)%2C%20shape%3D(n_samples_transform%2C%20self.n_samples_fit_))%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20kneighbors_graph%0A%0A%20%20%20%20def%20load_mnist(n_samples)%3A%20%20%23%20For%20compatibility%20reasons%2C%20as%20each%20sample%20is%20considered%20as%20its%20own%0A%20%20%20%20%20%20%20%20%22%22%22Load%20MNIST%2C%20shuffle%20the%20data%2C%20and%20return%20only%20n_samples.%22%22%22%20%20%23%20neighbor%2C%20one%20extra%20neighbor%20will%20be%20computed.%0A%20%20%20%20%20%20%20%20mnist%20%3D%20fetch_openml('mnist_784'%2C%20as_frame%3DFalse)%0A%20%20%20%20%20%20%20%20_X%2C%20_y%20%3D%20shuffle(mnist.data%2C%20mnist.target%2C%20random_state%3D2)%0A%20%20%20%20%20%20%20%20return%20(_X%5B%3An_samples%5D%20%2F%20255%2C%20_y%5B%3An_samples%5D)%20%20%23%20Same%20handling%20as%20done%20in%20joblib%20for%20negative%20values%20of%20n_jobs%3A%20%20%23%20in%20particular%2C%20%60n_jobs%20%3D%3D%20-1%60%20means%20%22as%20many%20threads%20as%20CPUs%22.%0A%20%20%20%20return%20NMSlibTransformer%2C%20load_mnist%2C%20np%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20We%20benchmark%20the%20different%20exact%2Fapproximate%20nearest%20neighbors%20transformers.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(NMSlibTransformer%2C%20PyNNDescentTransformer%2C%20load_mnist%2C%20np)%3A%0A%20%20%20%20import%20time%0A%20%20%20%20from%20sklearn.manifold%20import%20TSNE%0A%20%20%20%20from%20sklearn.neighbors%20import%20KNeighborsTransformer%0A%20%20%20%20from%20sklearn.pipeline%20import%20make_pipeline%0A%20%20%20%20datasets%20%3D%20%5B('MNIST_10000'%2C%20load_mnist(n_samples%3D10000))%2C%20('MNIST_20000'%2C%20load_mnist(n_samples%3D20000))%5D%0A%20%20%20%20max_iter%20%3D%20500%0A%20%20%20%20perplexity%20%3D%2030%0A%20%20%20%20metric%20%3D%20'euclidean'%0A%20%20%20%20n_neighbors%20%3D%20int(3.0%20*%20perplexity%20%2B%201)%20%2B%201%0A%20%20%20%20tsne_params%20%3D%20dict(init%3D'random'%2C%20perplexity%3Dperplexity%2C%20method%3D'barnes_hut'%2C%20random_state%3D42%2C%20max_iter%3Dmax_iter%2C%20learning_rate%3D'auto')%0A%20%20%20%20_transformers%20%3D%20%5B('KNeighborsTransformer'%2C%20KNeighborsTransformer(n_neighbors%3Dn_neighbors%2C%20mode%3D'distance'%2C%20metric%3Dmetric))%2C%20('NMSlibTransformer'%2C%20NMSlibTransformer(n_neighbors%3Dn_neighbors%2C%20metric%3Dmetric))%2C%20('PyNNDescentTransformer'%2C%20PyNNDescentTransformer(n_neighbors%3Dn_neighbors%2C%20metric%3Dmetric%2C%20parallel_batch_queries%3DTrue))%5D%0A%20%20%20%20for%20_dataset_name%2C%20(_X%2C%20_y)%20in%20datasets%3A%0A%20%20%20%20%20%20%20%20_msg%20%3D%20f'Benchmarking%20on%20%7B_dataset_name%7D%3A'%0A%20%20%20%20%20%20%20%20print(f'%5Cn%7B_msg%7D%5Cn'%20%2B%20str('-'%20*%20len(_msg)))%0A%20%20%20%20%23%20TSNE%20requires%20a%20certain%20number%20of%20neighbors%20which%20depends%20on%20the%0A%20%20%20%20%23%20perplexity%20parameter.%0A%20%20%20%20%23%20Add%20one%20since%20we%20include%20each%20sample%20as%20its%20own%20neighbor.%0A%20%20%20%20%20%20%20%20for%20_transformer_name%2C%20_transformer%20in%20_transformers%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_longest%20%3D%20np.max(%5Blen(name)%20for%20name%2C%20model%20in%20_transformers%5D)%0A%20%20%20%20%20%20%20%20%20%20%20%20_start%20%3D%20time.time()%0A%20%20%20%20%20%20%20%20%20%20%20%20_transformer.fit(_X)%20%20%23%20pca%20cannot%20be%20used%20with%20precomputed%20distances%0A%20%20%20%20%20%20%20%20%20%20%20%20fit_duration%20%3D%20time.time()%20-%20_start%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f'%7B_transformer_name%3A%3C%7B_longest%7D%7D%20%7Bfit_duration%3A.3f%7D%20sec%20(fit)')%0A%20%20%20%20%20%20%20%20%20%20%20%20_start%20%3D%20time.time()%0A%20%20%20%20%20%20%20%20%20%20%20%20_Xt%20%3D%20_transformer.transform(_X)%0A%20%20%20%20%20%20%20%20%20%20%20%20_transform_duration%20%3D%20time.time()%20-%20_start%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f'%7B_transformer_name%3A%3C%7B_longest%7D%7D%20%7B_transform_duration%3A.3f%7D%20sec%20(transform)')%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20_transformer_name%20%3D%3D%20'PyNNDescentTransformer'%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_start%20%3D%20time.time()%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_Xt%20%3D%20_transformer.transform(_X)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_transform_duration%20%3D%20time.time()%20-%20_start%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20print(f'%7B_transformer_name%3A%3C%7B_longest%7D%7D%20%7B_transform_duration%3A.3f%7D%20sec%20(transform)')%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20KNeighborsTransformer%2C%0A%20%20%20%20%20%20%20%20TSNE%2C%0A%20%20%20%20%20%20%20%20datasets%2C%0A%20%20%20%20%20%20%20%20make_pipeline%2C%0A%20%20%20%20%20%20%20%20metric%2C%0A%20%20%20%20%20%20%20%20n_neighbors%2C%0A%20%20%20%20%20%20%20%20time%2C%0A%20%20%20%20%20%20%20%20tsne_params%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Sample%20output%3A%3A%0A%0A%20%20%20%20%20%20%20%20Benchmarking%20on%20MNIST_10000%3A%0A%20%20%20%20%20%20%20%20----------------------------%0A%20%20%20%20%20%20%20%20KNeighborsTransformer%20%200.007%20sec%20(fit)%0A%20%20%20%20%20%20%20%20KNeighborsTransformer%20%201.139%20sec%20(transform)%0A%20%20%20%20%20%20%20%20NMSlibTransformer%20%20%20%20%20%200.208%20sec%20(fit)%0A%20%20%20%20%20%20%20%20NMSlibTransformer%20%20%20%20%20%200.315%20sec%20(transform)%0A%20%20%20%20%20%20%20%20PyNNDescentTransformer%204.823%20sec%20(fit)%0A%20%20%20%20%20%20%20%20PyNNDescentTransformer%204.884%20sec%20(transform)%0A%20%20%20%20%20%20%20%20PyNNDescentTransformer%200.744%20sec%20(transform)%0A%0A%20%20%20%20%20%20%20%20Benchmarking%20on%20MNIST_20000%3A%0A%20%20%20%20%20%20%20%20----------------------------%0A%20%20%20%20%20%20%20%20KNeighborsTransformer%20%200.011%20sec%20(fit)%0A%20%20%20%20%20%20%20%20KNeighborsTransformer%20%205.769%20sec%20(transform)%0A%20%20%20%20%20%20%20%20NMSlibTransformer%20%20%20%20%20%200.733%20sec%20(fit)%0A%20%20%20%20%20%20%20%20NMSlibTransformer%20%20%20%20%20%201.077%20sec%20(transform)%0A%20%20%20%20%20%20%20%20PyNNDescentTransformer%2014.448%20sec%20(fit)%0A%20%20%20%20%20%20%20%20PyNNDescentTransformer%207.103%20sec%20(transform)%0A%20%20%20%20%20%20%20%20PyNNDescentTransformer%201.759%20sec%20(transform)%0A%0A%20%20%20%20Notice%20that%20the%20%60PyNNDescentTransformer%60%20takes%20more%20time%20during%20the%20first%0A%20%20%20%20%60fit%60%20and%20the%20first%20%60transform%60%20due%20to%20the%20overhead%20of%20the%20numba%20just%20in%20time%0A%20%20%20%20compiler.%20But%20after%20the%20first%20call%2C%20the%20compiled%20Python%20code%20is%20kept%20in%20a%0A%20%20%20%20cache%20by%20numba%20and%20subsequent%20calls%20do%20not%20suffer%20from%20this%20initial%20overhead.%0A%20%20%20%20Both%20%3Aclass%3A%60~sklearn.neighbors.KNeighborsTransformer%60%20and%20%60NMSlibTransformer%60%0A%20%20%20%20are%20only%20run%20once%20here%20as%20they%20would%20show%20more%20stable%20%60fit%60%20and%20%60transform%60%0A%20%20%20%20times%20(they%20don't%20have%20the%20cold%20start%20problem%20of%20PyNNDescentTransformer).%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20KNeighborsTransformer%2C%0A%20%20%20%20NMSlibTransformer%2C%0A%20%20%20%20TSNE%2C%0A%20%20%20%20datasets%2C%0A%20%20%20%20make_pipeline%2C%0A%20%20%20%20metric%2C%0A%20%20%20%20n_neighbors%2C%0A%20%20%20%20np%2C%0A%20%20%20%20time%2C%0A%20%20%20%20tsne_params%2C%0A)%3A%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20from%20matplotlib.ticker%20import%20NullFormatter%0A%20%20%20%20_transformers%20%3D%20%5B('TSNE%20with%20internal%20NearestNeighbors'%2C%20TSNE(metric%3Dmetric%2C%20**tsne_params))%2C%20('TSNE%20with%20KNeighborsTransformer'%2C%20make_pipeline(KNeighborsTransformer(n_neighbors%3Dn_neighbors%2C%20mode%3D'distance'%2C%20metric%3Dmetric)%2C%20TSNE(metric%3D'precomputed'%2C%20**tsne_params)))%2C%20('TSNE%20with%20NMSlibTransformer'%2C%20make_pipeline(NMSlibTransformer(n_neighbors%3Dn_neighbors%2C%20metric%3Dmetric)%2C%20TSNE(metric%3D'precomputed'%2C%20**tsne_params)))%5D%0A%20%20%20%20nrows%20%3D%20len(datasets)%0A%20%20%20%20ncols%20%3D%20np.sum(%5B1%20for%20name%2C%20model%20in%20_transformers%20if%20'TSNE'%20in%20name%5D)%0A%20%20%20%20fig%2C%20axes%20%3D%20plt.subplots(nrows%3Dnrows%2C%20ncols%3Dncols%2C%20squeeze%3DFalse%2C%20figsize%3D(5%20*%20ncols%2C%204%20*%20nrows))%0A%20%20%20%20axes%20%3D%20axes.ravel()%0A%20%20%20%20i_ax%20%3D%200%0A%20%20%20%20for%20_dataset_name%2C%20(_X%2C%20_y)%20in%20datasets%3A%0A%20%20%20%20%20%20%20%20_msg%20%3D%20f'Benchmarking%20on%20%7B_dataset_name%7D%3A'%0A%20%20%20%20%20%20%20%20print(f'%5Cn%7B_msg%7D%5Cn'%20%2B%20str('-'%20*%20len(_msg)))%0A%20%20%20%20%20%20%20%20for%20_transformer_name%2C%20_transformer%20in%20_transformers%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_longest%20%3D%20np.max(%5Blen(name)%20for%20name%2C%20model%20in%20_transformers%5D)%0A%20%20%20%20%20%20%20%20%20%20%20%20_start%20%3D%20time.time()%0A%20%20%20%20%20%20%20%20%20%20%20%20_Xt%20%3D%20_transformer.fit_transform(_X)%0A%20%20%20%20%20%20%20%20%20%20%20%20_transform_duration%20%3D%20time.time()%20-%20_start%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f'%7B_transformer_name%3A%3C%7B_longest%7D%7D%20%7B_transform_duration%3A.3f%7D%20sec%20(fit_transform)')%0A%20%20%20%20%20%20%20%20%20%20%20%20axes%5Bi_ax%5D.set_title(_transformer_name%20%2B%20'%5Cnon%20'%20%2B%20_dataset_name)%0A%20%20%20%20%20%20%20%20%20%20%20%20axes%5Bi_ax%5D.scatter(_Xt%5B%3A%2C%200%5D%2C%20_Xt%5B%3A%2C%201%5D%2C%20c%3D_y.astype(np.int32)%2C%20alpha%3D0.2%2C%20cmap%3Dplt.cm.viridis)%0A%20%20%20%20%20%20%20%20%20%20%20%20axes%5Bi_ax%5D.xaxis.set_major_formatter(NullFormatter())%0A%20%20%20%20%20%20%20%20%20%20%20%20axes%5Bi_ax%5D.yaxis.set_major_formatter(NullFormatter())%0A%20%20%20%20%20%20%20%20%20%20%20%20axes%5Bi_ax%5D.axis('tight')%0A%20%20%20%20%20%20%20%20%20%20%20%20i_ax%20%2B%3D%201%0A%20%20%20%20%23%20init%20the%20plot%0A%20%20%20%20fig.tight_layout()%0A%20%20%20%20plt.show()%20%20%23%20plot%20TSNE%20embedding%20which%20should%20be%20very%20similar%20across%20methods%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Sample%20output%3A%3A%0A%0A%20%20%20%20%20%20%20%20Benchmarking%20on%20MNIST_10000%3A%0A%20%20%20%20%20%20%20%20----------------------------%0A%20%20%20%20%20%20%20%20TSNE%20with%20internal%20NearestNeighbors%2024.828%20sec%20(fit_transform)%0A%20%20%20%20%20%20%20%20TSNE%20with%20KNeighborsTransformer%20%20%20%20%2020.111%20sec%20(fit_transform)%0A%20%20%20%20%20%20%20%20TSNE%20with%20NMSlibTransformer%20%20%20%20%20%20%20%20%2021.757%20sec%20(fit_transform)%0A%0A%20%20%20%20%20%20%20%20Benchmarking%20on%20MNIST_20000%3A%0A%20%20%20%20%20%20%20%20----------------------------%0A%20%20%20%20%20%20%20%20TSNE%20with%20internal%20NearestNeighbors%2051.955%20sec%20(fit_transform)%0A%20%20%20%20%20%20%20%20TSNE%20with%20KNeighborsTransformer%20%20%20%20%2050.994%20sec%20(fit_transform)%0A%20%20%20%20%20%20%20%20TSNE%20with%20NMSlibTransformer%20%20%20%20%20%20%20%20%2043.536%20sec%20(fit_transform)%0A%0A%20%20%20%20We%20can%20observe%20that%20the%20default%20%3Aclass%3A%60~sklearn.manifold.TSNE%60%20estimator%20with%0A%20%20%20%20its%20internal%20%3Aclass%3A%60~sklearn.neighbors.NearestNeighbors%60%20implementation%20is%0A%20%20%20%20roughly%20equivalent%20to%20the%20pipeline%20with%20%3Aclass%3A%60~sklearn.manifold.TSNE%60%20and%0A%20%20%20%20%3Aclass%3A%60~sklearn.neighbors.KNeighborsTransformer%60%20in%20terms%20of%20performance.%0A%20%20%20%20This%20is%20expected%20because%20both%20pipelines%20rely%20internally%20on%20the%20same%0A%20%20%20%20%3Aclass%3A%60~sklearn.neighbors.NearestNeighbors%60%20implementation%20that%20performs%0A%20%20%20%20exacts%20neighbors%20search.%20The%20approximate%20%60NMSlibTransformer%60%20is%20already%0A%20%20%20%20slightly%20faster%20than%20the%20exact%20search%20on%20the%20smallest%20dataset%20but%20this%20speed%0A%20%20%20%20difference%20is%20expected%20to%20become%20more%20significant%20on%20datasets%20with%20a%20larger%0A%20%20%20%20number%20of%20samples.%0A%0A%20%20%20%20Notice%20however%20that%20not%20all%20approximate%20search%20methods%20are%20guaranteed%20to%0A%20%20%20%20improve%20the%20speed%20of%20the%20default%20exact%20search%20method%3A%20indeed%20the%20exact%20search%0A%20%20%20%20implementation%20significantly%20improved%20since%20scikit-learn%201.1.%20Furthermore%2C%20the%0A%20%20%20%20brute-force%20exact%20search%20method%20does%20not%20require%20building%20an%20index%20at%20%60fit%60%0A%20%20%20%20time.%20So%2C%20to%20get%20an%20overall%20performance%20improvement%20in%20the%20context%20of%20the%0A%20%20%20%20%3Aclass%3A%60~sklearn.manifold.TSNE%60%20pipeline%2C%20the%20gains%20of%20the%20approximate%20search%0A%20%20%20%20at%20%60transform%60%20need%20to%20be%20larger%20than%20the%20extra%20time%20spent%20to%20build%20the%0A%20%20%20%20approximate%20search%20index%20at%20%60fit%60%20time.%0A%0A%20%20%20%20Finally%2C%20the%20TSNE%20algorithm%20itself%20is%20also%20computationally%20intensive%2C%0A%20%20%20%20irrespective%20of%20the%20nearest%20neighbors%20search.%20So%20speeding-up%20the%20nearest%0A%20%20%20%20neighbors%20search%20step%20by%20a%20factor%20of%205%20would%20not%20result%20in%20a%20speed%20up%20by%20a%0A%20%20%20%20factor%20of%205%20for%20the%20overall%20pipeline.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

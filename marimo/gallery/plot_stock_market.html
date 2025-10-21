@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot stock market</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Visualizing%20the%20stock%20market%20structure%0A%0A%20%20%20%20This%20example%20employs%20several%20unsupervised%20learning%20techniques%20to%20extract%0A%20%20%20%20the%20stock%20market%20structure%20from%20variations%20in%20historical%20quotes.%0A%0A%20%20%20%20The%20quantity%20that%20we%20use%20is%20the%20daily%20variation%20in%20quote%20price%3A%20quotes%0A%20%20%20%20that%20are%20linked%20tend%20to%20fluctuate%20in%20relation%20to%20each%20other%20during%20a%20day.%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Retrieve%20the%20data%20from%20Internet%0A%0A%20%20%20%20The%20data%20is%20from%202003%20-%202008.%20This%20is%20reasonably%20calm%3A%20not%20too%20long%20ago%20so%0A%20%20%20%20that%20we%20get%20high-tech%20firms%2C%20and%20before%20the%202008%20crash.%20This%20kind%20of%0A%20%20%20%20historical%20data%20can%20be%20obtained%20from%20APIs%20like%20the%0A%20%20%20%20%5Bdata.nasdaq.com%5D(https%3A%2F%2Fdata.nasdaq.com%2F)%20and%0A%20%20%20%20%5Balphavantage.co%5D(https%3A%2F%2Fwww.alphavantage.co%2F).%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20sys%0A%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20import%20pandas%20as%20pd%0A%0A%20%20%20%20symbol_dict%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%22TOT%22%3A%20%22Total%22%2C%0A%20%20%20%20%20%20%20%20%22XOM%22%3A%20%22Exxon%22%2C%0A%20%20%20%20%20%20%20%20%22CVX%22%3A%20%22Chevron%22%2C%0A%20%20%20%20%20%20%20%20%22COP%22%3A%20%22ConocoPhillips%22%2C%0A%20%20%20%20%20%20%20%20%22VLO%22%3A%20%22Valero%20Energy%22%2C%0A%20%20%20%20%20%20%20%20%22MSFT%22%3A%20%22Microsoft%22%2C%0A%20%20%20%20%20%20%20%20%22IBM%22%3A%20%22IBM%22%2C%0A%20%20%20%20%20%20%20%20%22TWX%22%3A%20%22Time%20Warner%22%2C%0A%20%20%20%20%20%20%20%20%22CMCSA%22%3A%20%22Comcast%22%2C%0A%20%20%20%20%20%20%20%20%22CVC%22%3A%20%22Cablevision%22%2C%0A%20%20%20%20%20%20%20%20%22YHOO%22%3A%20%22Yahoo%22%2C%0A%20%20%20%20%20%20%20%20%22DELL%22%3A%20%22Dell%22%2C%0A%20%20%20%20%20%20%20%20%22HPQ%22%3A%20%22HP%22%2C%0A%20%20%20%20%20%20%20%20%22AMZN%22%3A%20%22Amazon%22%2C%0A%20%20%20%20%20%20%20%20%22TM%22%3A%20%22Toyota%22%2C%0A%20%20%20%20%20%20%20%20%22CAJ%22%3A%20%22Canon%22%2C%0A%20%20%20%20%20%20%20%20%22SNE%22%3A%20%22Sony%22%2C%0A%20%20%20%20%20%20%20%20%22F%22%3A%20%22Ford%22%2C%0A%20%20%20%20%20%20%20%20%22HMC%22%3A%20%22Honda%22%2C%0A%20%20%20%20%20%20%20%20%22NAV%22%3A%20%22Navistar%22%2C%0A%20%20%20%20%20%20%20%20%22NOC%22%3A%20%22Northrop%20Grumman%22%2C%0A%20%20%20%20%20%20%20%20%22BA%22%3A%20%22Boeing%22%2C%0A%20%20%20%20%20%20%20%20%22KO%22%3A%20%22Coca%20Cola%22%2C%0A%20%20%20%20%20%20%20%20%22MMM%22%3A%20%223M%22%2C%0A%20%20%20%20%20%20%20%20%22MCD%22%3A%20%22McDonald's%22%2C%0A%20%20%20%20%20%20%20%20%22PEP%22%3A%20%22Pepsi%22%2C%0A%20%20%20%20%20%20%20%20%22K%22%3A%20%22Kellogg%22%2C%0A%20%20%20%20%20%20%20%20%22UN%22%3A%20%22Unilever%22%2C%0A%20%20%20%20%20%20%20%20%22MAR%22%3A%20%22Marriott%22%2C%0A%20%20%20%20%20%20%20%20%22PG%22%3A%20%22Procter%20Gamble%22%2C%0A%20%20%20%20%20%20%20%20%22CL%22%3A%20%22Colgate-Palmolive%22%2C%0A%20%20%20%20%20%20%20%20%22GE%22%3A%20%22General%20Electrics%22%2C%0A%20%20%20%20%20%20%20%20%22WFC%22%3A%20%22Wells%20Fargo%22%2C%0A%20%20%20%20%20%20%20%20%22JPM%22%3A%20%22JPMorgan%20Chase%22%2C%0A%20%20%20%20%20%20%20%20%22AIG%22%3A%20%22AIG%22%2C%0A%20%20%20%20%20%20%20%20%22AXP%22%3A%20%22American%20express%22%2C%0A%20%20%20%20%20%20%20%20%22BAC%22%3A%20%22Bank%20of%20America%22%2C%0A%20%20%20%20%20%20%20%20%22GS%22%3A%20%22Goldman%20Sachs%22%2C%0A%20%20%20%20%20%20%20%20%22AAPL%22%3A%20%22Apple%22%2C%0A%20%20%20%20%20%20%20%20%22SAP%22%3A%20%22SAP%22%2C%0A%20%20%20%20%20%20%20%20%22CSCO%22%3A%20%22Cisco%22%2C%0A%20%20%20%20%20%20%20%20%22TXN%22%3A%20%22Texas%20Instruments%22%2C%0A%20%20%20%20%20%20%20%20%22XRX%22%3A%20%22Xerox%22%2C%0A%20%20%20%20%20%20%20%20%22WMT%22%3A%20%22Wal-Mart%22%2C%0A%20%20%20%20%20%20%20%20%22HD%22%3A%20%22Home%20Depot%22%2C%0A%20%20%20%20%20%20%20%20%22GSK%22%3A%20%22GlaxoSmithKline%22%2C%0A%20%20%20%20%20%20%20%20%22PFE%22%3A%20%22Pfizer%22%2C%0A%20%20%20%20%20%20%20%20%22SNY%22%3A%20%22Sanofi-Aventis%22%2C%0A%20%20%20%20%20%20%20%20%22NVS%22%3A%20%22Novartis%22%2C%0A%20%20%20%20%20%20%20%20%22KMB%22%3A%20%22Kimberly-Clark%22%2C%0A%20%20%20%20%20%20%20%20%22R%22%3A%20%22Ryder%22%2C%0A%20%20%20%20%20%20%20%20%22GD%22%3A%20%22General%20Dynamics%22%2C%0A%20%20%20%20%20%20%20%20%22RTN%22%3A%20%22Raytheon%22%2C%0A%20%20%20%20%20%20%20%20%22CVS%22%3A%20%22CVS%22%2C%0A%20%20%20%20%20%20%20%20%22CAT%22%3A%20%22Caterpillar%22%2C%0A%20%20%20%20%20%20%20%20%22DD%22%3A%20%22DuPont%20de%20Nemours%22%2C%0A%20%20%20%20%7D%0A%0A%0A%20%20%20%20symbols%2C%20names%20%3D%20np.array(sorted(symbol_dict.items())).T%0A%0A%20%20%20%20quotes%20%3D%20%5B%5D%0A%0A%20%20%20%20for%20symbol%20in%20symbols%3A%0A%20%20%20%20%20%20%20%20print(%22Fetching%20quote%20history%20for%20%25r%22%20%25%20symbol%2C%20file%3Dsys.stderr)%0A%20%20%20%20%20%20%20%20url%20%3D%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22https%3A%2F%2Fraw.githubusercontent.com%2Fscikit-learn%2Fexamples-data%2F%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%22master%2Ffinancial-data%2F%7B%7D.csv%22%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20quotes.append(pd.read_csv(url.format(symbol)))%0A%0A%20%20%20%20close_prices%20%3D%20np.vstack(%5Bq%5B%22close%22%5D%20for%20q%20in%20quotes%5D)%0A%20%20%20%20open_prices%20%3D%20np.vstack(%5Bq%5B%22open%22%5D%20for%20q%20in%20quotes%5D)%0A%0A%20%20%20%20%23%20The%20daily%20variations%20of%20the%20quotes%20are%20what%20carry%20the%20most%20information%0A%20%20%20%20variation%20%3D%20close_prices%20-%20open_prices%0A%20%20%20%20return%20names%2C%20np%2C%20variation%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%23%20Learning%20a%20graph%20structure%0A%0A%20%20%20%20We%20use%20sparse%20inverse%20covariance%20estimation%20to%20find%20which%20quotes%20are%0A%20%20%20%20correlated%20conditionally%20on%20the%20others.%20Specifically%2C%20sparse%20inverse%0A%20%20%20%20covariance%20gives%20us%20a%20graph%2C%20that%20is%20a%20list%20of%20connections.%20For%20each%0A%20%20%20%20symbol%2C%20the%20symbols%20that%20it%20is%20connected%20to%20are%20those%20useful%20to%20explain%0A%20%20%20%20its%20fluctuations.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(np%2C%20variation)%3A%0A%20%20%20%20from%20sklearn%20import%20covariance%0A%0A%20%20%20%20alphas%20%3D%20np.logspace(-1.5%2C%201%2C%20num%3D10)%0A%20%20%20%20edge_model%20%3D%20covariance.GraphicalLassoCV(alphas%3Dalphas)%0A%0A%20%20%20%20%23%20standardize%20the%20time%20series%3A%20using%20correlations%20rather%20than%20covariance%0A%20%20%20%20%23%20former%20is%20more%20efficient%20for%20structure%20recovery%0A%20%20%20%20X%20%3D%20variation.copy().T%0A%20%20%20%20X%20%2F%3D%20X.std(axis%3D0)%0A%20%20%20%20edge_model.fit(X)%0A%20%20%20%20return%20X%2C%20edge_model%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Clustering%20using%20affinity%20propagation%0A%0A%20%20%20%20We%20use%20clustering%20to%20group%20together%20quotes%20that%20behave%20similarly.%20Here%2C%0A%20%20%20%20amongst%20the%20%60various%20clustering%20techniques%20%3Cclustering%3E%60%20available%0A%20%20%20%20in%20the%20scikit-learn%2C%20we%20use%20%60affinity_propagation%60%20as%20it%20does%0A%20%20%20%20not%20enforce%20equal-size%20clusters%2C%20and%20it%20can%20choose%20automatically%20the%0A%20%20%20%20number%20of%20clusters%20from%20the%20data.%0A%0A%20%20%20%20Note%20that%20this%20gives%20us%20a%20different%20indication%20than%20the%20graph%2C%20as%20the%0A%20%20%20%20graph%20reflects%20conditional%20relations%20between%20variables%2C%20while%20the%0A%20%20%20%20clustering%20reflects%20marginal%20properties%3A%20variables%20clustered%20together%20can%0A%20%20%20%20be%20considered%20as%20having%20a%20similar%20impact%20at%20the%20level%20of%20the%20full%20stock%0A%20%20%20%20market.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(edge_model%2C%20names)%3A%0A%20%20%20%20from%20sklearn%20import%20cluster%0A%0A%20%20%20%20_%2C%20labels%20%3D%20cluster.affinity_propagation(edge_model.covariance_%2C%20random_state%3D0)%0A%20%20%20%20n_labels%20%3D%20labels.max()%0A%0A%20%20%20%20for%20i%20in%20range(n_labels%20%2B%201)%3A%0A%20%20%20%20%20%20%20%20print(f%22Cluster%20%7Bi%20%2B%201%7D%3A%20%7B'%2C%20'.join(names%5Blabels%20%3D%3D%20i%5D)%7D%22)%0A%20%20%20%20return%20labels%2C%20n_labels%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Embedding%20in%202D%20space%0A%0A%20%20%20%20For%20visualization%20purposes%2C%20we%20need%20to%20lay%20out%20the%20different%20symbols%20on%20a%0A%20%20%20%202D%20canvas.%20For%20this%2C%20we%20use%20%60manifold%60%20techniques%20to%20retrieve%202D%0A%20%20%20%20embedding.%0A%20%20%20%20We%20use%20a%20dense%20%60%60eigen_solver%60%60%20to%20achieve%20reproducibility%20(arpack%20is%20initiated%0A%20%20%20%20with%20the%20random%20vectors%20that%20we%20do%20not%20control).%20In%20addition%2C%20we%20use%20a%20large%0A%20%20%20%20number%20of%20neighbors%20to%20capture%20the%20large-scale%20structure.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X)%3A%0A%20%20%20%20%23%20Finding%20a%20low-dimension%20embedding%20for%20visualization%3A%20find%20the%20best%20position%20of%0A%20%20%20%20%23%20the%20nodes%20(the%20stocks)%20on%20a%202D%20plane%0A%0A%20%20%20%20from%20sklearn%20import%20manifold%0A%0A%20%20%20%20node_position_model%20%3D%20manifold.LocallyLinearEmbedding(%0A%20%20%20%20%20%20%20%20n_components%3D2%2C%20eigen_solver%3D%22dense%22%2C%20n_neighbors%3D6%0A%20%20%20%20)%0A%0A%20%20%20%20embedding%20%3D%20node_position_model.fit_transform(X.T).T%0A%20%20%20%20return%20(embedding%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Visualization%0A%0A%20%20%20%20The%20output%20of%20the%203%20models%20are%20combined%20in%20a%202D%20graph%20where%20nodes%0A%20%20%20%20represent%20the%20stocks%20and%20edges%20the%20connections%20(partial%20correlations)%3A%0A%0A%20%20%20%20-%20cluster%20labels%20are%20used%20to%20define%20the%20color%20of%20the%20nodes%0A%20%20%20%20-%20the%20sparse%20covariance%20model%20is%20used%20to%20display%20the%20strength%20of%20the%20edges%0A%20%20%20%20-%20the%202D%20embedding%20is%20used%20to%20position%20the%20nodes%20in%20the%20plan%0A%0A%20%20%20%20This%20example%20has%20a%20fair%20amount%20of%20visualization-related%20code%2C%20as%0A%20%20%20%20visualization%20is%20crucial%20here%20to%20display%20the%20graph.%20One%20of%20the%20challenges%0A%20%20%20%20is%20to%20position%20the%20labels%20minimizing%20overlap.%20For%20this%2C%20we%20use%20an%0A%20%20%20%20heuristic%20based%20on%20the%20direction%20of%20the%20nearest%20neighbor%20along%20each%0A%20%20%20%20axis.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(edge_model%2C%20embedding%2C%20labels%2C%20n_labels%2C%20names%2C%20np)%3A%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20from%20matplotlib.collections%20import%20LineCollection%0A%0A%20%20%20%20plt.figure(1%2C%20facecolor%3D%22w%22%2C%20figsize%3D(10%2C%208))%0A%20%20%20%20plt.clf()%0A%20%20%20%20ax%20%3D%20plt.axes(%5B0.0%2C%200.0%2C%201.0%2C%201.0%5D)%0A%20%20%20%20plt.axis(%22off%22)%0A%0A%20%20%20%20%23%20Plot%20the%20graph%20of%20partial%20correlations%0A%20%20%20%20partial_correlations%20%3D%20edge_model.precision_.copy()%0A%20%20%20%20d%20%3D%201%20%2F%20np.sqrt(np.diag(partial_correlations))%0A%20%20%20%20partial_correlations%20*%3D%20d%0A%20%20%20%20partial_correlations%20*%3D%20d%5B%3A%2C%20np.newaxis%5D%0A%20%20%20%20non_zero%20%3D%20np.abs(np.triu(partial_correlations%2C%20k%3D1))%20%3E%200.02%0A%0A%20%20%20%20%23%20Plot%20the%20nodes%20using%20the%20coordinates%20of%20our%20embedding%0A%20%20%20%20plt.scatter(%0A%20%20%20%20%20%20%20%20embedding%5B0%5D%2C%20embedding%5B1%5D%2C%20s%3D100%20*%20d**2%2C%20c%3Dlabels%2C%20cmap%3Dplt.cm.nipy_spectral%0A%20%20%20%20)%0A%0A%20%20%20%20%23%20Plot%20the%20edges%0A%20%20%20%20start_idx%2C%20end_idx%20%3D%20non_zero.nonzero()%0A%20%20%20%20%23%20a%20sequence%20of%20(*line0*%2C%20*line1*%2C%20*line2*)%2C%20where%3A%3A%0A%20%20%20%20%23%20%20%20%20%20%20%20%20%20%20%20%20linen%20%3D%20(x0%2C%20y0)%2C%20(x1%2C%20y1)%2C%20...%20(xm%2C%20ym)%0A%20%20%20%20segments%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%5Bembedding%5B%3A%2C%20start%5D%2C%20embedding%5B%3A%2C%20stop%5D%5D%20for%20start%2C%20stop%20in%20zip(start_idx%2C%20end_idx)%0A%20%20%20%20%5D%0A%20%20%20%20values%20%3D%20np.abs(partial_correlations%5Bnon_zero%5D)%0A%20%20%20%20lc%20%3D%20LineCollection(%0A%20%20%20%20%20%20%20%20segments%2C%20zorder%3D0%2C%20cmap%3Dplt.cm.hot_r%2C%20norm%3Dplt.Normalize(0%2C%200.7%20*%20values.max())%0A%20%20%20%20)%0A%20%20%20%20lc.set_array(values)%0A%20%20%20%20lc.set_linewidths(15%20*%20values)%0A%20%20%20%20ax.add_collection(lc)%0A%0A%20%20%20%20%23%20Add%20a%20label%20to%20each%20node.%20The%20challenge%20here%20is%20that%20we%20want%20to%0A%20%20%20%20%23%20position%20the%20labels%20to%20avoid%20overlap%20with%20other%20labels%0A%20%20%20%20for%20index%2C%20(name%2C%20label%2C%20(x%2C%20y))%20in%20enumerate(zip(names%2C%20labels%2C%20embedding.T))%3A%0A%20%20%20%20%20%20%20%20dx%20%3D%20x%20-%20embedding%5B0%5D%0A%20%20%20%20%20%20%20%20dx%5Bindex%5D%20%3D%201%0A%20%20%20%20%20%20%20%20dy%20%3D%20y%20-%20embedding%5B1%5D%0A%20%20%20%20%20%20%20%20dy%5Bindex%5D%20%3D%201%0A%20%20%20%20%20%20%20%20this_dx%20%3D%20dx%5Bnp.argmin(np.abs(dy))%5D%0A%20%20%20%20%20%20%20%20this_dy%20%3D%20dy%5Bnp.argmin(np.abs(dx))%5D%0A%20%20%20%20%20%20%20%20if%20this_dx%20%3E%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20horizontalalignment%20%3D%20%22left%22%0A%20%20%20%20%20%20%20%20%20%20%20%20x%20%3D%20x%20%2B%200.002%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20horizontalalignment%20%3D%20%22right%22%0A%20%20%20%20%20%20%20%20%20%20%20%20x%20%3D%20x%20-%200.002%0A%20%20%20%20%20%20%20%20if%20this_dy%20%3E%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20verticalalignment%20%3D%20%22bottom%22%0A%20%20%20%20%20%20%20%20%20%20%20%20y%20%3D%20y%20%2B%200.002%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20verticalalignment%20%3D%20%22top%22%0A%20%20%20%20%20%20%20%20%20%20%20%20y%20%3D%20y%20-%200.002%0A%20%20%20%20%20%20%20%20plt.text(%0A%20%20%20%20%20%20%20%20%20%20%20%20x%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20y%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20size%3D10%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20horizontalalignment%3Dhorizontalalignment%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20verticalalignment%3Dverticalalignment%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20bbox%3Ddict(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20facecolor%3D%22w%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20edgecolor%3Dplt.cm.nipy_spectral(label%20%2F%20float(n_labels))%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20alpha%3D0.6%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20plt.xlim(%0A%20%20%20%20%20%20%20%20embedding%5B0%5D.min()%20-%200.15%20*%20np.ptp(embedding%5B0%5D)%2C%0A%20%20%20%20%20%20%20%20embedding%5B0%5D.max()%20%2B%200.10%20*%20np.ptp(embedding%5B0%5D)%2C%0A%20%20%20%20)%0A%20%20%20%20plt.ylim(%0A%20%20%20%20%20%20%20%20embedding%5B1%5D.min()%20-%200.03%20*%20np.ptp(embedding%5B1%5D)%2C%0A%20%20%20%20%20%20%20%20embedding%5B1%5D.max()%20%2B%200.03%20*%20np.ptp(embedding%5B1%5D)%2C%0A%20%20%20%20)%0A%0A%20%20%20%20plt.show()%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>
