@@ -6,9 +6,13 @@ This repository was created with a `justfile` in [this pr](https://github.com/sc
 build-docs:
     make html
 
-docs: build-docs
+[working-directory: '../skdocs-demo']
+cleanup: 
+    find . -mindepth 1 -not -name 'README.md' -not -path './.git*' -delete
+
+
+docs: cleanup build-docs
     cp -r doc/_build/html/stable/**/* ../skdocs-demo
 
 serve:
-    uv run python -m http.server --directory ../skdocs-demo 12345
-```
+    uv run python -m http.server --directory ../skdocs-demo 12345```
