@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot hdbscan</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%E2%9A%A0%EF%B8%8F%20**Note**%3A%20This%20notebook%20was%20automatically%20converted%20from%20Jupyter.%0A%20%20%20%20Some%20features%20may%20behave%20differently%20in%20marimo.%0A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Demo%20of%20HDBSCAN%20clustering%20algorithm%0A%20%20%20%20..%20currentmodule%3A%3A%20sklearn%0A%0A%20%20%20%20In%20this%20demo%20we%20will%20take%20a%20look%20at%20%3Aclass%3A%60cluster.HDBSCAN%60%20from%20the%0A%20%20%20%20perspective%20of%20generalizing%20the%20%3Aclass%3A%60cluster.DBSCAN%60%20algorithm.%0A%20%20%20%20We'll%20compare%20both%20algorithms%20on%20specific%20datasets.%20Finally%20we'll%20evaluate%0A%20%20%20%20HDBSCAN's%20sensitivity%20to%20certain%20hyperparameters.%0A%0A%20%20%20%20We%20first%20define%20a%20couple%20utility%20functions%20for%20convenience.%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20from%20sklearn.cluster%20import%20DBSCAN%2C%20HDBSCAN%0A%20%20%20%20from%20sklearn.datasets%20import%20make_blobs%0A%0A%20%20%20%20def%20plot(X%2C%20labels%2C%20probabilities%3DNone%2C%20parameters%3DNone%2C%20ground_truth%3DFalse%2C%20ax%3DNone)%3A%0A%20%20%20%20%20%20%20%20if%20ax%20is%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_%2C%20ax%20%3D%20plt.subplots(figsize%3D(10%2C%204))%0A%20%20%20%20%20%20%20%20_labels%20%3D%20_labels%20if%20_labels%20is%20not%20None%20else%20np.ones(X.shape%5B0%5D)%0A%20%20%20%20%20%20%20%20probabilities%20%3D%20probabilities%20if%20probabilities%20is%20not%20None%20else%20np.ones(X.shape%5B0%5D)%0A%20%20%20%20%20%20%20%20unique_labels%20%3D%20set(_labels)%0A%20%20%20%20%20%20%20%20colors%20%3D%20%5Bplt.cm.Spectral(each)%20for%20each%20in%20np.linspace(0%2C%201%2C%20len(unique_labels))%5D%0A%20%20%20%20%20%20%20%20proba_map%20%3D%20%7B_idx%3A%20probabilities%5B_idx%5D%20for%20_idx%20in%20range(len(_labels))%7D%0A%20%20%20%20%20%20%20%20for%20k%2C%20col%20in%20zip(unique_labels%2C%20colors)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20k%20%3D%3D%20-1%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20col%20%3D%20%5B0%2C%200%2C%200%2C%201%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20class_index%20%3D%20(_labels%20%3D%3D%20k).nonzero()%5B0%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20ci%20in%20class_index%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ax.plot(X%5Bci%2C%200%5D%2C%20X%5Bci%2C%201%5D%2C%20'x'%20if%20k%20%3D%3D%20-1%20else%20'o'%2C%20markerfacecolor%3Dtuple(col)%2C%20markeredgecolor%3D'k'%2C%20markersize%3D4%20if%20k%20%3D%3D%20-1%20else%201%20%2B%205%20*%20proba_map%5Bci%5D)%0A%20%20%20%20%20%20%20%20n_clusters_%20%3D%20len(set(_labels))%20-%20(1%20if%20-1%20in%20_labels%20else%200)%0A%20%20%20%20%20%20%20%20preamble%20%3D%20'True'%20if%20ground_truth%20else%20'Estimated'%0A%20%20%20%20%20%20%20%20title%20%3D%20f'%7Bpreamble%7D%20number%20of%20clusters%3A%20%7Bn_clusters_%7D'%0A%20%20%20%20%20%20%20%20if%20parameters%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20parameters_str%20%3D%20'%2C%20'.join((f'%7Bk%7D%3D%7Bv%7D'%20for%20k%2C%20v%20in%20parameters.items()))%0A%20%20%20%20%20%20%20%20%20%20%20%20title%20%3D%20title%20%2B%20f'%20%7C%20%7Bparameters_str%7D'%0A%20%20%20%20%20%20%20%20ax.set_title(title)%0A%20%20%20%20%20%20%20%20plt.tight_layout()%0A%20%20%20%20return%20DBSCAN%2C%20HDBSCAN%2C%20make_blobs%2C%20plot%2C%20plt%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Generate%20sample%20data%0A%20%20%20%20One%20of%20the%20greatest%20advantages%20of%20HDBSCAN%20over%20DBSCAN%20is%20its%20out-of-the-box%0A%20%20%20%20robustness.%20It's%20especially%20remarkable%20on%20heterogeneous%20mixtures%20of%20data.%0A%20%20%20%20Like%20DBSCAN%2C%20it%20can%20model%20arbitrary%20shapes%20and%20distributions%2C%20however%20unlike%0A%20%20%20%20DBSCAN%20it%20does%20not%20require%20specification%20of%20an%20arbitrary%20and%20sensitive%0A%20%20%20%20%60eps%60%20hyperparameter.%0A%0A%20%20%20%20For%20example%2C%20below%20we%20generate%20a%20dataset%20from%20a%20mixture%20of%20three%20bi-dimensional%0A%20%20%20%20and%20isotropic%20Gaussian%20distributions.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(make_blobs%2C%20plot)%3A%0A%20%20%20%20_centers%20%3D%20%5B%5B1%2C%201%5D%2C%20%5B-1%2C%20-1%5D%2C%20%5B1.5%2C%20-1.5%5D%5D%0A%20%20%20%20X%2C%20_labels_true%20%3D%20make_blobs(n_samples%3D750%2C%20centers%3D_centers%2C%20cluster_std%3D%5B0.4%2C%200.1%2C%200.75%5D%2C%20random_state%3D0)%0A%20%20%20%20plot(X%2C%20labels%3D_labels_true%2C%20ground_truth%3DTrue)%0A%20%20%20%20return%20(X%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Scale%20Invariance%0A%20%20%20%20It's%20worth%20remembering%20that%2C%20while%20DBSCAN%20provides%20a%20default%20value%20for%20%60eps%60%0A%20%20%20%20parameter%2C%20it%20hardly%20has%20a%20proper%20default%20value%20and%20must%20be%20tuned%20for%20the%0A%20%20%20%20specific%20dataset%20at%20use.%0A%0A%20%20%20%20As%20a%20simple%20demonstration%2C%20consider%20the%20clustering%20for%20a%20%60eps%60%20value%20tuned%0A%20%20%20%20for%20one%20dataset%2C%20and%20clustering%20obtained%20with%20the%20same%20value%20but%20applied%20to%0A%20%20%20%20rescaled%20versions%20of%20the%20dataset.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(DBSCAN%2C%20X%2C%20plot%2C%20plt)%3A%0A%20%20%20%20_fig%2C%20_axes%20%3D%20plt.subplots(3%2C%201%2C%20figsize%3D(10%2C%2012))%0A%20%20%20%20_dbs%20%3D%20DBSCAN(eps%3D0.3)%0A%20%20%20%20for%20_idx%2C%20_scale%20in%20enumerate(%5B1%2C%200.5%2C%203%5D)%3A%0A%20%20%20%20%20%20%20%20_dbs.fit(X%20*%20_scale)%0A%20%20%20%20%20%20%20%20plot(X%20*%20_scale%2C%20_dbs.labels_%2C%20parameters%3D%7B'scale'%3A%20_scale%2C%20'eps'%3A%200.3%7D%2C%20ax%3D_axes%5B_idx%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Indeed%2C%20in%20order%20to%20maintain%20the%20same%20results%20we%20would%20have%20to%20scale%20%60eps%60%20by%0A%20%20%20%20the%20same%20factor.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(DBSCAN%2C%20X%2C%20plot%2C%20plt)%3A%0A%20%20%20%20_fig%2C%20axis%20%3D%20plt.subplots(1%2C%201%2C%20figsize%3D(12%2C%205))%0A%20%20%20%20_dbs%20%3D%20DBSCAN(eps%3D0.9).fit(3%20*%20X)%0A%20%20%20%20plot(3%20*%20X%2C%20_dbs.labels_%2C%20parameters%3D%7B'scale'%3A%203%2C%20'eps'%3A%200.9%7D%2C%20ax%3Daxis)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20While%20standardizing%20data%20(e.g.%20using%0A%20%20%20%20%3Aclass%3A%60sklearn.preprocessing.StandardScaler%60)%20helps%20mitigate%20this%20problem%2C%0A%20%20%20%20great%20care%20must%20be%20taken%20to%20select%20the%20appropriate%20value%20for%20%60eps%60.%0A%0A%20%20%20%20HDBSCAN%20is%20much%20more%20robust%20in%20this%20sense%3A%20HDBSCAN%20can%20be%20seen%20as%0A%20%20%20%20clustering%20over%20all%20possible%20values%20of%20%60eps%60%20and%20extracting%20the%20best%0A%20%20%20%20clusters%20from%20all%20possible%20clusters%20(see%20%60User%20Guide%20%3CHDBSCAN%3E%60).%0A%20%20%20%20One%20immediate%20advantage%20is%20that%20HDBSCAN%20is%20scale-invariant.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(HDBSCAN%2C%20X%2C%20plot%2C%20plt)%3A%0A%20%20%20%20_fig%2C%20_axes%20%3D%20plt.subplots(3%2C%201%2C%20figsize%3D(10%2C%2012))%0A%20%20%20%20_hdb%20%3D%20HDBSCAN(copy%3DTrue)%0A%20%20%20%20for%20_idx%2C%20_scale%20in%20enumerate(%5B1%2C%200.5%2C%203%5D)%3A%0A%20%20%20%20%20%20%20%20_hdb.fit(X%20*%20_scale)%0A%20%20%20%20%20%20%20%20plot(X%20*%20_scale%2C%20_hdb.labels_%2C%20_hdb.probabilities_%2C%20ax%3D_axes%5B_idx%5D%2C%20parameters%3D%7B'scale'%3A%20_scale%7D)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Multi-Scale%20Clustering%0A%20%20%20%20HDBSCAN%20is%20much%20more%20than%20scale%20invariant%20though%20--%20it%20is%20capable%20of%0A%20%20%20%20multi-scale%20clustering%2C%20which%20accounts%20for%20clusters%20with%20varying%20density.%0A%20%20%20%20Traditional%20DBSCAN%20assumes%20that%20any%20potential%20clusters%20are%20homogeneous%20in%0A%20%20%20%20density.%20HDBSCAN%20is%20free%20from%20such%20constraints.%20To%20demonstrate%20this%20we%0A%20%20%20%20consider%20the%20following%20dataset%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(make_blobs%2C%20plot)%3A%0A%20%20%20%20_centers%20%3D%20%5B%5B-0.85%2C%20-0.85%5D%2C%20%5B-0.85%2C%200.85%5D%2C%20%5B3%2C%203%5D%2C%20%5B3%2C%20-3%5D%5D%0A%20%20%20%20X_1%2C%20_labels_true%20%3D%20make_blobs(n_samples%3D750%2C%20centers%3D_centers%2C%20cluster_std%3D%5B0.2%2C%200.35%2C%201.35%2C%201.35%5D%2C%20random_state%3D0)%0A%20%20%20%20plot(X_1%2C%20labels%3D_labels_true%2C%20ground_truth%3DTrue)%0A%20%20%20%20return%20(X_1%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20This%20dataset%20is%20more%20difficult%20for%20DBSCAN%20due%20to%20the%20varying%20densities%20and%0A%20%20%20%20spatial%20separation%3A%0A%0A%20%20%20%20-%20If%20%60eps%60%20is%20too%20large%20then%20we%20risk%20falsely%20clustering%20the%20two%20dense%0A%20%20%20%20%20%20clusters%20as%20one%20since%20their%20mutual%20reachability%20will%20extend%0A%20%20%20%20%20%20clusters.%0A%20%20%20%20-%20If%20%60eps%60%20is%20too%20small%2C%20then%20we%20risk%20fragmenting%20the%20sparser%20clusters%0A%20%20%20%20%20%20into%20many%20false%20clusters.%0A%0A%20%20%20%20Not%20to%20mention%20this%20requires%20manually%20tuning%20choices%20of%20%60eps%60%20until%20we%0A%20%20%20%20find%20a%20tradeoff%20that%20we%20are%20comfortable%20with.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(DBSCAN%2C%20X_1%2C%20plot%2C%20plt)%3A%0A%20%20%20%20_fig%2C%20_axes%20%3D%20plt.subplots(2%2C%201%2C%20figsize%3D(10%2C%208))%0A%20%20%20%20params%20%3D%20%7B'eps'%3A%200.7%7D%0A%20%20%20%20_dbs%20%3D%20DBSCAN(**params).fit(X_1)%0A%20%20%20%20plot(X_1%2C%20_dbs.labels_%2C%20parameters%3Dparams%2C%20ax%3D_axes%5B0%5D)%0A%20%20%20%20params%20%3D%20%7B'eps'%3A%200.3%7D%0A%20%20%20%20_dbs%20%3D%20DBSCAN(**params).fit(X_1)%0A%20%20%20%20plot(X_1%2C%20_dbs.labels_%2C%20parameters%3Dparams%2C%20ax%3D_axes%5B1%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20To%20properly%20cluster%20the%20two%20dense%20clusters%2C%20we%20would%20need%20a%20smaller%20value%20of%0A%20%20%20%20epsilon%2C%20however%20at%20%60eps%3D0.3%60%20we%20are%20already%20fragmenting%20the%20sparse%20clusters%2C%0A%20%20%20%20which%20would%20only%20become%20more%20severe%20as%20we%20decrease%20epsilon.%20Indeed%20it%20seems%0A%20%20%20%20that%20DBSCAN%20is%20incapable%20of%20simultaneously%20separating%20the%20two%20dense%20clusters%0A%20%20%20%20while%20preventing%20the%20sparse%20clusters%20from%20fragmenting.%20Let's%20compare%20with%0A%20%20%20%20HDBSCAN.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(HDBSCAN%2C%20X_1%2C%20plot)%3A%0A%20%20%20%20_hdb%20%3D%20HDBSCAN(copy%3DTrue).fit(X_1)%0A%20%20%20%20plot(X_1%2C%20_hdb.labels_%2C%20_hdb.probabilities_)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20HDBSCAN%20is%20able%20to%20adapt%20to%20the%20multi-scale%20structure%20of%20the%20dataset%20without%0A%20%20%20%20requiring%20parameter%20tuning.%20While%20any%20sufficiently%20interesting%20dataset%20will%0A%20%20%20%20require%20tuning%2C%20this%20case%20demonstrates%20that%20HDBSCAN%20can%20yield%20qualitatively%0A%20%20%20%20better%20classes%20of%20clusterings%20without%20users'%20intervention%20which%20are%0A%20%20%20%20inaccessible%20via%20DBSCAN.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Hyperparameter%20Robustness%0A%20%20%20%20Ultimately%20tuning%20will%20be%20an%20important%20step%20in%20any%20real%20world%20application%2C%20so%0A%20%20%20%20let's%20take%20a%20look%20at%20some%20of%20the%20most%20important%20hyperparameters%20for%20HDBSCAN.%0A%20%20%20%20While%20HDBSCAN%20is%20free%20from%20the%20%60eps%60%20parameter%20of%20DBSCAN%2C%20it%20does%20still%20have%0A%20%20%20%20some%20hyperparameters%20like%20%60min_cluster_size%60%20and%20%60min_samples%60%20which%20tune%20its%0A%20%20%20%20results%20regarding%20density.%20We%20will%20however%20see%20that%20HDBSCAN%20is%20relatively%20robust%0A%20%20%20%20to%20various%20real%20world%20examples%20thanks%20to%20those%20parameters%20whose%20clear%20meaning%0A%20%20%20%20helps%20tuning%20them.%0A%0A%20%20%20%20%23%23%23%20%60min_cluster_size%60%0A%20%20%20%20%60min_cluster_size%60%20is%20the%20minimum%20number%20of%20samples%20in%20a%20group%20for%20that%0A%20%20%20%20group%20to%20be%20considered%20a%20cluster.%0A%0A%20%20%20%20Clusters%20smaller%20than%20the%20ones%20of%20this%20size%20will%20be%20left%20as%20noise.%0A%20%20%20%20The%20default%20value%20is%205.%20This%20parameter%20is%20generally%20tuned%20to%0A%20%20%20%20larger%20values%20as%20needed.%20Smaller%20values%20will%20likely%20to%20lead%20to%20results%20with%0A%20%20%20%20fewer%20points%20labeled%20as%20noise.%20However%20values%20which%20too%20small%20will%20lead%20to%0A%20%20%20%20false%20sub-clusters%20being%20picked%20up%20and%20preferred.%20Larger%20values%20tend%20to%20be%0A%20%20%20%20more%20robust%20with%20respect%20to%20noisy%20datasets%2C%20e.g.%20high-variance%20clusters%20with%0A%20%20%20%20significant%20overlap.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(HDBSCAN%2C%20X_1%2C%20plot%2C%20plt)%3A%0A%20%20%20%20_PARAM%20%3D%20(%7B'min_cluster_size'%3A%205%7D%2C%20%7B'min_cluster_size'%3A%203%7D%2C%20%7B'min_cluster_size'%3A%2025%7D)%0A%20%20%20%20_fig%2C%20_axes%20%3D%20plt.subplots(3%2C%201%2C%20figsize%3D(10%2C%2012))%0A%20%20%20%20for%20_i%2C%20_param%20in%20enumerate(_PARAM)%3A%0A%20%20%20%20%20%20%20%20_hdb%20%3D%20HDBSCAN(copy%3DTrue%2C%20**_param).fit(X_1)%0A%20%20%20%20%20%20%20%20_labels%20%3D%20_hdb.labels_%0A%20%20%20%20%20%20%20%20plot(X_1%2C%20_labels%2C%20_hdb.probabilities_%2C%20_param%2C%20ax%3D_axes%5B_i%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20%60min_samples%60%0A%20%20%20%20%60min_samples%60%20is%20the%20number%20of%20samples%20in%20a%20neighborhood%20for%20a%20point%20to%0A%20%20%20%20be%20considered%20as%20a%20core%20point%2C%20including%20the%20point%20itself.%0A%20%20%20%20%60min_samples%60%20defaults%20to%20%60min_cluster_size%60.%0A%20%20%20%20Similarly%20to%20%60min_cluster_size%60%2C%20larger%20values%20for%20%60min_samples%60%20increase%0A%20%20%20%20the%20model's%20robustness%20to%20noise%2C%20but%20risks%20ignoring%20or%20discarding%0A%20%20%20%20potentially%20valid%20but%20small%20clusters.%0A%20%20%20%20%60min_samples%60%20better%20be%20tuned%20after%20finding%20a%20good%20value%20for%20%60min_cluster_size%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(HDBSCAN%2C%20X_1%2C%20plot%2C%20plt)%3A%0A%20%20%20%20_PARAM%20%3D%20(%7B'min_cluster_size'%3A%2020%2C%20'min_samples'%3A%205%7D%2C%20%7B'min_cluster_size'%3A%2020%2C%20'min_samples'%3A%203%7D%2C%20%7B'min_cluster_size'%3A%2020%2C%20'min_samples'%3A%2025%7D)%0A%20%20%20%20_fig%2C%20_axes%20%3D%20plt.subplots(3%2C%201%2C%20figsize%3D(10%2C%2012))%0A%20%20%20%20for%20_i%2C%20_param%20in%20enumerate(_PARAM)%3A%0A%20%20%20%20%20%20%20%20_hdb%20%3D%20HDBSCAN(copy%3DTrue%2C%20**_param).fit(X_1)%0A%20%20%20%20%20%20%20%20_labels%20%3D%20_hdb.labels_%0A%20%20%20%20%20%20%20%20plot(X_1%2C%20_labels%2C%20_hdb.probabilities_%2C%20_param%2C%20ax%3D_axes%5B_i%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20%60dbscan_clustering%60%0A%20%20%20%20During%20%60fit%60%2C%20%60HDBSCAN%60%20builds%20a%20single-linkage%20tree%20which%20encodes%20the%0A%20%20%20%20clustering%20of%20all%20points%20across%20all%20values%20of%20%3Aclass%3A%60~cluster.DBSCAN%60's%0A%20%20%20%20%60eps%60%20parameter.%0A%20%20%20%20We%20can%20thus%20plot%20and%20evaluate%20these%20clusterings%20efficiently%20without%20fully%0A%20%20%20%20recomputing%20intermediate%20values%20such%20as%20core-distances%2C%20mutual-reachability%2C%0A%20%20%20%20and%20the%20minimum%20spanning%20tree.%20All%20we%20need%20to%20do%20is%20specify%20the%20%60cut_distance%60%0A%20%20%20%20(equivalent%20to%20%60eps%60)%20we%20want%20to%20cluster%20with.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(HDBSCAN%2C%20X_1%2C%20plot%2C%20plt)%3A%0A%20%20%20%20_PARAM%20%3D%20(%7B'cut_distance'%3A%200.1%7D%2C%20%7B'cut_distance'%3A%200.5%7D%2C%20%7B'cut_distance'%3A%201.0%7D)%0A%20%20%20%20_hdb%20%3D%20HDBSCAN(copy%3DTrue)%0A%20%20%20%20_hdb.fit(X_1)%0A%20%20%20%20_fig%2C%20_axes%20%3D%20plt.subplots(len(_PARAM)%2C%201%2C%20figsize%3D(10%2C%2012))%0A%20%20%20%20for%20_i%2C%20_param%20in%20enumerate(_PARAM)%3A%0A%20%20%20%20%20%20%20%20_labels%20%3D%20_hdb.dbscan_clustering(**_param)%0A%20%20%20%20%20%20%20%20plot(X_1%2C%20_labels%2C%20_hdb.probabilities_%2C%20_param%2C%20ax%3D_axes%5B_i%5D)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

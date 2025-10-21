@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot prediction latency</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%E2%9A%A0%EF%B8%8F%20**Note**%3A%20This%20notebook%20was%20automatically%20converted%20from%20Jupyter.%0A%20%20%20%20Some%20features%20may%20behave%20differently%20in%20marimo.%0A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Prediction%20Latency%0A%0A%20%20%20%20This%20is%20an%20example%20showing%20the%20prediction%20latency%20of%20various%20scikit-learn%0A%20%20%20%20estimators.%0A%0A%20%20%20%20The%20goal%20is%20to%20measure%20the%20latency%20one%20can%20expect%20when%20doing%20predictions%0A%20%20%20%20either%20in%20bulk%20or%20atomic%20(i.e.%20one%20by%20one)%20mode.%0A%0A%20%20%20%20The%20plots%20represent%20the%20distribution%20of%20the%20prediction%20latency%20as%20a%20boxplot.%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%0A%20%20%20%20import%20gc%0A%20%20%20%20import%20time%0A%20%20%20%20from%20collections%20import%20defaultdict%0A%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20import%20numpy%20as%20np%0A%0A%20%20%20%20from%20sklearn.datasets%20import%20make_regression%0A%20%20%20%20from%20sklearn.ensemble%20import%20RandomForestRegressor%0A%20%20%20%20from%20sklearn.linear_model%20import%20Ridge%2C%20SGDRegressor%0A%20%20%20%20from%20sklearn.model_selection%20import%20train_test_split%0A%20%20%20%20from%20sklearn.preprocessing%20import%20StandardScaler%0A%20%20%20%20from%20sklearn.svm%20import%20SVR%0A%20%20%20%20from%20sklearn.utils%20import%20shuffle%0A%0A%0A%20%20%20%20def%20_not_in_sphinx()%3A%0A%20%20%20%20%20%20%20%20%23%20Hack%20to%20detect%20whether%20we%20are%20running%20by%20the%20sphinx%20builder%0A%20%20%20%20%20%20%20%20return%20%22__file__%22%20in%20globals()%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20RandomForestRegressor%2C%0A%20%20%20%20%20%20%20%20Ridge%2C%0A%20%20%20%20%20%20%20%20SGDRegressor%2C%0A%20%20%20%20%20%20%20%20SVR%2C%0A%20%20%20%20%20%20%20%20StandardScaler%2C%0A%20%20%20%20%20%20%20%20defaultdict%2C%0A%20%20%20%20%20%20%20%20gc%2C%0A%20%20%20%20%20%20%20%20make_regression%2C%0A%20%20%20%20%20%20%20%20np%2C%0A%20%20%20%20%20%20%20%20plt%2C%0A%20%20%20%20%20%20%20%20shuffle%2C%0A%20%20%20%20%20%20%20%20time%2C%0A%20%20%20%20%20%20%20%20train_test_split%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Benchmark%20and%20plot%20helper%20functions%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20StandardScaler%2C%0A%20%20%20%20defaultdict%2C%0A%20%20%20%20gc%2C%0A%20%20%20%20make_regression%2C%0A%20%20%20%20np%2C%0A%20%20%20%20plt%2C%0A%20%20%20%20shuffle%2C%0A%20%20%20%20time%2C%0A%20%20%20%20train_test_split%2C%0A)%3A%0A%20%20%20%20def%20atomic_benchmark_estimator(estimator%2C%20X_test%2C%20verbose%3DFalse)%3A%0A%20%20%20%20%20%20%20%20%22%22%22Measure%20runtime%20prediction%20of%20each%20instance.%22%22%22%0A%20%20%20%20%20%20%20%20n_instances%20%3D%20X_test.shape%5B0%5D%0A%20%20%20%20%20%20%20%20runtimes%20%3D%20np.zeros(n_instances%2C%20dtype%3Dfloat)%0A%20%20%20%20%20%20%20%20for%20i%20in%20range(n_instances)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20instance%20%3D%20X_test%5B%5Bi%5D%2C%20%3A%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20start%20%3D%20time.time()%0A%20%20%20%20%20%20%20%20%20%20%20%20estimator.predict(instance)%0A%20%20%20%20%20%20%20%20%20%20%20%20runtimes%5Bi%5D%20%3D%20time.time()%20-%20start%0A%20%20%20%20%20%20%20%20if%20verbose%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22atomic_benchmark%20runtimes%3A%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20min(runtimes)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20np.percentile(runtimes%2C%2050)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20max(runtimes)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20return%20runtimes%0A%0A%0A%20%20%20%20def%20bulk_benchmark_estimator(estimator%2C%20X_test%2C%20n_bulk_repeats%2C%20verbose)%3A%0A%20%20%20%20%20%20%20%20%22%22%22Measure%20runtime%20prediction%20of%20the%20whole%20input.%22%22%22%0A%20%20%20%20%20%20%20%20n_instances%20%3D%20X_test.shape%5B0%5D%0A%20%20%20%20%20%20%20%20runtimes%20%3D%20np.zeros(n_bulk_repeats%2C%20dtype%3Dfloat)%0A%20%20%20%20%20%20%20%20for%20i%20in%20range(n_bulk_repeats)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20start%20%3D%20time.time()%0A%20%20%20%20%20%20%20%20%20%20%20%20estimator.predict(X_test)%0A%20%20%20%20%20%20%20%20%20%20%20%20runtimes%5Bi%5D%20%3D%20time.time()%20-%20start%0A%20%20%20%20%20%20%20%20runtimes%20%3D%20np.array(list(map(lambda%20x%3A%20x%20%2F%20float(n_instances)%2C%20runtimes)))%0A%20%20%20%20%20%20%20%20if%20verbose%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22bulk_benchmark%20runtimes%3A%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20min(runtimes)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20np.percentile(runtimes%2C%2050)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20max(runtimes)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20return%20runtimes%0A%0A%0A%20%20%20%20def%20benchmark_estimator(estimator%2C%20X_test%2C%20n_bulk_repeats%3D30%2C%20verbose%3DFalse)%3A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20Measure%20runtimes%20of%20prediction%20in%20both%20atomic%20and%20bulk%20mode.%0A%0A%20%20%20%20%20%20%20%20Parameters%0A%20%20%20%20%20%20%20%20----------%0A%20%20%20%20%20%20%20%20estimator%20%3A%20already%20trained%20estimator%20supporting%20%60predict()%60%0A%20%20%20%20%20%20%20%20X_test%20%3A%20test%20input%0A%20%20%20%20%20%20%20%20n_bulk_repeats%20%3A%20how%20many%20times%20to%20repeat%20when%20evaluating%20bulk%20mode%0A%0A%20%20%20%20%20%20%20%20Returns%0A%20%20%20%20%20%20%20%20-------%0A%20%20%20%20%20%20%20%20atomic_runtimes%2C%20bulk_runtimes%20%3A%20a%20pair%20of%20%60np.array%60%20which%20contain%20the%0A%20%20%20%20%20%20%20%20runtimes%20in%20seconds.%0A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20atomic_runtimes%20%3D%20atomic_benchmark_estimator(estimator%2C%20X_test%2C%20verbose)%0A%20%20%20%20%20%20%20%20bulk_runtimes%20%3D%20bulk_benchmark_estimator(estimator%2C%20X_test%2C%20n_bulk_repeats%2C%20verbose)%0A%20%20%20%20%20%20%20%20return%20atomic_runtimes%2C%20bulk_runtimes%0A%0A%0A%20%20%20%20def%20generate_dataset(n_train%2C%20n_test%2C%20n_features%2C%20noise%3D0.1%2C%20verbose%3DFalse)%3A%0A%20%20%20%20%20%20%20%20%22%22%22Generate%20a%20regression%20dataset%20with%20the%20given%20parameters.%22%22%22%0A%20%20%20%20%20%20%20%20if%20verbose%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%22generating%20dataset...%22)%0A%0A%20%20%20%20%20%20%20%20X%2C%20y%2C%20coef%20%3D%20make_regression(%0A%20%20%20%20%20%20%20%20%20%20%20%20n_samples%3Dn_train%20%2B%20n_test%2C%20n_features%3Dn_features%2C%20noise%3Dnoise%2C%20coef%3DTrue%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20random_seed%20%3D%2013%0A%20%20%20%20%20%20%20%20X_train%2C%20X_test%2C%20y_train%2C%20y_test%20%3D%20train_test_split(%0A%20%20%20%20%20%20%20%20%20%20%20%20X%2C%20y%2C%20train_size%3Dn_train%2C%20test_size%3Dn_test%2C%20random_state%3Drandom_seed%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20X_train%2C%20y_train%20%3D%20shuffle(X_train%2C%20y_train%2C%20random_state%3Drandom_seed)%0A%0A%20%20%20%20%20%20%20%20X_scaler%20%3D%20StandardScaler()%0A%20%20%20%20%20%20%20%20X_train%20%3D%20X_scaler.fit_transform(X_train)%0A%20%20%20%20%20%20%20%20X_test%20%3D%20X_scaler.transform(X_test)%0A%0A%20%20%20%20%20%20%20%20y_scaler%20%3D%20StandardScaler()%0A%20%20%20%20%20%20%20%20y_train%20%3D%20y_scaler.fit_transform(y_train%5B%3A%2C%20None%5D)%5B%3A%2C%200%5D%0A%20%20%20%20%20%20%20%20y_test%20%3D%20y_scaler.transform(y_test%5B%3A%2C%20None%5D)%5B%3A%2C%200%5D%0A%0A%20%20%20%20%20%20%20%20gc.collect()%0A%20%20%20%20%20%20%20%20if%20verbose%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%22ok%22)%0A%20%20%20%20%20%20%20%20return%20X_train%2C%20y_train%2C%20X_test%2C%20y_test%0A%0A%0A%20%20%20%20def%20boxplot_runtimes(runtimes%2C%20pred_type%2C%20configuration)%3A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20Plot%20a%20new%20%60Figure%60%20with%20boxplots%20of%20prediction%20runtimes.%0A%0A%20%20%20%20%20%20%20%20Parameters%0A%20%20%20%20%20%20%20%20----------%0A%20%20%20%20%20%20%20%20runtimes%20%3A%20list%20of%20%60np.array%60%20of%20latencies%20in%20micro-seconds%0A%20%20%20%20%20%20%20%20cls_names%20%3A%20list%20of%20estimator%20class%20names%20that%20generated%20the%20runtimes%0A%20%20%20%20%20%20%20%20pred_type%20%3A%20'bulk'%20or%20'atomic'%0A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%0A%20%20%20%20%20%20%20%20fig%2C%20ax1%20%3D%20plt.subplots(figsize%3D(10%2C%206))%0A%20%20%20%20%20%20%20%20bp%20%3D%20plt.boxplot(%0A%20%20%20%20%20%20%20%20%20%20%20%20runtimes%2C%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20cls_infos%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%25s%5Cn(%25d%20%25s)%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%25%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20estimator_conf%5B%22name%22%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20estimator_conf%5B%22complexity_computer%22%5D(estimator_conf%5B%22instance%22%5D)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20estimator_conf%5B%22complexity_label%22%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20estimator_conf%20in%20configuration%5B%22estimators%22%5D%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%20%20plt.setp(ax1%2C%20xticklabels%3Dcls_infos)%0A%20%20%20%20%20%20%20%20plt.setp(bp%5B%22boxes%22%5D%2C%20color%3D%22black%22)%0A%20%20%20%20%20%20%20%20plt.setp(bp%5B%22whiskers%22%5D%2C%20color%3D%22black%22)%0A%20%20%20%20%20%20%20%20plt.setp(bp%5B%22fliers%22%5D%2C%20color%3D%22red%22%2C%20marker%3D%22%2B%22)%0A%0A%20%20%20%20%20%20%20%20ax1.yaxis.grid(True%2C%20linestyle%3D%22-%22%2C%20which%3D%22major%22%2C%20color%3D%22lightgrey%22%2C%20alpha%3D0.5)%0A%0A%20%20%20%20%20%20%20%20ax1.set_axisbelow(True)%0A%20%20%20%20%20%20%20%20ax1.set_title(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Prediction%20Time%20per%20Instance%20-%20%25s%2C%20%25d%20feats.%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%25%20(pred_type.capitalize()%2C%20configuration%5B%22n_features%22%5D)%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20ax1.set_ylabel(%22Prediction%20Time%20(us)%22)%0A%0A%20%20%20%20%20%20%20%20plt.show()%0A%0A%0A%20%20%20%20def%20benchmark(configuration)%3A%0A%20%20%20%20%20%20%20%20%22%22%22Run%20the%20whole%20benchmark.%22%22%22%0A%20%20%20%20%20%20%20%20X_train%2C%20y_train%2C%20X_test%2C%20y_test%20%3D%20generate_dataset(%0A%20%20%20%20%20%20%20%20%20%20%20%20configuration%5B%22n_train%22%5D%2C%20configuration%5B%22n_test%22%5D%2C%20configuration%5B%22n_features%22%5D%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20stats%20%3D%20%7B%7D%0A%20%20%20%20%20%20%20%20for%20estimator_conf%20in%20configuration%5B%22estimators%22%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%22Benchmarking%22%2C%20estimator_conf%5B%22instance%22%5D)%0A%20%20%20%20%20%20%20%20%20%20%20%20estimator_conf%5B%22instance%22%5D.fit(X_train%2C%20y_train)%0A%20%20%20%20%20%20%20%20%20%20%20%20gc.collect()%0A%20%20%20%20%20%20%20%20%20%20%20%20a%2C%20b%20%3D%20benchmark_estimator(estimator_conf%5B%22instance%22%5D%2C%20X_test)%0A%20%20%20%20%20%20%20%20%20%20%20%20stats%5Bestimator_conf%5B%22name%22%5D%5D%20%3D%20%7B%22atomic%22%3A%20a%2C%20%22bulk%22%3A%20b%7D%0A%0A%20%20%20%20%20%20%20%20cls_names%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20estimator_conf%5B%22name%22%5D%20for%20estimator_conf%20in%20configuration%5B%22estimators%22%5D%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%20%20runtimes%20%3D%20%5B1e6%20*%20stats%5Bclf_name%5D%5B%22atomic%22%5D%20for%20clf_name%20in%20cls_names%5D%0A%20%20%20%20%20%20%20%20boxplot_runtimes(runtimes%2C%20%22atomic%22%2C%20configuration)%0A%20%20%20%20%20%20%20%20runtimes%20%3D%20%5B1e6%20*%20stats%5Bclf_name%5D%5B%22bulk%22%5D%20for%20clf_name%20in%20cls_names%5D%0A%20%20%20%20%20%20%20%20boxplot_runtimes(runtimes%2C%20%22bulk%20(%25d)%22%20%25%20configuration%5B%22n_test%22%5D%2C%20configuration)%0A%0A%0A%20%20%20%20def%20n_feature_influence(estimators%2C%20n_train%2C%20n_test%2C%20n_features%2C%20percentile)%3A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20Estimate%20influence%20of%20the%20number%20of%20features%20on%20prediction%20time.%0A%0A%20%20%20%20%20%20%20%20Parameters%0A%20%20%20%20%20%20%20%20----------%0A%0A%20%20%20%20%20%20%20%20estimators%20%3A%20dict%20of%20(name%20(str)%2C%20estimator)%20to%20benchmark%0A%20%20%20%20%20%20%20%20n_train%20%3A%20nber%20of%20training%20instances%20(int)%0A%20%20%20%20%20%20%20%20n_test%20%3A%20nber%20of%20testing%20instances%20(int)%0A%20%20%20%20%20%20%20%20n_features%20%3A%20list%20of%20feature-space%20dimensionality%20to%20test%20(int)%0A%20%20%20%20%20%20%20%20percentile%20%3A%20percentile%20at%20which%20to%20measure%20the%20speed%20(int%20%5B0-100%5D)%0A%0A%20%20%20%20%20%20%20%20Returns%3A%0A%20%20%20%20%20%20%20%20--------%0A%0A%20%20%20%20%20%20%20%20percentiles%20%3A%20dict(estimator_name%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dict(n_features%2C%20percentile_perf_in_us))%0A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20percentiles%20%3D%20defaultdict(defaultdict)%0A%20%20%20%20%20%20%20%20for%20n%20in%20n_features%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%22benchmarking%20with%20%25d%20features%22%20%25%20n)%0A%20%20%20%20%20%20%20%20%20%20%20%20X_train%2C%20y_train%2C%20X_test%2C%20y_test%20%3D%20generate_dataset(n_train%2C%20n_test%2C%20n)%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20cls_name%2C%20estimator%20in%20estimators.items()%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20estimator.fit(X_train%2C%20y_train)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20gc.collect()%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20runtimes%20%3D%20bulk_benchmark_estimator(estimator%2C%20X_test%2C%2030%2C%20False)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20percentiles%5Bcls_name%5D%5Bn%5D%20%3D%201e6%20*%20np.percentile(runtimes%2C%20percentile)%0A%20%20%20%20%20%20%20%20return%20percentiles%0A%0A%0A%20%20%20%20def%20plot_n_features_influence(percentiles%2C%20percentile)%3A%0A%20%20%20%20%20%20%20%20fig%2C%20ax1%20%3D%20plt.subplots(figsize%3D(10%2C%206))%0A%20%20%20%20%20%20%20%20colors%20%3D%20%5B%22r%22%2C%20%22g%22%2C%20%22b%22%5D%0A%20%20%20%20%20%20%20%20for%20i%2C%20cls_name%20in%20enumerate(percentiles.keys())%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20x%20%3D%20np.array(sorted(percentiles%5Bcls_name%5D.keys()))%0A%20%20%20%20%20%20%20%20%20%20%20%20y%20%3D%20np.array(%5Bpercentiles%5Bcls_name%5D%5Bn%5D%20for%20n%20in%20x%5D)%0A%20%20%20%20%20%20%20%20%20%20%20%20plt.plot(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20x%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20y%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%3Dcolors%5Bi%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20ax1.yaxis.grid(True%2C%20linestyle%3D%22-%22%2C%20which%3D%22major%22%2C%20color%3D%22lightgrey%22%2C%20alpha%3D0.5)%0A%20%20%20%20%20%20%20%20ax1.set_axisbelow(True)%0A%20%20%20%20%20%20%20%20ax1.set_title(%22Evolution%20of%20Prediction%20Time%20with%20%23Features%22)%0A%20%20%20%20%20%20%20%20ax1.set_xlabel(%22%23Features%22)%0A%20%20%20%20%20%20%20%20ax1.set_ylabel(%22Prediction%20Time%20at%20%25d%25%25-ile%20(us)%22%20%25%20percentile)%0A%20%20%20%20%20%20%20%20plt.show()%0A%0A%0A%20%20%20%20def%20benchmark_throughputs(configuration%2C%20duration_secs%3D0.1)%3A%0A%20%20%20%20%20%20%20%20%22%22%22benchmark%20throughput%20for%20different%20estimators.%22%22%22%0A%20%20%20%20%20%20%20%20X_train%2C%20y_train%2C%20X_test%2C%20y_test%20%3D%20generate_dataset(%0A%20%20%20%20%20%20%20%20%20%20%20%20configuration%5B%22n_train%22%5D%2C%20configuration%5B%22n_test%22%5D%2C%20configuration%5B%22n_features%22%5D%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20throughputs%20%3D%20dict()%0A%20%20%20%20%20%20%20%20for%20estimator_config%20in%20configuration%5B%22estimators%22%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20estimator_config%5B%22instance%22%5D.fit(X_train%2C%20y_train)%0A%20%20%20%20%20%20%20%20%20%20%20%20start_time%20%3D%20time.time()%0A%20%20%20%20%20%20%20%20%20%20%20%20n_predictions%20%3D%200%0A%20%20%20%20%20%20%20%20%20%20%20%20while%20(time.time()%20-%20start_time)%20%3C%20duration_secs%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20estimator_config%5B%22instance%22%5D.predict(X_test%5B%5B0%5D%5D)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20n_predictions%20%2B%3D%201%0A%20%20%20%20%20%20%20%20%20%20%20%20throughputs%5Bestimator_config%5B%22name%22%5D%5D%20%3D%20n_predictions%20%2F%20duration_secs%0A%20%20%20%20%20%20%20%20return%20throughputs%0A%0A%0A%20%20%20%20def%20plot_benchmark_throughput(throughputs%2C%20configuration)%3A%0A%20%20%20%20%20%20%20%20fig%2C%20ax%20%3D%20plt.subplots(figsize%3D(10%2C%206))%0A%20%20%20%20%20%20%20%20colors%20%3D%20%5B%22r%22%2C%20%22g%22%2C%20%22b%22%5D%0A%20%20%20%20%20%20%20%20cls_infos%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%25s%5Cn(%25d%20%25s)%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%25%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20estimator_conf%5B%22name%22%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20estimator_conf%5B%22complexity_computer%22%5D(estimator_conf%5B%22instance%22%5D)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20estimator_conf%5B%22complexity_label%22%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20estimator_conf%20in%20configuration%5B%22estimators%22%5D%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%20%20cls_values%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20throughputs%5Bestimator_conf%5B%22name%22%5D%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20estimator_conf%20in%20configuration%5B%22estimators%22%5D%0A%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%20%20plt.bar(range(len(throughputs))%2C%20cls_values%2C%20width%3D0.5%2C%20color%3Dcolors)%0A%20%20%20%20%20%20%20%20ax.set_xticks(np.linspace(0.25%2C%20len(throughputs)%20-%200.75%2C%20len(throughputs)))%0A%20%20%20%20%20%20%20%20ax.set_xticklabels(cls_infos%2C%20fontsize%3D10)%0A%20%20%20%20%20%20%20%20ymax%20%3D%20max(cls_values)%20*%201.2%0A%20%20%20%20%20%20%20%20ax.set_ylim((0%2C%20ymax))%0A%20%20%20%20%20%20%20%20ax.set_ylabel(%22Throughput%20(predictions%2Fsec)%22)%0A%20%20%20%20%20%20%20%20ax.set_title(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Prediction%20Throughput%20for%20different%20estimators%20(%25d%20features)%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%25%20configuration%5B%22n_features%22%5D%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20plt.show()%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20benchmark%2C%0A%20%20%20%20%20%20%20%20benchmark_throughputs%2C%0A%20%20%20%20%20%20%20%20n_feature_influence%2C%0A%20%20%20%20%20%20%20%20plot_benchmark_throughput%2C%0A%20%20%20%20%20%20%20%20plot_n_features_influence%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Benchmark%20bulk%2Fatomic%20prediction%20speed%20for%20various%20regressors%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(RandomForestRegressor%2C%20SGDRegressor%2C%20SVR%2C%20benchmark%2C%20np)%3A%0A%20%20%20%20configuration%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%22n_train%22%3A%20int(1e3)%2C%0A%20%20%20%20%20%20%20%20%22n_test%22%3A%20int(1e2)%2C%0A%20%20%20%20%20%20%20%20%22n_features%22%3A%20int(1e2)%2C%0A%20%20%20%20%20%20%20%20%22estimators%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22name%22%3A%20%22Linear%20Model%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22instance%22%3A%20SGDRegressor(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20penalty%3D%22elasticnet%22%2C%20alpha%3D0.01%2C%20l1_ratio%3D0.25%2C%20tol%3D1e-4%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22complexity_label%22%3A%20%22non-zero%20coefficients%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22complexity_computer%22%3A%20lambda%20clf%3A%20np.count_nonzero(clf.coef_)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22name%22%3A%20%22RandomForest%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22instance%22%3A%20RandomForestRegressor()%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22complexity_label%22%3A%20%22estimators%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22complexity_computer%22%3A%20lambda%20clf%3A%20clf.n_estimators%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22name%22%3A%20%22SVR%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22instance%22%3A%20SVR(kernel%3D%22rbf%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22complexity_label%22%3A%20%22support%20vectors%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22complexity_computer%22%3A%20lambda%20clf%3A%20len(clf.support_vectors_)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%7D%0A%20%20%20%20benchmark(configuration)%0A%20%20%20%20return%20(configuration%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Benchmark%20n_features%20influence%20on%20prediction%20speed%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(Ridge%2C%20configuration%2C%20n_feature_influence%2C%20plot_n_features_influence)%3A%0A%20%20%20%20percentile%20%3D%2090%0A%20%20%20%20percentiles%20%3D%20n_feature_influence(%0A%20%20%20%20%20%20%20%20%7B%22ridge%22%3A%20Ridge()%7D%2C%0A%20%20%20%20%20%20%20%20configuration%5B%22n_train%22%5D%2C%0A%20%20%20%20%20%20%20%20configuration%5B%22n_test%22%5D%2C%0A%20%20%20%20%20%20%20%20%5B100%2C%20250%2C%20500%5D%2C%0A%20%20%20%20%20%20%20%20percentile%2C%0A%20%20%20%20)%0A%20%20%20%20plot_n_features_influence(percentiles%2C%20percentile)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Benchmark%20throughput%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(benchmark_throughputs%2C%20configuration%2C%20plot_benchmark_throughput)%3A%0A%20%20%20%20throughputs%20%3D%20benchmark_throughputs(configuration)%0A%20%20%20%20plot_benchmark_throughput(throughputs%2C%20configuration)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

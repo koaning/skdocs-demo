@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot release highlights 1 0 0</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%E2%9A%A0%EF%B8%8F%20**Note**%3A%20This%20notebook%20was%20automatically%20converted%20from%20Jupyter.%0A%20%20%20%20Some%20features%20may%20behave%20differently%20in%20marimo.%0A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Release%20Highlights%20for%20scikit-learn%201.0%0A%0A%20%20%20%20..%20currentmodule%3A%3A%20sklearn%0A%0A%20%20%20%20We%20are%20very%20pleased%20to%20announce%20the%20release%20of%20scikit-learn%201.0!%20The%20library%0A%20%20%20%20has%20been%20stable%20for%20quite%20some%20time%2C%20releasing%20version%201.0%20is%20recognizing%20that%0A%20%20%20%20and%20signalling%20it%20to%20our%20users.%20This%20release%20does%20not%20include%20any%20breaking%0A%20%20%20%20changes%20apart%20from%20the%20usual%20two-release%20deprecation%20cycle.%20For%20the%20future%2C%20we%0A%20%20%20%20do%20our%20best%20to%20keep%20this%20pattern.%0A%0A%20%20%20%20This%20release%20includes%20some%20new%20key%20features%20as%20well%20as%20many%20improvements%20and%0A%20%20%20%20bug%20fixes.%20We%20detail%20below%20a%20few%20of%20the%20major%20features%20of%20this%20release.%20**For%0A%20%20%20%20an%20exhaustive%20list%20of%20all%20the%20changes**%2C%20please%20refer%20to%20the%20%60release%0A%20%20%20%20notes%20%3Crelease_notes_1_0%3E%60.%0A%0A%20%20%20%20To%20install%20the%20latest%20version%20(with%20pip)%3A%3A%0A%0A%20%20%20%20%20%20%20%20pip%20install%20--upgrade%20scikit-learn%0A%0A%20%20%20%20or%20with%20conda%3A%3A%0A%0A%20%20%20%20%20%20%20%20conda%20install%20-c%20conda-forge%20scikit-learn%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Keyword%20and%20positional%20arguments%0A%20%20%20%20The%20scikit-learn%20API%20exposes%20many%20functions%20and%20methods%20which%20have%20many%20input%0A%20%20%20%20parameters.%20For%20example%2C%20before%20this%20release%2C%20one%20could%20instantiate%20a%0A%20%20%20%20%3Aclass%3A%60~ensemble.HistGradientBoostingRegressor%60%20as%3A%3A%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20HistGradientBoostingRegressor(%22squared_error%22%2C%200.1%2C%20100%2C%2031%2C%20None%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2020%2C%200.0%2C%20255%2C%20None%2C%20None%2C%20False%2C%20%22auto%22%2C%20%22loss%22%2C%200.1%2C%2010%2C%201e-7%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%200%2C%20None)%0A%0A%20%20%20%20Understanding%20the%20above%20code%20requires%20the%20reader%20to%20go%20to%20the%20API%0A%20%20%20%20documentation%20and%20to%20check%20each%20and%20every%20parameter%20for%20its%20position%20and%0A%20%20%20%20its%20meaning.%20To%20improve%20the%20readability%20of%20code%20written%20based%20on%20scikit-learn%2C%0A%20%20%20%20now%20users%20have%20to%20provide%20most%20parameters%20with%20their%20names%2C%20as%20keyword%0A%20%20%20%20arguments%2C%20instead%20of%20positional%20arguments.%20For%20example%2C%20the%20above%20code%20would%0A%20%20%20%20be%3A%3A%0A%0A%20%20%20%20%20%20%20%20HistGradientBoostingRegressor(%0A%20%20%20%20%20%20%20%20%20%20%20%20loss%3D%22squared_error%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20learning_rate%3D0.1%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20max_iter%3D100%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20max_leaf_nodes%3D31%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20max_depth%3DNone%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20min_samples_leaf%3D20%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20l2_regularization%3D0.0%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20max_bins%3D255%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20categorical_features%3DNone%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20monotonic_cst%3DNone%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20warm_start%3DFalse%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20early_stopping%3D%22auto%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20scoring%3D%22loss%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20validation_fraction%3D0.1%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20n_iter_no_change%3D10%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20tol%3D1e-7%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20verbose%3D0%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20random_state%3DNone%2C%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20which%20is%20much%20more%20readable.%20Positional%20arguments%20have%20been%20deprecated%20since%0A%20%20%20%20version%200.23%20and%20will%20now%20raise%20a%20%60%60TypeError%60%60.%20A%20limited%20number%20of%0A%20%20%20%20positional%20arguments%20are%20still%20allowed%20in%20some%20cases%2C%20for%20example%20in%0A%20%20%20%20%3Aclass%3A%60~decomposition.PCA%60%2C%20where%20%60%60PCA(10)%60%60%20is%20still%20allowed%2C%20but%20%60%60PCA(10%2C%0A%20%20%20%20False)%60%60%20is%20not%20allowed.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Spline%20Transformers%0A%20%20%20%20One%20way%20to%20add%20nonlinear%20terms%20to%20a%20dataset's%20feature%20set%20is%20to%20generate%0A%20%20%20%20spline%20basis%20functions%20for%20continuous%2Fnumerical%20features%20with%20the%20new%0A%20%20%20%20%3Aclass%3A%60~preprocessing.SplineTransformer%60.%20Splines%20are%20piecewise%20polynomials%2C%0A%20%20%20%20parametrized%20by%20their%20polynomial%20degree%20and%20the%20positions%20of%20the%20knots.%20The%0A%20%20%20%20%3Aclass%3A%60~preprocessing.SplineTransformer%60%20implements%20a%20B-spline%20basis.%0A%0A%20%20%20%20..%20figure%3A%3A%20..%2Flinear_model%2Fimages%2Fsphx_glr_plot_polynomial_interpolation_001.png%0A%20%20%20%20%20%20%3Atarget%3A%20..%2Flinear_model%2Fplot_polynomial_interpolation.html%0A%20%20%20%20%20%20%3Aalign%3A%20center%0A%0A%20%20%20%20The%20following%20code%20shows%20splines%20in%20action%2C%20for%20more%20information%2C%20please%0A%20%20%20%20refer%20to%20the%20%60User%20Guide%20%3Cspline_transformer%3E%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20numpy%20as%20np%0A%0A%20%20%20%20from%20sklearn.preprocessing%20import%20SplineTransformer%0A%0A%20%20%20%20X%20%3D%20np.arange(5).reshape(5%2C%201)%0A%20%20%20%20spline%20%3D%20SplineTransformer(degree%3D2%2C%20n_knots%3D3)%0A%20%20%20%20spline.fit_transform(X)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Quantile%20Regressor%0A%20%20%20%20Quantile%20regression%20estimates%20the%20median%20or%20other%20quantiles%20of%20%24y%24%0A%20%20%20%20conditional%20on%20%24X%24%2C%20while%20ordinary%20least%20squares%20(OLS)%20estimates%20the%0A%20%20%20%20conditional%20mean.%0A%0A%20%20%20%20As%20a%20linear%20model%2C%20the%20new%20%3Aclass%3A%60~linear_model.QuantileRegressor%60%20gives%0A%20%20%20%20linear%20predictions%20%24%5Chat%7By%7D(w%2C%20X)%20%3D%20Xw%24%20for%20the%20%24q%24-th%20quantile%2C%0A%20%20%20%20%24q%20%5Cin%20(0%2C%201)%24.%20The%20weights%20or%20coefficients%20%24w%24%20are%20then%20found%20by%0A%20%20%20%20the%20following%20minimization%20problem%3A%0A%0A%20%20%20%20%5Cbegin%7Balign%7D%5Cmin_%7Bw%7D%20%7B%5Cfrac%7B1%7D%7Bn_%7B%5Ctext%7Bsamples%7D%7D%7D%0A%20%20%20%20%20%20%20%20%5Csum_i%20PB_q(y_i%20-%20X_i%20w)%20%2B%20%5Calpha%20%7C%7Cw%7C%7C_1%7D.%5Cend%7Balign%7D%0A%0A%20%20%20%20This%20consists%20of%20the%20pinball%20loss%20(also%20known%20as%20linear%20loss)%2C%0A%20%20%20%20see%20also%20%3Aclass%3A%60~sklearn.metrics.mean_pinball_loss%60%2C%0A%0A%20%20%20%20%5Cbegin%7Balign%7DPB_q(t)%20%3D%20q%20%5Cmax(t%2C%200)%20%2B%20(1%20-%20q)%20%5Cmax(-t%2C%200)%20%3D%0A%20%20%20%20%20%20%20%20%5Cbegin%7Bcases%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20q%20t%2C%20%26%20t%20%3E%200%2C%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%200%2C%20%20%20%20%26%20t%20%3D%200%2C%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20(1-q)%20t%2C%20%26%20t%20%3C%200%0A%20%20%20%20%20%20%20%20%5Cend%7Bcases%7D%5Cend%7Balign%7D%0A%0A%20%20%20%20and%20the%20L1%20penalty%20controlled%20by%20parameter%20%60%60alpha%60%60%2C%20similar%20to%0A%20%20%20%20%3Aclass%3A%60linear_model.Lasso%60.%0A%0A%20%20%20%20Please%20check%20the%20following%20example%20to%20see%20how%20it%20works%2C%20and%20the%20%60User%0A%20%20%20%20Guide%20%3Cquantile_regression%3E%60%20for%20more%20details.%0A%0A%20%20%20%20..%20figure%3A%3A%20..%2Flinear_model%2Fimages%2Fsphx_glr_plot_quantile_regression_002.png%0A%20%20%20%20%20%20%20%3Atarget%3A%20..%2Flinear_model%2Fplot_quantile_regression.html%0A%20%20%20%20%20%20%20%3Aalign%3A%20center%0A%20%20%20%20%20%20%20%3Ascale%3A%2050%25%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Feature%20Names%20Support%0A%20%20%20%20When%20an%20estimator%20is%20passed%20a%20%5Bpandas'%20dataframe%5D(https%3A%2F%2Fpandas.pydata.org%2Fdocs%2Fuser_guide%2Fdsintro.html%23dataframe)%20during%0A%20%20%20%20%3Aterm%3A%60fit%60%2C%20the%20estimator%20will%20set%20a%20%60feature_names_in_%60%20attribute%0A%20%20%20%20containing%20the%20feature%20names.%20This%20is%20a%20part%20of%0A%20%20%20%20%5BSLEP007%5D(https%3A%2F%2Fscikit-learn-enhancement-proposals.readthedocs.io%2Fen%2Flatest%2Fslep007%2Fproposal.html)_.%0A%20%20%20%20Note%20that%20feature%20names%20support%20is%20only%20enabled%0A%20%20%20%20when%20the%20column%20names%20in%20the%20dataframe%20are%20all%20strings.%20%60feature_names_in_%60%0A%20%20%20%20is%20used%20to%20check%20that%20the%20column%20names%20of%20the%20dataframe%20passed%20in%0A%20%20%20%20non-%3Aterm%3A%60fit%60%2C%20such%20as%20%3Aterm%3A%60predict%60%2C%20are%20consistent%20with%20features%20in%0A%20%20%20%20%3Aterm%3A%60fit%60%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20pandas%20as%20pd%0A%20%20%20%20from%20sklearn.preprocessing%20import%20StandardScaler%0A%20%20%20%20X_1%20%3D%20pd.DataFrame(%5B%5B1%2C%202%2C%203%5D%2C%20%5B4%2C%205%2C%206%5D%5D%2C%20columns%3D%5B'a'%2C%20'b'%2C%20'c'%5D)%0A%20%20%20%20scalar%20%3D%20StandardScaler().fit(X_1)%0A%20%20%20%20scalar.feature_names_in_%0A%20%20%20%20return%20StandardScaler%2C%20pd%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20The%20support%20of%20%3Aterm%3A%60get_feature_names_out%60%20is%20available%20for%20transformers%0A%20%20%20%20that%20already%20had%20%60get_feature_names%60%20and%20transformers%20with%20a%20one-to-one%0A%20%20%20%20correspondence%20between%20input%20and%20output%20such%20as%0A%20%20%20%20%3Aclass%3A%60~preprocessing.StandardScaler%60.%20%3Aterm%3A%60get_feature_names_out%60%20support%0A%20%20%20%20will%20be%20added%20to%20all%20other%20transformers%20in%20future%20releases.%20Additionally%2C%0A%20%20%20%20%3Ameth%3A%60compose.ColumnTransformer.get_feature_names_out%60%20is%20available%20to%0A%20%20%20%20combine%20feature%20names%20of%20its%20transformers%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(StandardScaler%2C%20pd)%3A%0A%20%20%20%20from%20sklearn.compose%20import%20ColumnTransformer%0A%20%20%20%20from%20sklearn.preprocessing%20import%20OneHotEncoder%0A%20%20%20%20X_2%20%3D%20pd.DataFrame(%7B'pet'%3A%20%5B'dog'%2C%20'cat'%2C%20'fish'%5D%2C%20'age'%3A%20%5B3%2C%207%2C%201%5D%7D)%0A%20%20%20%20preprocessor%20%3D%20ColumnTransformer(%5B('numerical'%2C%20StandardScaler()%2C%20%5B'age'%5D)%2C%20('categorical'%2C%20OneHotEncoder()%2C%20%5B'pet'%5D)%5D%2C%20verbose_feature_names_out%3DFalse).fit(X_2)%0A%20%20%20%20preprocessor.get_feature_names_out()%0A%20%20%20%20return%20X_2%2C%20preprocessor%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20When%20this%20%60%60preprocessor%60%60%20is%20used%20with%20a%20pipeline%2C%20the%20feature%20names%20used%0A%20%20%20%20by%20the%20classifier%20are%20obtained%20by%20slicing%20and%20calling%0A%20%20%20%20%3Aterm%3A%60get_feature_names_out%60%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_2%2C%20preprocessor)%3A%0A%20%20%20%20from%20sklearn.linear_model%20import%20LogisticRegression%0A%20%20%20%20from%20sklearn.pipeline%20import%20make_pipeline%0A%20%20%20%20y%20%3D%20%5B1%2C%200%2C%201%5D%0A%20%20%20%20pipe%20%3D%20make_pipeline(preprocessor%2C%20LogisticRegression())%0A%20%20%20%20pipe.fit(X_2%2C%20y)%0A%20%20%20%20pipe%5B%3A-1%5D.get_feature_names_out()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20A%20more%20flexible%20plotting%20API%0A%20%20%20%20%3Aclass%3A%60metrics.ConfusionMatrixDisplay%60%2C%0A%20%20%20%20%3Aclass%3A%60metrics.PrecisionRecallDisplay%60%2C%20%3Aclass%3A%60metrics.DetCurveDisplay%60%2C%0A%20%20%20%20and%20%3Aclass%3A%60inspection.PartialDependenceDisplay%60%20now%20expose%20two%20class%0A%20%20%20%20methods%3A%20%60from_estimator%60%20and%20%60from_predictions%60%20which%20allow%20users%20to%20create%0A%20%20%20%20a%20plot%20given%20the%20predictions%20or%20an%20estimator.%20This%20means%20the%20corresponding%0A%20%20%20%20%60plot_*%60%20functions%20are%20deprecated.%20Please%20check%20%60example%20one%0A%20%20%20%20%3Csphx_glr_auto_examples_model_selection_plot_confusion_matrix.py%3E%60%20and%0A%20%20%20%20%60example%20two%0A%20%20%20%20%3Csphx_glr_auto_examples_classification_plot_digits_classification.py%3E%60%20for%0A%20%20%20%20how%20to%20use%20the%20new%20plotting%20functionalities.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Online%20One-Class%20SVM%0A%20%20%20%20The%20new%20class%20%3Aclass%3A%60~linear_model.SGDOneClassSVM%60%20implements%20an%20online%0A%20%20%20%20linear%20version%20of%20the%20One-Class%20SVM%20using%20a%20stochastic%20gradient%20descent.%0A%20%20%20%20Combined%20with%20kernel%20approximation%20techniques%2C%0A%20%20%20%20%3Aclass%3A%60~linear_model.SGDOneClassSVM%60%20can%20be%20used%20to%20approximate%20the%20solution%0A%20%20%20%20of%20a%20kernelized%20One-Class%20SVM%2C%20implemented%20in%20%3Aclass%3A%60~svm.OneClassSVM%60%2C%20with%0A%20%20%20%20a%20fit%20time%20complexity%20linear%20in%20the%20number%20of%20samples.%20Note%20that%20the%0A%20%20%20%20complexity%20of%20a%20kernelized%20One-Class%20SVM%20is%20at%20best%20quadratic%20in%20the%20number%0A%20%20%20%20of%20samples.%20%3Aclass%3A%60~linear_model.SGDOneClassSVM%60%20is%20thus%20well%20suited%20for%0A%20%20%20%20datasets%20with%20a%20large%20number%20of%20training%20samples%20(%3E%2010%2C000)%20for%20which%20the%20SGD%0A%20%20%20%20variant%20can%20be%20several%20orders%20of%20magnitude%20faster.%20Please%20check%20this%0A%20%20%20%20%60example%0A%20%20%20%20%3Csphx_glr_auto_examples_miscellaneous_plot_anomaly_comparison.py%3E%60%20to%20see%20how%0A%20%20%20%20it's%20used%2C%20and%20the%20%60User%20Guide%20%3Csgd_online_one_class_svm%3E%60%20for%20more%0A%20%20%20%20details.%0A%0A%20%20%20%20..%20figure%3A%3A%20..%2Fmiscellaneous%2Fimages%2Fsphx_glr_plot_anomaly_comparison_001.png%0A%20%20%20%20%20%20%20%3Atarget%3A%20..%2Fmiscellaneous%2Fplot_anomaly_comparison.html%0A%20%20%20%20%20%20%20%3Aalign%3A%20center%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Histogram-based%20Gradient%20Boosting%20Models%20are%20now%20stable%0A%20%20%20%20%3Aclass%3A%60~sklearn.ensemble.HistGradientBoostingRegressor%60%20and%0A%20%20%20%20%3Aclass%3A%60~ensemble.HistGradientBoostingClassifier%60%20are%20no%20longer%20experimental%0A%20%20%20%20and%20can%20simply%20be%20imported%20and%20used%20as%3A%3A%0A%0A%20%20%20%20%20%20%20%20from%20sklearn.ensemble%20import%20HistGradientBoostingClassifier%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20New%20documentation%20improvements%0A%20%20%20%20This%20release%20includes%20many%20documentation%20improvements.%20Out%20of%20over%202100%0A%20%20%20%20merged%20pull%20requests%2C%20about%20800%20of%20them%20are%20improvements%20to%20our%0A%20%20%20%20documentation.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

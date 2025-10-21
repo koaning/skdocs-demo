@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot document classification 20newsgroups</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%E2%9A%A0%EF%B8%8F%20**Note**%3A%20This%20notebook%20was%20automatically%20converted%20from%20Jupyter.%0A%20%20%20%20Some%20features%20may%20behave%20differently%20in%20marimo.%0A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Classification%20of%20text%20documents%20using%20sparse%20features%0A%0A%20%20%20%20This%20is%20an%20example%20showing%20how%20scikit-learn%20can%20be%20used%20to%20classify%20documents%20by%0A%20%20%20%20topics%20using%20a%20%5BBag%20of%20Words%20approach%5D(https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FBag-of-words_model).%20This%20example%20uses%20a%0A%20%20%20%20Tf-idf-weighted%20document-term%20sparse%20matrix%20to%20encode%20the%20features%20and%0A%20%20%20%20demonstrates%20various%20classifiers%20that%20can%20efficiently%20handle%20sparse%20matrices.%0A%0A%20%20%20%20For%20document%20analysis%20via%20an%20unsupervised%20learning%20approach%2C%20see%20the%20example%0A%20%20%20%20script%20%60sphx_glr_auto_examples_text_plot_document_clustering.py%60.%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Loading%20and%20vectorizing%20the%2020%20newsgroups%20text%20dataset%0A%0A%20%20%20%20We%20define%20a%20function%20to%20load%20data%20from%20%6020newsgroups_dataset%60%2C%20which%0A%20%20%20%20comprises%20around%2018%2C000%20newsgroups%20posts%20on%2020%20topics%20split%20in%20two%20subsets%3A%0A%20%20%20%20one%20for%20training%20(or%20development)%20and%20the%20other%20one%20for%20testing%20(or%20for%0A%20%20%20%20performance%20evaluation).%20Note%20that%2C%20by%20default%2C%20the%20text%20samples%20contain%20some%0A%20%20%20%20message%20metadata%20such%20as%20%60'headers'%60%2C%20%60'footers'%60%20(signatures)%20and%20%60'quotes'%60%0A%20%20%20%20to%20other%20posts.%20The%20%60fetch_20newsgroups%60%20function%20therefore%20accepts%20a%0A%20%20%20%20parameter%20named%20%60remove%60%20to%20attempt%20stripping%20such%20information%20that%20can%20make%0A%20%20%20%20the%20classification%20problem%20%22too%20easy%22.%20This%20is%20achieved%20using%20simple%0A%20%20%20%20heuristics%20that%20are%20neither%20perfect%20nor%20standard%2C%20hence%20disabled%20by%20default.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20from%20time%20import%20time%0A%0A%20%20%20%20from%20sklearn.datasets%20import%20fetch_20newsgroups%0A%20%20%20%20from%20sklearn.feature_extraction.text%20import%20TfidfVectorizer%0A%0A%20%20%20%20categories%20%3D%20%5B%0A%20%20%20%20%20%20%20%20%22alt.atheism%22%2C%0A%20%20%20%20%20%20%20%20%22talk.religion.misc%22%2C%0A%20%20%20%20%20%20%20%20%22comp.graphics%22%2C%0A%20%20%20%20%20%20%20%20%22sci.space%22%2C%0A%20%20%20%20%5D%0A%0A%0A%20%20%20%20def%20size_mb(docs)%3A%0A%20%20%20%20%20%20%20%20return%20sum(len(s.encode(%22utf-8%22))%20for%20s%20in%20docs)%20%2F%201e6%0A%0A%0A%20%20%20%20def%20load_dataset(verbose%3DFalse%2C%20remove%3D())%3A%0A%20%20%20%20%20%20%20%20%22%22%22Load%20and%20vectorize%20the%2020%20newsgroups%20dataset.%22%22%22%0A%0A%20%20%20%20%20%20%20%20data_train%20%3D%20fetch_20newsgroups(%0A%20%20%20%20%20%20%20%20%20%20%20%20subset%3D%22train%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20categories%3Dcategories%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20shuffle%3DTrue%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20random_state%3D42%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20remove%3Dremove%2C%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20data_test%20%3D%20fetch_20newsgroups(%0A%20%20%20%20%20%20%20%20%20%20%20%20subset%3D%22test%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20categories%3Dcategories%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20shuffle%3DTrue%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20random_state%3D42%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20remove%3Dremove%2C%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20%23%20order%20of%20labels%20in%20%60target_names%60%20can%20be%20different%20from%20%60categories%60%0A%20%20%20%20%20%20%20%20target_names%20%3D%20data_train.target_names%0A%0A%20%20%20%20%20%20%20%20%23%20split%20target%20in%20a%20training%20set%20and%20a%20test%20set%0A%20%20%20%20%20%20%20%20y_train%2C%20y_test%20%3D%20data_train.target%2C%20data_test.target%0A%0A%20%20%20%20%20%20%20%20%23%20Extracting%20features%20from%20the%20training%20data%20using%20a%20sparse%20vectorizer%0A%20%20%20%20%20%20%20%20t0%20%3D%20time()%0A%20%20%20%20%20%20%20%20vectorizer%20%3D%20TfidfVectorizer(%0A%20%20%20%20%20%20%20%20%20%20%20%20sublinear_tf%3DTrue%2C%20max_df%3D0.5%2C%20min_df%3D5%2C%20stop_words%3D%22english%22%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20X_train%20%3D%20vectorizer.fit_transform(data_train.data)%0A%20%20%20%20%20%20%20%20duration_train%20%3D%20time()%20-%20t0%0A%0A%20%20%20%20%20%20%20%20%23%20Extracting%20features%20from%20the%20test%20data%20using%20the%20same%20vectorizer%0A%20%20%20%20%20%20%20%20t0%20%3D%20time()%0A%20%20%20%20%20%20%20%20X_test%20%3D%20vectorizer.transform(data_test.data)%0A%20%20%20%20%20%20%20%20duration_test%20%3D%20time()%20-%20t0%0A%0A%20%20%20%20%20%20%20%20feature_names%20%3D%20vectorizer.get_feature_names_out()%0A%0A%20%20%20%20%20%20%20%20if%20verbose%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20compute%20size%20of%20loaded%20data%0A%20%20%20%20%20%20%20%20%20%20%20%20data_train_size_mb%20%3D%20size_mb(data_train.data)%0A%20%20%20%20%20%20%20%20%20%20%20%20data_test_size_mb%20%3D%20size_mb(data_test.data)%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20f%22%7Blen(data_train.data)%7D%20documents%20-%20%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20f%22%7Bdata_train_size_mb%3A.2f%7DMB%20(training%20set)%22%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f%22%7Blen(data_test.data)%7D%20documents%20-%20%7Bdata_test_size_mb%3A.2f%7DMB%20(test%20set)%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f%22%7Blen(target_names)%7D%20categories%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20f%22vectorize%20training%20done%20in%20%7Bduration_train%3A.3f%7Ds%20%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20f%22at%20%7Bdata_train_size_mb%20%2F%20duration_train%3A.3f%7DMB%2Fs%22%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f%22n_samples%3A%20%7BX_train.shape%5B0%5D%7D%2C%20n_features%3A%20%7BX_train.shape%5B1%5D%7D%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20print(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20f%22vectorize%20testing%20done%20in%20%7Bduration_test%3A.3f%7Ds%20%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20f%22at%20%7Bdata_test_size_mb%20%2F%20duration_test%3A.3f%7DMB%2Fs%22%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f%22n_samples%3A%20%7BX_test.shape%5B0%5D%7D%2C%20n_features%3A%20%7BX_test.shape%5B1%5D%7D%22)%0A%0A%20%20%20%20%20%20%20%20return%20X_train%2C%20X_test%2C%20y_train%2C%20y_test%2C%20feature_names%2C%20target_names%0A%20%20%20%20return%20categories%2C%20fetch_20newsgroups%2C%20load_dataset%2C%20time%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Analysis%20of%20a%20bag-of-words%20document%20classifier%0A%0A%20%20%20%20We%20will%20now%20train%20a%20classifier%20twice%2C%20once%20on%20the%20text%20samples%20including%0A%20%20%20%20metadata%20and%20once%20after%20stripping%20the%20metadata.%20For%20both%20cases%20we%20will%20analyze%0A%20%20%20%20the%20classification%20errors%20on%20a%20test%20set%20using%20a%20confusion%20matrix%20and%20inspect%0A%20%20%20%20the%20coefficients%20that%20define%20the%20classification%20function%20of%20the%20trained%0A%20%20%20%20models.%0A%0A%20%20%20%20%23%23%23%20Model%20without%20metadata%20stripping%0A%0A%20%20%20%20We%20start%20by%20using%20the%20custom%20function%20%60load_dataset%60%20to%20load%20the%20data%20without%0A%20%20%20%20metadata%20stripping.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(load_dataset)%3A%0A%20%20%20%20X_train%2C%20X_test%2C%20y_train%2C%20y_test%2C%20feature_names%2C%20target_names%20%3D%20load_dataset(%0A%20%20%20%20%20%20%20%20verbose%3DTrue%0A%20%20%20%20)%0A%20%20%20%20return%20X_test%2C%20X_train%2C%20feature_names%2C%20target_names%2C%20y_test%2C%20y_train%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Our%20first%20model%20is%20an%20instance%20of%20the%0A%20%20%20%20%3Aclass%3A%60~sklearn.linear_model.RidgeClassifier%60%20class.%20This%20is%20a%20linear%0A%20%20%20%20classification%20model%20that%20uses%20the%20mean%20squared%20error%20on%20%7B-1%2C%201%7D%20encoded%0A%20%20%20%20targets%2C%20one%20for%20each%20possible%20class.%20Contrary%20to%0A%20%20%20%20%3Aclass%3A%60~sklearn.linear_model.LogisticRegression%60%2C%0A%20%20%20%20%3Aclass%3A%60~sklearn.linear_model.RidgeClassifier%60%20does%20not%0A%20%20%20%20provide%20probabilistic%20predictions%20(no%20%60predict_proba%60%20method)%2C%0A%20%20%20%20but%20it%20is%20often%20faster%20to%20train.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_test%2C%20X_train%2C%20y_train)%3A%0A%20%20%20%20from%20sklearn.linear_model%20import%20RidgeClassifier%0A%0A%20%20%20%20clf%20%3D%20RidgeClassifier(tol%3D1e-2%2C%20solver%3D%22sparse_cg%22)%0A%20%20%20%20clf.fit(X_train%2C%20y_train)%0A%20%20%20%20pred%20%3D%20clf.predict(X_test)%0A%20%20%20%20return%20RidgeClassifier%2C%20clf%2C%20pred%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20We%20plot%20the%20confusion%20matrix%20of%20this%20classifier%20to%20find%20if%20there%20is%20a%20pattern%0A%20%20%20%20in%20the%20classification%20errors.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(clf%2C%20pred%2C%20target_names%2C%20y_test)%3A%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20from%20sklearn.metrics%20import%20ConfusionMatrixDisplay%0A%20%20%20%20_fig%2C%20_ax%20%3D%20plt.subplots(figsize%3D(10%2C%205))%0A%20%20%20%20ConfusionMatrixDisplay.from_predictions(y_test%2C%20pred%2C%20ax%3D_ax)%0A%20%20%20%20_ax.xaxis.set_ticklabels(target_names)%0A%20%20%20%20_ax.yaxis.set_ticklabels(target_names)%0A%20%20%20%20_%20%3D%20_ax.set_title(f'Confusion%20Matrix%20for%20%7Bclf.__class__.__name__%7D%5Cnon%20the%20original%20documents')%0A%20%20%20%20return%20ConfusionMatrixDisplay%2C%20plt%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20The%20confusion%20matrix%20highlights%20that%20documents%20of%20the%20%60alt.atheism%60%20class%20are%0A%20%20%20%20often%20confused%20with%20documents%20with%20the%20class%20%60talk.religion.misc%60%20class%20and%0A%20%20%20%20vice-versa%20which%20is%20expected%20since%20the%20topics%20are%20semantically%20related.%0A%0A%20%20%20%20We%20also%20observe%20that%20some%20documents%20of%20the%20%60sci.space%60%20class%20can%20be%20misclassified%20as%0A%20%20%20%20%60comp.graphics%60%20while%20the%20converse%20is%20much%20rarer.%20A%20manual%20inspection%20of%20those%0A%20%20%20%20badly%20classified%20documents%20would%20be%20required%20to%20get%20some%20insights%20on%20this%0A%20%20%20%20asymmetry.%20It%20could%20be%20the%20case%20that%20the%20vocabulary%20of%20the%20space%20topic%20could%0A%20%20%20%20be%20more%20specific%20than%20the%20vocabulary%20for%20computer%20graphics.%0A%0A%20%20%20%20We%20can%20gain%20a%20deeper%20understanding%20of%20how%20this%20classifier%20makes%20its%20decisions%0A%20%20%20%20by%20looking%20at%20the%20words%20with%20the%20highest%20average%20feature%20effects%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_train%2C%20clf%2C%20feature_names%2C%20plt%2C%20target_names)%3A%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20import%20pandas%20as%20pd%0A%0A%20%20%20%20def%20plot_feature_effects()%3A%0A%20%20%20%20%20%20%20%20average_feature_effects%20%3D%20clf.coef_%20*%20np.asarray(X_train.mean(axis%3D0)).ravel()%0A%20%20%20%20%20%20%20%20for%20i%2C%20label%20in%20enumerate(target_names)%3A%20%20%23%20learned%20coefficients%20weighted%20by%20frequency%20of%20appearance%0A%20%20%20%20%20%20%20%20%20%20%20%20top5%20%3D%20np.argsort(average_feature_effects%5Bi%5D)%5B-5%3A%5D%5B%3A%3A-1%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20i%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20top%20%3D%20pd.DataFrame(feature_names%5Btop5%5D%2C%20columns%3D%5Blabel%5D)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20top_indices%20%3D%20top5%0A%20%20%20%20%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20top%5Blabel%5D%20%3D%20feature_names%5Btop5%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20top_indices%20%3D%20np.concatenate((top_indices%2C%20top5)%2C%20axis%3DNone)%0A%20%20%20%20%20%20%20%20top_indices%20%3D%20np.unique(top_indices)%0A%20%20%20%20%20%20%20%20predictive_words%20%3D%20feature_names%5Btop_indices%5D%0A%20%20%20%20%20%20%20%20bar_size%20%3D%200.25%0A%20%20%20%20%20%20%20%20padding%20%3D%200.75%0A%20%20%20%20%20%20%20%20y_locs%20%3D%20np.arange(len(top_indices))%20*%20(4%20*%20bar_size%20%2B%20padding)%0A%20%20%20%20%20%20%20%20_fig%2C%20_ax%20%3D%20plt.subplots(figsize%3D(10%2C%208))%0A%20%20%20%20%20%20%20%20for%20i%2C%20label%20in%20enumerate(target_names)%3A%20%20%23%20plot%20feature%20effects%0A%20%20%20%20%20%20%20%20%20%20%20%20_ax.barh(y_locs%20%2B%20(i%20-%202)%20*%20bar_size%2C%20average_feature_effects%5Bi%2C%20top_indices%5D%2C%20height%3Dbar_size%2C%20label%3Dlabel)%0A%20%20%20%20%20%20%20%20_ax.set(yticks%3Dy_locs%2C%20yticklabels%3Dpredictive_words%2C%20ylim%3D%5B0%20-%204%20*%20bar_size%2C%20len(top_indices)%20*%20(4%20*%20bar_size%20%2B%20padding)%20-%204%20*%20bar_size%5D)%0A%20%20%20%20%20%20%20%20_ax.legend(loc%3D'lower%20right')%0A%20%20%20%20%20%20%20%20print('top%205%20keywords%20per%20class%3A')%0A%20%20%20%20%20%20%20%20print(top)%0A%20%20%20%20%20%20%20%20return%20_ax%0A%20%20%20%20_%20%3D%20plot_feature_effects().set_title('Average%20feature%20effect%20on%20the%20original%20data')%0A%20%20%20%20return%20np%2C%20plot_feature_effects%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20We%20can%20observe%20that%20the%20most%20predictive%20words%20are%20often%20strongly%20positively%0A%20%20%20%20associated%20with%20a%20single%20class%20and%20negatively%20associated%20with%20all%20the%20other%0A%20%20%20%20classes.%20Most%20of%20those%20positive%20associations%20are%20quite%20easy%20to%20interpret.%0A%20%20%20%20However%2C%20some%20words%20such%20as%20%60%22god%22%60%20and%20%60%22people%22%60%20are%20positively%20associated%20to%0A%20%20%20%20both%20%60%22talk.misc.religion%22%60%20and%20%60%22alt.atheism%22%60%20as%20those%20two%20classes%20expectedly%0A%20%20%20%20share%20some%20common%20vocabulary.%20Notice%20however%20that%20there%20are%20also%20words%20such%20as%0A%20%20%20%20%60%22christian%22%60%20and%20%60%22morality%22%60%20that%20are%20only%20positively%20associated%20with%0A%20%20%20%20%60%22talk.misc.religion%22%60.%20Furthermore%2C%20in%20this%20version%20of%20the%20dataset%2C%20the%20word%0A%20%20%20%20%60%22caltech%22%60%20is%20one%20of%20the%20top%20predictive%20features%20for%20atheism%20due%20to%20pollution%0A%20%20%20%20in%20the%20dataset%20coming%20from%20some%20sort%20of%20metadata%20such%20as%20the%20email%20addresses%0A%20%20%20%20of%20the%20sender%20of%20previous%20emails%20in%20the%20discussion%20as%20can%20be%20seen%20below%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(categories%2C%20fetch_20newsgroups)%3A%0A%20%20%20%20data_train%20%3D%20fetch_20newsgroups(%0A%20%20%20%20%20%20%20%20subset%3D%22train%22%2C%20categories%3Dcategories%2C%20shuffle%3DTrue%2C%20random_state%3D42%0A%20%20%20%20)%0A%0A%20%20%20%20for%20doc%20in%20data_train.data%3A%0A%20%20%20%20%20%20%20%20if%20%22caltech%22%20in%20doc%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(doc)%0A%20%20%20%20%20%20%20%20%20%20%20%20break%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Such%20headers%2C%20signature%20footers%20(and%20quoted%20metadata%20from%20previous%20messages)%0A%20%20%20%20can%20be%20considered%20side%20information%20that%20artificially%20reveals%20the%20newsgroup%20by%0A%20%20%20%20identifying%20the%20registered%20members%20and%20one%20would%20rather%20want%20our%20text%0A%20%20%20%20classifier%20to%20only%20learn%20from%20the%20%22main%20content%22%20of%20each%20text%20document%20instead%0A%20%20%20%20of%20relying%20on%20the%20leaked%20identity%20of%20the%20writers.%0A%0A%20%20%20%20%23%23%23%20Model%20with%20metadata%20stripping%0A%0A%20%20%20%20The%20%60remove%60%20option%20of%20the%2020%20newsgroups%20dataset%20loader%20in%20scikit-learn%20allows%0A%20%20%20%20to%20heuristically%20attempt%20to%20filter%20out%20some%20of%20this%20unwanted%20metadata%20that%0A%20%20%20%20makes%20the%20classification%20problem%20artificially%20easier.%20Be%20aware%20that%20such%0A%20%20%20%20filtering%20of%20the%20text%20contents%20is%20far%20from%20perfect.%0A%0A%20%20%20%20Let%20us%20try%20to%20leverage%20this%20option%20to%20train%20a%20text%20classifier%20that%20does%20not%0A%20%20%20%20rely%20too%20much%20on%20this%20kind%20of%20metadata%20to%20make%20its%20decisions%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(ConfusionMatrixDisplay%2C%20RidgeClassifier%2C%20load_dataset%2C%20plt)%3A%0A%20%20%20%20X_train_1%2C%20X_test_1%2C%20y_train_1%2C%20y_test_1%2C%20feature_names_1%2C%20target_names_1%20%3D%20load_dataset(remove%3D('headers'%2C%20'footers'%2C%20'quotes'))%0A%20%20%20%20clf_1%20%3D%20RidgeClassifier(tol%3D0.01%2C%20solver%3D'sparse_cg')%0A%20%20%20%20clf_1.fit(X_train_1%2C%20y_train_1)%0A%20%20%20%20pred_1%20%3D%20clf_1.predict(X_test_1)%0A%20%20%20%20_fig%2C%20_ax%20%3D%20plt.subplots(figsize%3D(10%2C%205))%0A%20%20%20%20ConfusionMatrixDisplay.from_predictions(y_test_1%2C%20pred_1%2C%20ax%3D_ax)%0A%20%20%20%20_ax.xaxis.set_ticklabels(target_names_1)%0A%20%20%20%20_ax.yaxis.set_ticklabels(target_names_1)%0A%20%20%20%20_%20%3D%20_ax.set_title(f'Confusion%20Matrix%20for%20%7Bclf_1.__class__.__name__%7D%5Cnon%20filtered%20documents')%0A%20%20%20%20return%20X_test_1%2C%20X_train_1%2C%20y_test_1%2C%20y_train_1%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20By%20looking%20at%20the%20confusion%20matrix%2C%20it%20is%20more%20evident%20that%20the%20scores%20of%20the%0A%20%20%20%20model%20trained%20with%20metadata%20were%20over-optimistic.%20The%20classification%20problem%0A%20%20%20%20without%20access%20to%20the%20metadata%20is%20less%20accurate%20but%20more%20representative%20of%20the%0A%20%20%20%20intended%20text%20classification%20problem.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(plot_feature_effects)%3A%0A%20%20%20%20_%20%3D%20plot_feature_effects().set_title(%22Average%20feature%20effects%20on%20filtered%20documents%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20In%20the%20next%20section%20we%20keep%20the%20dataset%20without%20metadata%20to%20compare%20several%0A%20%20%20%20classifiers.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Benchmarking%20classifiers%0A%0A%20%20%20%20Scikit-learn%20provides%20many%20different%20kinds%20of%20classification%20algorithms.%20In%0A%20%20%20%20this%20section%20we%20will%20train%20a%20selection%20of%20those%20classifiers%20on%20the%20same%20text%0A%20%20%20%20classification%20problem%20and%20measure%20both%20their%20generalization%20performance%0A%20%20%20%20(accuracy%20on%20the%20test%20set)%20and%20their%20computation%20performance%20(speed)%2C%20both%20at%0A%20%20%20%20training%20time%20and%20testing%20time.%20For%20such%20purpose%20we%20define%20the%20following%0A%20%20%20%20benchmarking%20utilities%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_test_1%2C%20X_train_1%2C%20time%2C%20y_test_1%2C%20y_train_1)%3A%0A%20%20%20%20from%20sklearn%20import%20metrics%0A%20%20%20%20from%20sklearn.utils.extmath%20import%20density%0A%0A%20%20%20%20def%20benchmark(clf%2C%20custom_name%3DFalse)%3A%0A%20%20%20%20%20%20%20%20print('_'%20*%2080)%0A%20%20%20%20%20%20%20%20print('Training%3A%20')%0A%20%20%20%20%20%20%20%20print(clf)%0A%20%20%20%20%20%20%20%20t0%20%3D%20time()%0A%20%20%20%20%20%20%20%20clf.fit(X_train_1%2C%20y_train_1)%0A%20%20%20%20%20%20%20%20train_time%20%3D%20time()%20-%20t0%0A%20%20%20%20%20%20%20%20print(f'train%20time%3A%20%7Btrain_time%3A.3%7Ds')%0A%20%20%20%20%20%20%20%20t0%20%3D%20time()%0A%20%20%20%20%20%20%20%20pred%20%3D%20clf.predict(X_test_1)%0A%20%20%20%20%20%20%20%20test_time%20%3D%20time()%20-%20t0%0A%20%20%20%20%20%20%20%20print(f'test%20time%3A%20%20%7Btest_time%3A.3%7Ds')%0A%20%20%20%20%20%20%20%20score%20%3D%20metrics.accuracy_score(y_test_1%2C%20pred)%0A%20%20%20%20%20%20%20%20print(f'accuracy%3A%20%20%20%7Bscore%3A.3%7D')%0A%20%20%20%20%20%20%20%20if%20hasattr(clf%2C%20'coef_')%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f'dimensionality%3A%20%7Bclf.coef_.shape%5B1%5D%7D')%0A%20%20%20%20%20%20%20%20%20%20%20%20print(f'density%3A%20%7Bdensity(clf.coef_)%7D')%0A%20%20%20%20%20%20%20%20%20%20%20%20print()%0A%20%20%20%20%20%20%20%20print()%0A%20%20%20%20%20%20%20%20if%20custom_name%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20clf_descr%20%3D%20str(custom_name)%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20clf_descr%20%3D%20clf.__class__.__name__%0A%20%20%20%20%20%20%20%20return%20(clf_descr%2C%20score%2C%20train_time%2C%20test_time)%0A%20%20%20%20return%20(benchmark%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20We%20now%20train%20and%20test%20the%20datasets%20with%208%20different%20classification%20models%20and%0A%20%20%20%20get%20performance%20results%20for%20each%20model.%20The%20goal%20of%20this%20study%20is%20to%20highlight%0A%20%20%20%20the%20computation%2Faccuracy%20tradeoffs%20of%20different%20types%20of%20classifiers%20for%0A%20%20%20%20such%20a%20multi-class%20text%20classification%20problem.%0A%0A%20%20%20%20Notice%20that%20the%20most%20important%20hyperparameters%20values%20were%20tuned%20using%20a%20grid%0A%20%20%20%20search%20procedure%20not%20shown%20in%20this%20notebook%20for%20the%20sake%20of%20simplicity.%20See%0A%20%20%20%20the%20example%20script%0A%20%20%20%20%60sphx_glr_auto_examples_model_selection_plot_grid_search_text_feature_extraction.py%60%20%20%23%20noqa%3A%20E501%0A%20%20%20%20for%20a%20demo%20on%20how%20such%20tuning%20can%20be%20done.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(RidgeClassifier%2C%20benchmark)%3A%0A%20%20%20%20from%20sklearn.ensemble%20import%20RandomForestClassifier%0A%20%20%20%20from%20sklearn.linear_model%20import%20LogisticRegression%2C%20SGDClassifier%0A%20%20%20%20from%20sklearn.naive_bayes%20import%20ComplementNB%0A%20%20%20%20from%20sklearn.neighbors%20import%20KNeighborsClassifier%2C%20NearestCentroid%0A%20%20%20%20from%20sklearn.svm%20import%20LinearSVC%0A%20%20%20%20results%20%3D%20%5B%5D%0A%20%20%20%20for%20clf_2%2C%20name%20in%20((LogisticRegression(C%3D5%2C%20max_iter%3D1000)%2C%20'Logistic%20Regression')%2C%20(RidgeClassifier(alpha%3D1.0%2C%20solver%3D'sparse_cg')%2C%20'Ridge%20Classifier')%2C%20(KNeighborsClassifier(n_neighbors%3D100)%2C%20'kNN')%2C%20(RandomForestClassifier()%2C%20'Random%20Forest')%2C%20(LinearSVC(C%3D0.1%2C%20dual%3DFalse%2C%20max_iter%3D1000)%2C%20'Linear%20SVC')%2C%20(SGDClassifier(loss%3D'log_loss'%2C%20alpha%3D0.0001%2C%20n_iter_no_change%3D3%2C%20early_stopping%3DTrue)%2C%20'log-loss%20SGD')%2C%20(NearestCentroid()%2C%20'NearestCentroid')%2C%20(ComplementNB(alpha%3D0.1)%2C%20'Complement%20naive%20Bayes'))%3A%0A%20%20%20%20%20%20%20%20print('%3D'%20*%2080)%0A%20%20%20%20%20%20%20%20print(name)%0A%20%20%20%20%20%20%20%20results.append(benchmark(clf_2%2C%20name))%20%20%23%20L2%20penalty%20Linear%20SVC%20%20%23%20L2%20penalty%20Linear%20SGD%20%20%23%20NearestCentroid%20(aka%20Rocchio%20classifier)%20%20%23%20Sparse%20naive%20Bayes%20classifier%0A%20%20%20%20return%20(results%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Plot%20accuracy%2C%20training%20and%20test%20time%20of%20each%20classifier%0A%0A%20%20%20%20The%20scatter%20plots%20show%20the%20trade-off%20between%20the%20test%20accuracy%20and%20the%0A%20%20%20%20training%20and%20testing%20time%20of%20each%20classifier.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(np%2C%20plt%2C%20results)%3A%0A%20%20%20%20indices%20%3D%20np.arange(len(results))%0A%20%20%20%20results_1%20%3D%20%5B%5Bx%5Bi%5D%20for%20x%20in%20results%5D%20for%20i%20in%20range(4)%5D%0A%20%20%20%20clf_names%2C%20score%2C%20training_time%2C%20test_time%20%3D%20results_1%0A%20%20%20%20training_time%20%3D%20np.array(training_time)%0A%20%20%20%20test_time%20%3D%20np.array(test_time)%0A%20%20%20%20_fig%2C%20ax1%20%3D%20plt.subplots(figsize%3D(10%2C%208))%0A%20%20%20%20ax1.scatter(score%2C%20training_time%2C%20s%3D60)%0A%20%20%20%20ax1.set(title%3D'Score-training%20time%20trade-off'%2C%20yscale%3D'log'%2C%20xlabel%3D'test%20accuracy'%2C%20ylabel%3D'training%20time%20(s)')%0A%20%20%20%20_fig%2C%20ax2%20%3D%20plt.subplots(figsize%3D(10%2C%208))%0A%20%20%20%20ax2.scatter(score%2C%20test_time%2C%20s%3D60)%0A%20%20%20%20ax2.set(title%3D'Score-test%20time%20trade-off'%2C%20yscale%3D'log'%2C%20xlabel%3D'test%20accuracy'%2C%20ylabel%3D'test%20time%20(s)')%0A%20%20%20%20for%20i%2C%20txt%20in%20enumerate(clf_names)%3A%0A%20%20%20%20%20%20%20%20ax1.annotate(txt%2C%20(score%5Bi%5D%2C%20training_time%5Bi%5D))%0A%20%20%20%20%20%20%20%20ax2.annotate(txt%2C%20(score%5Bi%5D%2C%20test_time%5Bi%5D))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20The%20naive%20Bayes%20model%20has%20the%20best%20trade-off%20between%20score%20and%0A%20%20%20%20training%2Ftesting%20time%2C%20while%20Random%20Forest%20is%20both%20slow%20to%20train%2C%20expensive%20to%0A%20%20%20%20predict%20and%20has%20a%20comparatively%20bad%20accuracy.%20This%20is%20expected%3A%20for%0A%20%20%20%20high-dimensional%20prediction%20problems%2C%20linear%20models%20are%20often%20better%20suited%20as%0A%20%20%20%20most%20problems%20become%20linearly%20separable%20when%20the%20feature%20space%20has%2010%2C000%0A%20%20%20%20dimensions%20or%20more.%0A%0A%20%20%20%20The%20difference%20in%20training%20speed%20and%20accuracy%20of%20the%20linear%20models%20can%20be%0A%20%20%20%20explained%20by%20the%20choice%20of%20the%20loss%20function%20they%20optimize%20and%20the%20kind%20of%0A%20%20%20%20regularization%20they%20use.%20Be%20aware%20that%20some%20linear%20models%20with%20the%20same%20loss%0A%20%20%20%20but%20a%20different%20solver%20or%20regularization%20configuration%20may%20yield%20different%0A%20%20%20%20fitting%20times%20and%20test%20accuracy.%20We%20can%20observe%20on%20the%20second%20plot%20that%20once%0A%20%20%20%20trained%2C%20all%20linear%20models%20have%20approximately%20the%20same%20prediction%20speed%20which%0A%20%20%20%20is%20expected%20because%20they%20all%20implement%20the%20same%20prediction%20function.%0A%0A%20%20%20%20KNeighborsClassifier%20has%20a%20relatively%20low%20accuracy%20and%20has%20the%20highest%20testing%0A%20%20%20%20time.%20The%20long%20prediction%20time%20is%20also%20expected%3A%20for%20each%20prediction%20the%20model%0A%20%20%20%20has%20to%20compute%20the%20pairwise%20distances%20between%20the%20testing%20sample%20and%20each%0A%20%20%20%20document%20in%20the%20training%20set%2C%20which%20is%20computationally%20expensive.%20Furthermore%2C%0A%20%20%20%20the%20%22curse%20of%20dimensionality%22%20harms%20the%20ability%20of%20this%20model%20to%20yield%0A%20%20%20%20competitive%20accuracy%20in%20the%20high%20dimensional%20feature%20space%20of%20text%0A%20%20%20%20classification%20problems.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

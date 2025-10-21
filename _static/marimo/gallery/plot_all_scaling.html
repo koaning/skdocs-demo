@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot all scaling</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%E2%9A%A0%EF%B8%8F%20**Note**%3A%20This%20notebook%20was%20automatically%20converted%20from%20Jupyter.%0A%20%20%20%20Some%20features%20may%20behave%20differently%20in%20marimo.%0A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Compare%20the%20effect%20of%20different%20scalers%20on%20data%20with%20outliers%0A%0A%20%20%20%20Feature%200%20(median%20income%20in%20a%20block)%20and%20feature%205%20(average%20house%20occupancy)%20of%0A%20%20%20%20the%20%60california_housing_dataset%60%20have%20very%0A%20%20%20%20different%20scales%20and%20contain%20some%20very%20large%20outliers.%20These%20two%0A%20%20%20%20characteristics%20lead%20to%20difficulties%20to%20visualize%20the%20data%20and%2C%20more%0A%20%20%20%20importantly%2C%20they%20can%20degrade%20the%20predictive%20performance%20of%20many%20machine%0A%20%20%20%20learning%20algorithms.%20Unscaled%20data%20can%20also%20slow%20down%20or%20even%20prevent%20the%0A%20%20%20%20convergence%20of%20many%20gradient-based%20estimators.%0A%0A%20%20%20%20Indeed%20many%20estimators%20are%20designed%20with%20the%20assumption%20that%20each%20feature%20takes%0A%20%20%20%20values%20close%20to%20zero%20or%20more%20importantly%20that%20all%20features%20vary%20on%20comparable%0A%20%20%20%20scales.%20In%20particular%2C%20metric-based%20and%20gradient-based%20estimators%20often%20assume%0A%20%20%20%20approximately%20standardized%20data%20(centered%20features%20with%20unit%20variances).%20A%0A%20%20%20%20notable%20exception%20are%20decision%20tree-based%20estimators%20that%20are%20robust%20to%0A%20%20%20%20arbitrary%20scaling%20of%20the%20data.%0A%0A%20%20%20%20This%20example%20uses%20different%20scalers%2C%20transformers%2C%20and%20normalizers%20to%20bring%20the%0A%20%20%20%20data%20within%20a%20pre-defined%20range.%0A%0A%20%20%20%20Scalers%20are%20linear%20(or%20more%20precisely%20affine)%20transformers%20and%20differ%20from%20each%0A%20%20%20%20other%20in%20the%20way%20they%20estimate%20the%20parameters%20used%20to%20shift%20and%20scale%20each%0A%20%20%20%20feature.%0A%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.QuantileTransformer%60%20provides%20non-linear%0A%20%20%20%20transformations%20in%20which%20distances%0A%20%20%20%20between%20marginal%20outliers%20and%20inliers%20are%20shrunk.%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.PowerTransformer%60%20provides%0A%20%20%20%20non-linear%20transformations%20in%20which%20data%20is%20mapped%20to%20a%20normal%20distribution%20to%0A%20%20%20%20stabilize%20variance%20and%20minimize%20skewness.%0A%0A%20%20%20%20Unlike%20the%20previous%20transformations%2C%20normalization%20refers%20to%20a%20per%20sample%0A%20%20%20%20transformation%20instead%20of%20a%20per%20feature%20transformation.%0A%0A%20%20%20%20The%20following%20code%20is%20a%20bit%20verbose%2C%20feel%20free%20to%20jump%20directly%20to%20the%20analysis%0A%20%20%20%20of%20the%20results_.%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%0A%20%20%20%20import%20matplotlib%20as%20mpl%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20from%20matplotlib%20import%20cm%0A%20%20%20%20from%20matplotlib%20import%20pyplot%20as%20plt%0A%0A%20%20%20%20from%20sklearn.datasets%20import%20fetch_california_housing%0A%20%20%20%20from%20sklearn.preprocessing%20import%20(%0A%20%20%20%20%20%20%20%20MaxAbsScaler%2C%0A%20%20%20%20%20%20%20%20MinMaxScaler%2C%0A%20%20%20%20%20%20%20%20Normalizer%2C%0A%20%20%20%20%20%20%20%20PowerTransformer%2C%0A%20%20%20%20%20%20%20%20QuantileTransformer%2C%0A%20%20%20%20%20%20%20%20RobustScaler%2C%0A%20%20%20%20%20%20%20%20StandardScaler%2C%0A%20%20%20%20%20%20%20%20minmax_scale%2C%0A%20%20%20%20)%0A%0A%20%20%20%20dataset%20%3D%20fetch_california_housing()%0A%20%20%20%20X_full%2C%20y_full%20%3D%20dataset.data%2C%20dataset.target%0A%20%20%20%20feature_names%20%3D%20dataset.feature_names%0A%0A%20%20%20%20feature_mapping%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%22MedInc%22%3A%20%22Median%20income%20in%20block%22%2C%0A%20%20%20%20%20%20%20%20%22HouseAge%22%3A%20%22Median%20house%20age%20in%20block%22%2C%0A%20%20%20%20%20%20%20%20%22AveRooms%22%3A%20%22Average%20number%20of%20rooms%22%2C%0A%20%20%20%20%20%20%20%20%22AveBedrms%22%3A%20%22Average%20number%20of%20bedrooms%22%2C%0A%20%20%20%20%20%20%20%20%22Population%22%3A%20%22Block%20population%22%2C%0A%20%20%20%20%20%20%20%20%22AveOccup%22%3A%20%22Average%20house%20occupancy%22%2C%0A%20%20%20%20%20%20%20%20%22Latitude%22%3A%20%22House%20block%20latitude%22%2C%0A%20%20%20%20%20%20%20%20%22Longitude%22%3A%20%22House%20block%20longitude%22%2C%0A%20%20%20%20%7D%0A%0A%20%20%20%20%23%20Take%20only%202%20features%20to%20make%20visualization%20easier%0A%20%20%20%20%23%20Feature%20MedInc%20has%20a%20long%20tail%20distribution.%0A%20%20%20%20%23%20Feature%20AveOccup%20has%20a%20few%20but%20very%20large%20outliers.%0A%20%20%20%20features%20%3D%20%5B%22MedInc%22%2C%20%22AveOccup%22%5D%0A%20%20%20%20features_idx%20%3D%20%5Bfeature_names.index(feature)%20for%20feature%20in%20features%5D%0A%20%20%20%20X%20%3D%20X_full%5B%3A%2C%20features_idx%5D%0A%20%20%20%20distributions%20%3D%20%5B%0A%20%20%20%20%20%20%20%20(%22Unscaled%20data%22%2C%20X)%2C%0A%20%20%20%20%20%20%20%20(%22Data%20after%20standard%20scaling%22%2C%20StandardScaler().fit_transform(X))%2C%0A%20%20%20%20%20%20%20%20(%22Data%20after%20min-max%20scaling%22%2C%20MinMaxScaler().fit_transform(X))%2C%0A%20%20%20%20%20%20%20%20(%22Data%20after%20max-abs%20scaling%22%2C%20MaxAbsScaler().fit_transform(X))%2C%0A%20%20%20%20%20%20%20%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Data%20after%20robust%20scaling%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20RobustScaler(quantile_range%3D(25%2C%2075)).fit_transform(X)%2C%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Data%20after%20power%20transformation%20(Yeo-Johnson)%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20PowerTransformer(method%3D%22yeo-johnson%22).fit_transform(X)%2C%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Data%20after%20power%20transformation%20(Box-Cox)%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20PowerTransformer(method%3D%22box-cox%22).fit_transform(X)%2C%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Data%20after%20quantile%20transformation%20(uniform%20pdf)%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20QuantileTransformer(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20output_distribution%3D%22uniform%22%2C%20random_state%3D42%0A%20%20%20%20%20%20%20%20%20%20%20%20).fit_transform(X)%2C%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Data%20after%20quantile%20transformation%20(gaussian%20pdf)%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20QuantileTransformer(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20output_distribution%3D%22normal%22%2C%20random_state%3D42%0A%20%20%20%20%20%20%20%20%20%20%20%20).fit_transform(X)%2C%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20(%22Data%20after%20sample-wise%20L2%20normalizing%22%2C%20Normalizer().fit_transform(X))%2C%0A%20%20%20%20%5D%0A%0A%20%20%20%20%23%20scale%20the%20output%20between%200%20and%201%20for%20the%20colorbar%0A%20%20%20%20y%20%3D%20minmax_scale(y_full)%0A%0A%20%20%20%20%23%20plasma%20does%20not%20exist%20in%20matplotlib%20%3C%201.5%0A%20%20%20%20cmap%20%3D%20getattr(cm%2C%20%22plasma_r%22%2C%20cm.hot_r)%0A%0A%0A%20%20%20%20def%20create_axes(title%2C%20figsize%3D(16%2C%206))%3A%0A%20%20%20%20%20%20%20%20fig%20%3D%20plt.figure(figsize%3Dfigsize)%0A%20%20%20%20%20%20%20%20fig.suptitle(title)%0A%0A%20%20%20%20%20%20%20%20%23%20define%20the%20axis%20for%20the%20first%20plot%0A%20%20%20%20%20%20%20%20left%2C%20width%20%3D%200.1%2C%200.22%0A%20%20%20%20%20%20%20%20bottom%2C%20height%20%3D%200.1%2C%200.7%0A%20%20%20%20%20%20%20%20bottom_h%20%3D%20height%20%2B%200.15%0A%20%20%20%20%20%20%20%20left_h%20%3D%20left%20%2B%20width%20%2B%200.02%0A%0A%20%20%20%20%20%20%20%20rect_scatter%20%3D%20%5Bleft%2C%20bottom%2C%20width%2C%20height%5D%0A%20%20%20%20%20%20%20%20rect_histx%20%3D%20%5Bleft%2C%20bottom_h%2C%20width%2C%200.1%5D%0A%20%20%20%20%20%20%20%20rect_histy%20%3D%20%5Bleft_h%2C%20bottom%2C%200.05%2C%20height%5D%0A%0A%20%20%20%20%20%20%20%20ax_scatter%20%3D%20plt.axes(rect_scatter)%0A%20%20%20%20%20%20%20%20ax_histx%20%3D%20plt.axes(rect_histx)%0A%20%20%20%20%20%20%20%20ax_histy%20%3D%20plt.axes(rect_histy)%0A%0A%20%20%20%20%20%20%20%20%23%20define%20the%20axis%20for%20the%20zoomed-in%20plot%0A%20%20%20%20%20%20%20%20left%20%3D%20width%20%2B%20left%20%2B%200.2%0A%20%20%20%20%20%20%20%20left_h%20%3D%20left%20%2B%20width%20%2B%200.02%0A%0A%20%20%20%20%20%20%20%20rect_scatter%20%3D%20%5Bleft%2C%20bottom%2C%20width%2C%20height%5D%0A%20%20%20%20%20%20%20%20rect_histx%20%3D%20%5Bleft%2C%20bottom_h%2C%20width%2C%200.1%5D%0A%20%20%20%20%20%20%20%20rect_histy%20%3D%20%5Bleft_h%2C%20bottom%2C%200.05%2C%20height%5D%0A%0A%20%20%20%20%20%20%20%20ax_scatter_zoom%20%3D%20plt.axes(rect_scatter)%0A%20%20%20%20%20%20%20%20ax_histx_zoom%20%3D%20plt.axes(rect_histx)%0A%20%20%20%20%20%20%20%20ax_histy_zoom%20%3D%20plt.axes(rect_histy)%0A%0A%20%20%20%20%20%20%20%20%23%20define%20the%20axis%20for%20the%20colorbar%0A%20%20%20%20%20%20%20%20left%2C%20width%20%3D%20width%20%2B%20left%20%2B%200.13%2C%200.01%0A%0A%20%20%20%20%20%20%20%20rect_colorbar%20%3D%20%5Bleft%2C%20bottom%2C%20width%2C%20height%5D%0A%20%20%20%20%20%20%20%20ax_colorbar%20%3D%20plt.axes(rect_colorbar)%0A%0A%20%20%20%20%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20(ax_scatter%2C%20ax_histy%2C%20ax_histx)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20(ax_scatter_zoom%2C%20ax_histy_zoom%2C%20ax_histx_zoom)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20ax_colorbar%2C%0A%20%20%20%20%20%20%20%20)%0A%0A%0A%20%20%20%20def%20plot_distribution(axes%2C%20X%2C%20y%2C%20hist_nbins%3D50%2C%20title%3D%22%22%2C%20x0_label%3D%22%22%2C%20x1_label%3D%22%22)%3A%0A%20%20%20%20%20%20%20%20ax%2C%20hist_X1%2C%20hist_X0%20%3D%20axes%0A%0A%20%20%20%20%20%20%20%20ax.set_title(title)%0A%20%20%20%20%20%20%20%20ax.set_xlabel(x0_label)%0A%20%20%20%20%20%20%20%20ax.set_ylabel(x1_label)%0A%0A%20%20%20%20%20%20%20%20%23%20The%20scatter%20plot%0A%20%20%20%20%20%20%20%20colors%20%3D%20cmap(y)%0A%20%20%20%20%20%20%20%20ax.scatter(X%5B%3A%2C%200%5D%2C%20X%5B%3A%2C%201%5D%2C%20alpha%3D0.5%2C%20marker%3D%22o%22%2C%20s%3D5%2C%20lw%3D0%2C%20c%3Dcolors)%0A%0A%20%20%20%20%20%20%20%20%23%20Removing%20the%20top%20and%20the%20right%20spine%20for%20aesthetics%0A%20%20%20%20%20%20%20%20%23%20make%20nice%20axis%20layout%0A%20%20%20%20%20%20%20%20ax.spines%5B%22top%22%5D.set_visible(False)%0A%20%20%20%20%20%20%20%20ax.spines%5B%22right%22%5D.set_visible(False)%0A%20%20%20%20%20%20%20%20ax.get_xaxis().tick_bottom()%0A%20%20%20%20%20%20%20%20ax.get_yaxis().tick_left()%0A%20%20%20%20%20%20%20%20ax.spines%5B%22left%22%5D.set_position((%22outward%22%2C%2010))%0A%20%20%20%20%20%20%20%20ax.spines%5B%22bottom%22%5D.set_position((%22outward%22%2C%2010))%0A%0A%20%20%20%20%20%20%20%20%23%20Histogram%20for%20axis%20X1%20(feature%205)%0A%20%20%20%20%20%20%20%20hist_X1.set_ylim(ax.get_ylim())%0A%20%20%20%20%20%20%20%20hist_X1.hist(%0A%20%20%20%20%20%20%20%20%20%20%20%20X%5B%3A%2C%201%5D%2C%20bins%3Dhist_nbins%2C%20orientation%3D%22horizontal%22%2C%20color%3D%22grey%22%2C%20ec%3D%22grey%22%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20hist_X1.axis(%22off%22)%0A%0A%20%20%20%20%20%20%20%20%23%20Histogram%20for%20axis%20X0%20(feature%200)%0A%20%20%20%20%20%20%20%20hist_X0.set_xlim(ax.get_xlim())%0A%20%20%20%20%20%20%20%20hist_X0.hist(%0A%20%20%20%20%20%20%20%20%20%20%20%20X%5B%3A%2C%200%5D%2C%20bins%3Dhist_nbins%2C%20orientation%3D%22vertical%22%2C%20color%3D%22grey%22%2C%20ec%3D%22grey%22%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20hist_X0.axis(%22off%22)%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20cmap%2C%0A%20%20%20%20%20%20%20%20create_axes%2C%0A%20%20%20%20%20%20%20%20distributions%2C%0A%20%20%20%20%20%20%20%20feature_mapping%2C%0A%20%20%20%20%20%20%20%20features%2C%0A%20%20%20%20%20%20%20%20mpl%2C%0A%20%20%20%20%20%20%20%20np%2C%0A%20%20%20%20%20%20%20%20plot_distribution%2C%0A%20%20%20%20%20%20%20%20plt%2C%0A%20%20%20%20%20%20%20%20y%2C%0A%20%20%20%20%20%20%20%20y_full%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Two%20plots%20will%20be%20shown%20for%20each%20scaler%2Fnormalizer%2Ftransformer.%20The%20left%0A%20%20%20%20figure%20will%20show%20a%20scatter%20plot%20of%20the%20full%20data%20set%20while%20the%20right%20figure%0A%20%20%20%20will%20exclude%20the%20extreme%20values%20considering%20only%2099%20%25%20of%20the%20data%20set%2C%0A%20%20%20%20excluding%20marginal%20outliers.%20In%20addition%2C%20the%20marginal%20distributions%20for%20each%0A%20%20%20%20feature%20will%20be%20shown%20on%20the%20sides%20of%20the%20scatter%20plot.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20cmap%2C%0A%20%20%20%20create_axes%2C%0A%20%20%20%20distributions%2C%0A%20%20%20%20feature_mapping%2C%0A%20%20%20%20features%2C%0A%20%20%20%20mpl%2C%0A%20%20%20%20np%2C%0A%20%20%20%20plot_distribution%2C%0A%20%20%20%20y%2C%0A%20%20%20%20y_full%2C%0A)%3A%0A%20%20%20%20def%20make_plot(item_idx)%3A%0A%20%20%20%20%20%20%20%20title%2C%20X%20%3D%20distributions%5Bitem_idx%5D%0A%20%20%20%20%20%20%20%20ax_zoom_out%2C%20ax_zoom_in%2C%20ax_colorbar%20%3D%20create_axes(title)%0A%20%20%20%20%20%20%20%20axarr%20%3D%20(ax_zoom_out%2C%20ax_zoom_in)%0A%20%20%20%20%20%20%20%20plot_distribution(%0A%20%20%20%20%20%20%20%20%20%20%20%20axarr%5B0%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20X%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20y%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20hist_nbins%3D200%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20x0_label%3Dfeature_mapping%5Bfeatures%5B0%5D%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20x1_label%3Dfeature_mapping%5Bfeatures%5B1%5D%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3D%22Full%20data%22%2C%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20%23%20zoom-in%0A%20%20%20%20%20%20%20%20zoom_in_percentile_range%20%3D%20(0%2C%2099)%0A%20%20%20%20%20%20%20%20cutoffs_X0%20%3D%20np.percentile(X%5B%3A%2C%200%5D%2C%20zoom_in_percentile_range)%0A%20%20%20%20%20%20%20%20cutoffs_X1%20%3D%20np.percentile(X%5B%3A%2C%201%5D%2C%20zoom_in_percentile_range)%0A%0A%20%20%20%20%20%20%20%20non_outliers_mask%20%3D%20np.all(X%20%3E%20%5Bcutoffs_X0%5B0%5D%2C%20cutoffs_X1%5B0%5D%5D%2C%20axis%3D1)%20%26%20np.all(%0A%20%20%20%20%20%20%20%20%20%20%20%20X%20%3C%20%5Bcutoffs_X0%5B1%5D%2C%20cutoffs_X1%5B1%5D%5D%2C%20axis%3D1%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20plot_distribution(%0A%20%20%20%20%20%20%20%20%20%20%20%20axarr%5B1%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20X%5Bnon_outliers_mask%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20y%5Bnon_outliers_mask%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20hist_nbins%3D50%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20x0_label%3Dfeature_mapping%5Bfeatures%5B0%5D%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20x1_label%3Dfeature_mapping%5Bfeatures%5B1%5D%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3D%22Zoom-in%22%2C%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20norm%20%3D%20mpl.colors.Normalize(y_full.min()%2C%20y_full.max())%0A%20%20%20%20%20%20%20%20mpl.colorbar.ColorbarBase(%0A%20%20%20%20%20%20%20%20%20%20%20%20ax_colorbar%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20cmap%3Dcmap%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20norm%3Dnorm%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20orientation%3D%22vertical%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3D%22Color%20mapping%20for%20values%20of%20y%22%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20return%20(make_plot%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%23%20Original%20data%0A%0A%20%20%20%20Each%20transformation%20is%20plotted%20showing%20two%20transformed%20features%2C%20with%20the%0A%20%20%20%20left%20plot%20showing%20the%20entire%20dataset%2C%20and%20the%20right%20zoomed-in%20to%20show%20the%0A%20%20%20%20dataset%20without%20the%20marginal%20outliers.%20A%20large%20majority%20of%20the%20samples%20are%0A%20%20%20%20compacted%20to%20a%20specific%20range%2C%20%5B0%2C%2010%5D%20for%20the%20median%20income%20and%20%5B0%2C%206%5D%20for%0A%20%20%20%20the%20average%20house%20occupancy.%20Note%20that%20there%20are%20some%20marginal%20outliers%20(some%0A%20%20%20%20blocks%20have%20average%20occupancy%20of%20more%20than%201200).%20Therefore%2C%20a%20specific%0A%20%20%20%20pre-processing%20can%20be%20very%20beneficial%20depending%20of%20the%20application.%20In%20the%0A%20%20%20%20following%2C%20we%20present%20some%20insights%20and%20behaviors%20of%20those%20pre-processing%0A%20%20%20%20methods%20in%20the%20presence%20of%20marginal%20outliers.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(make_plot)%3A%0A%20%20%20%20make_plot(0)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%23%20StandardScaler%0A%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.StandardScaler%60%20removes%20the%20mean%20and%20scales%0A%20%20%20%20the%20data%20to%20unit%20variance.%20The%20scaling%20shrinks%20the%20range%20of%20the%20feature%0A%20%20%20%20values%20as%20shown%20in%20the%20left%20figure%20below.%0A%20%20%20%20However%2C%20the%20outliers%20have%20an%20influence%20when%20computing%20the%20empirical%20mean%20and%0A%20%20%20%20standard%20deviation.%20Note%20in%20particular%20that%20because%20the%20outliers%20on%20each%0A%20%20%20%20feature%20have%20different%20magnitudes%2C%20the%20spread%20of%20the%20transformed%20data%20on%0A%20%20%20%20each%20feature%20is%20very%20different%3A%20most%20of%20the%20data%20lie%20in%20the%20%5B-2%2C%204%5D%20range%20for%0A%20%20%20%20the%20transformed%20median%20income%20feature%20while%20the%20same%20data%20is%20squeezed%20in%20the%0A%20%20%20%20smaller%20%5B-0.2%2C%200.2%5D%20range%20for%20the%20transformed%20average%20house%20occupancy.%0A%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.StandardScaler%60%20therefore%20cannot%20guarantee%0A%20%20%20%20balanced%20feature%20scales%20in%20the%0A%20%20%20%20presence%20of%20outliers.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(make_plot)%3A%0A%20%20%20%20make_plot(1)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%23%20MinMaxScaler%0A%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.MinMaxScaler%60%20rescales%20the%20data%20set%20such%20that%0A%20%20%20%20all%20feature%20values%20are%20in%0A%20%20%20%20the%20range%20%5B0%2C%201%5D%20as%20shown%20in%20the%20right%20panel%20below.%20However%2C%20this%20scaling%0A%20%20%20%20compresses%20all%20inliers%20into%20the%20narrow%20range%20%5B0%2C%200.005%5D%20for%20the%20transformed%0A%20%20%20%20average%20house%20occupancy.%0A%0A%20%20%20%20Both%20%3Aclass%3A%60~sklearn.preprocessing.StandardScaler%60%20and%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.MinMaxScaler%60%20are%20very%20sensitive%20to%20the%0A%20%20%20%20presence%20of%20outliers.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(make_plot)%3A%0A%20%20%20%20make_plot(2)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%23%20MaxAbsScaler%0A%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.MaxAbsScaler%60%20is%20similar%20to%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.MinMaxScaler%60%20except%20that%20the%0A%20%20%20%20values%20are%20mapped%20across%20several%20ranges%20depending%20on%20whether%20negative%0A%20%20%20%20OR%20positive%20values%20are%20present.%20If%20only%20positive%20values%20are%20present%2C%20the%0A%20%20%20%20range%20is%20%5B0%2C%201%5D.%20If%20only%20negative%20values%20are%20present%2C%20the%20range%20is%20%5B-1%2C%200%5D.%0A%20%20%20%20If%20both%20negative%20and%20positive%20values%20are%20present%2C%20the%20range%20is%20%5B-1%2C%201%5D.%0A%20%20%20%20On%20positive%20only%20data%2C%20both%20%3Aclass%3A%60~sklearn.preprocessing.MinMaxScaler%60%0A%20%20%20%20and%20%3Aclass%3A%60~sklearn.preprocessing.MaxAbsScaler%60%20behave%20similarly.%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.MaxAbsScaler%60%20therefore%20also%20suffers%20from%0A%20%20%20%20the%20presence%20of%20large%20outliers.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(make_plot)%3A%0A%20%20%20%20make_plot(3)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%23%20RobustScaler%0A%0A%20%20%20%20Unlike%20the%20previous%20scalers%2C%20the%20centering%20and%20scaling%20statistics%20of%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.RobustScaler%60%0A%20%20%20%20are%20based%20on%20percentiles%20and%20are%20therefore%20not%20influenced%20by%20a%20small%0A%20%20%20%20number%20of%20very%20large%20marginal%20outliers.%20Consequently%2C%20the%20resulting%20range%20of%0A%20%20%20%20the%20transformed%20feature%20values%20is%20larger%20than%20for%20the%20previous%20scalers%20and%2C%0A%20%20%20%20more%20importantly%2C%20are%20approximately%20similar%3A%20for%20both%20features%20most%20of%20the%0A%20%20%20%20transformed%20values%20lie%20in%20a%20%5B-2%2C%203%5D%20range%20as%20seen%20in%20the%20zoomed-in%20figure.%0A%20%20%20%20Note%20that%20the%20outliers%20themselves%20are%20still%20present%20in%20the%20transformed%20data.%0A%20%20%20%20If%20a%20separate%20outlier%20clipping%20is%20desirable%2C%20a%20non-linear%20transformation%20is%0A%20%20%20%20required%20(see%20below).%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(make_plot)%3A%0A%20%20%20%20make_plot(4)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%23%20PowerTransformer%0A%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.PowerTransformer%60%20applies%20a%20power%0A%20%20%20%20transformation%20to%20each%20feature%20to%20make%20the%20data%20more%20Gaussian-like%20in%20order%0A%20%20%20%20to%20stabilize%20variance%20and%20minimize%20skewness.%20Currently%20the%20Yeo-Johnson%0A%20%20%20%20and%20Box-Cox%20transforms%20are%20supported%20and%20the%20optimal%0A%20%20%20%20scaling%20factor%20is%20determined%20via%20maximum%20likelihood%20estimation%20in%20both%0A%20%20%20%20methods.%20By%20default%2C%20%3Aclass%3A%60~sklearn.preprocessing.PowerTransformer%60%20applies%0A%20%20%20%20zero-mean%2C%20unit%20variance%20normalization.%20Note%20that%0A%20%20%20%20Box-Cox%20can%20only%20be%20applied%20to%20strictly%20positive%20data.%20Income%20and%20average%0A%20%20%20%20house%20occupancy%20happen%20to%20be%20strictly%20positive%2C%20but%20if%20negative%20values%20are%0A%20%20%20%20present%20the%20Yeo-Johnson%20transformed%20is%20preferred.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(make_plot)%3A%0A%20%20%20%20make_plot(5)%0A%20%20%20%20make_plot(6)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%23%20QuantileTransformer%20(uniform%20output)%0A%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.QuantileTransformer%60%20applies%20a%20non-linear%0A%20%20%20%20transformation%20such%20that%20the%0A%20%20%20%20probability%20density%20function%20of%20each%20feature%20will%20be%20mapped%20to%20a%20uniform%0A%20%20%20%20or%20Gaussian%20distribution.%20In%20this%20case%2C%20all%20the%20data%2C%20including%20outliers%2C%0A%20%20%20%20will%20be%20mapped%20to%20a%20uniform%20distribution%20with%20the%20range%20%5B0%2C%201%5D%2C%20making%0A%20%20%20%20outliers%20indistinguishable%20from%20inliers.%0A%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.RobustScaler%60%20and%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.QuantileTransformer%60%20are%20robust%20to%20outliers%20in%0A%20%20%20%20the%20sense%20that%20adding%20or%20removing%20outliers%20in%20the%20training%20set%20will%20yield%0A%20%20%20%20approximately%20the%20same%20transformation.%20But%20contrary%20to%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.RobustScaler%60%2C%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.QuantileTransformer%60%20will%20also%20automatically%0A%20%20%20%20collapse%20any%20outlier%20by%20setting%20them%20to%20the%20a%20priori%20defined%20range%20boundaries%0A%20%20%20%20(0%20and%201).%20This%20can%20result%20in%20saturation%20artifacts%20for%20extreme%20values.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(make_plot)%3A%0A%20%20%20%20make_plot(7)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20QuantileTransformer%20(Gaussian%20output)%0A%0A%20%20%20%20To%20map%20to%20a%20Gaussian%20distribution%2C%20set%20the%20parameter%0A%20%20%20%20%60%60output_distribution%3D'normal'%60%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(make_plot)%3A%0A%20%20%20%20make_plot(8)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%23%20Normalizer%0A%0A%20%20%20%20The%20%3Aclass%3A%60~sklearn.preprocessing.Normalizer%60%20rescales%20the%20vector%20for%20each%0A%20%20%20%20sample%20to%20have%20unit%20norm%2C%0A%20%20%20%20independently%20of%20the%20distribution%20of%20the%20samples.%20It%20can%20be%20seen%20on%20both%0A%20%20%20%20figures%20below%20where%20all%20samples%20are%20mapped%20onto%20the%20unit%20circle.%20In%20our%0A%20%20%20%20example%20the%20two%20selected%20features%20have%20only%20positive%20values%3B%20therefore%20the%0A%20%20%20%20transformed%20data%20only%20lie%20in%20the%20positive%20quadrant.%20This%20would%20not%20be%20the%0A%20%20%20%20case%20if%20some%20original%20features%20had%20a%20mix%20of%20positive%20and%20negative%20values.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(make_plot%2C%20plt)%3A%0A%20%20%20%20make_plot(9)%0A%0A%20%20%20%20plt.show()%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

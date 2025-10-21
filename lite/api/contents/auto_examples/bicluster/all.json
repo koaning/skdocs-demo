@@ -1,0 +1,57 @@
+{
+  "content": [
+    {
+      "content": null,
+      "created": "2025-10-21T09:27:43.402855Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2025-10-21T09:27:40.755750Z",
+      "mimetype": null,
+      "name": "plot_bicluster_newsgroups.ipynb",
+      "path": "auto_examples/bicluster/plot_bicluster_newsgroups.ipynb",
+      "size": 7311,
+      "type": "notebook",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2025-10-21T09:27:43.403303Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2025-10-21T09:27:40.756130Z",
+      "mimetype": null,
+      "name": "plot_spectral_coclustering.ipynb",
+      "path": "auto_examples/bicluster/plot_spectral_coclustering.ipynb",
+      "size": 3492,
+      "type": "notebook",
+      "writable": true
+    },
+    {
+      "content": null,
+      "created": "2025-10-21T09:27:43.403095Z",
+      "format": null,
+      "hash": null,
+      "hash_algorithm": null,
+      "last_modified": "2025-10-21T09:27:40.755987Z",
+      "mimetype": null,
+      "name": "plot_spectral_biclustering.ipynb",
+      "path": "auto_examples/bicluster/plot_spectral_biclustering.ipynb",
+      "size": 8233,
+      "type": "notebook",
+      "writable": true
+    }
+  ],
+  "created": "2025-10-21T09:27:43.403217Z",
+  "format": "json",
+  "hash": null,
+  "hash_algorithm": null,
+  "last_modified": "2025-10-21T09:27:43.403217Z",
+  "mimetype": null,
+  "name": "bicluster",
+  "path": "auto_examples/bicluster",
+  "size": null,
+  "type": "directory",
+  "writable": true
+}

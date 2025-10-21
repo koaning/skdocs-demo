@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot hgbt regression</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%E2%9A%A0%EF%B8%8F%20**Note**%3A%20This%20notebook%20was%20automatically%20converted%20from%20Jupyter.%0A%20%20%20%20Some%20features%20may%20behave%20differently%20in%20marimo.%0A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Features%20in%20Histogram%20Gradient%20Boosting%20Trees%0A%0A%20%20%20%20%60histogram_based_gradient_boosting%60%20(HGBT)%20models%20may%20be%20one%20of%20the%20most%0A%20%20%20%20useful%20supervised%20learning%20models%20in%20scikit-learn.%20They%20are%20based%20on%20a%20modern%0A%20%20%20%20gradient%20boosting%20implementation%20comparable%20to%20LightGBM%20and%20XGBoost.%20As%20such%2C%0A%20%20%20%20HGBT%20models%20are%20more%20feature%20rich%20than%20and%20often%20outperform%20alternative%20models%0A%20%20%20%20like%20random%20forests%2C%20especially%20when%20the%20number%20of%20samples%20is%20larger%20than%20some%0A%20%20%20%20ten%20thousands%20(see%0A%20%20%20%20%60sphx_glr_auto_examples_ensemble_plot_forest_hist_grad_boosting_comparison.py%60).%0A%0A%20%20%20%20The%20top%20usability%20features%20of%20HGBT%20models%20are%3A%0A%0A%20%20%20%201.%20Several%20available%20loss%20functions%20for%20mean%20and%20quantile%20regression%20tasks%2C%20see%0A%20%20%20%20%20%20%20%60Quantile%20loss%20%3Cquantile_support_hgbdt%3E%60.%0A%20%20%20%202.%20%60categorical_support_gbdt%60%2C%20see%0A%20%20%20%20%20%20%20%60sphx_glr_auto_examples_ensemble_plot_gradient_boosting_categorical.py%60.%0A%20%20%20%203.%20Early%20stopping.%0A%20%20%20%204.%20%60nan_support_hgbt%60%2C%20which%20avoids%20the%20need%20for%20an%20imputer.%0A%20%20%20%205.%20%60monotonic_cst_gbdt%60.%0A%20%20%20%206.%20%60interaction_cst_hgbt%60.%0A%0A%20%20%20%20This%20example%20aims%20at%20showcasing%20all%20points%20except%202%20and%206%20in%20a%20real%20life%0A%20%20%20%20setting.%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Preparing%20the%20data%0A%20%20%20%20The%20%5Belectricity%20dataset%5D(http%3A%2F%2Fwww.openml.org%2Fd%2F151)%20consists%20of%20data%0A%20%20%20%20collected%20from%20the%20Australian%20New%20South%20Wales%20Electricity%20Market.%20In%20this%0A%20%20%20%20market%2C%20prices%20are%20not%20fixed%20and%20are%20affected%20by%20supply%20and%20demand.%20They%20are%0A%20%20%20%20set%20every%20five%20minutes.%20Electricity%20transfers%20to%2Ffrom%20the%20neighboring%20state%20of%0A%20%20%20%20Victoria%20were%20done%20to%20alleviate%20fluctuations.%0A%0A%20%20%20%20The%20dataset%2C%20originally%20named%20ELEC2%2C%20contains%2045%2C312%20instances%20dated%20from%207%0A%20%20%20%20May%201996%20to%205%20December%201998.%20Each%20sample%20of%20the%20dataset%20refers%20to%20a%20period%20of%0A%20%20%20%2030%20minutes%2C%20i.e.%20there%20are%2048%20instances%20for%20each%20time%20period%20of%20one%20day.%20Each%0A%20%20%20%20sample%20on%20the%20dataset%20has%207%20columns%3A%0A%0A%20%20%20%20-%20date%3A%20between%207%20May%201996%20to%205%20December%201998.%20Normalized%20between%200%20and%201%3B%0A%20%20%20%20-%20day%3A%20day%20of%20week%20(1-7)%3B%0A%20%20%20%20-%20period%3A%20half%20hour%20intervals%20over%2024%20hours.%20Normalized%20between%200%20and%201%3B%0A%20%20%20%20-%20nswprice%2Fnswdemand%3A%20electricity%20price%2Fdemand%20of%20New%20South%20Wales%3B%0A%20%20%20%20-%20vicprice%2Fvicdemand%3A%20electricity%20price%2Fdemand%20of%20Victoria.%0A%0A%20%20%20%20Originally%2C%20it%20is%20a%20classification%20task%2C%20but%20here%20we%20use%20it%20for%20the%20regression%0A%20%20%20%20task%20to%20predict%20the%20scheduled%20electricity%20transfer%20between%20states.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20from%20sklearn.datasets%20import%20fetch_openml%0A%0A%20%20%20%20electricity%20%3D%20fetch_openml(%0A%20%20%20%20%20%20%20%20name%3D%22electricity%22%2C%20version%3D1%2C%20as_frame%3DTrue%2C%20parser%3D%22pandas%22%0A%20%20%20%20)%0A%20%20%20%20df%20%3D%20electricity.frame%0A%20%20%20%20return%20df%2C%20electricity%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20This%20particular%20dataset%20has%20a%20stepwise%20constant%20target%20for%20the%20first%2017%2C760%0A%20%20%20%20samples%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(df)%3A%0A%20%20%20%20df%5B%22transfer%22%5D%5B%3A17_760%5D.unique()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Let%20us%20drop%20those%20entries%20and%20explore%20the%20hourly%20electricity%20transfer%20over%0A%20%20%20%20different%20days%20of%20the%20week%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(electricity)%3A%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20import%20seaborn%20as%20sns%0A%20%20%20%20df_1%20%3D%20electricity.frame.iloc%5B17760%3A%5D%0A%20%20%20%20X%20%3D%20df_1.drop(columns%3D%5B'transfer'%2C%20'class'%5D)%0A%20%20%20%20y%20%3D%20df_1%5B'transfer'%5D%0A%20%20%20%20_fig%2C%20_ax%20%3D%20plt.subplots(figsize%3D(15%2C%2010))%0A%20%20%20%20pointplot%20%3D%20sns.lineplot(x%3Ddf_1%5B'period'%5D%2C%20y%3Ddf_1%5B'transfer'%5D%2C%20hue%3Ddf_1%5B'day'%5D%2C%20ax%3D_ax)%0A%20%20%20%20handles%2C%20labels%20%3D%20_ax.get_legend_handles_labels()%0A%20%20%20%20_ax.set(title%3D'Hourly%20energy%20transfer%20for%20different%20days%20of%20the%20week'%2C%20xlabel%3D'Normalized%20time%20of%20the%20day'%2C%20ylabel%3D'Normalized%20energy%20transfer')%0A%20%20%20%20_%20%3D%20_ax.legend(handles%2C%20%5B'Sun'%2C%20'Mon'%2C%20'Tue'%2C%20'Wed'%2C%20'Thu'%2C%20'Fri'%2C%20'Sat'%5D)%0A%20%20%20%20return%20X%2C%20df_1%2C%20plt%2C%20sns%2C%20y%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Notice%20that%20energy%20transfer%20increases%20systematically%20during%20weekends.%0A%0A%20%20%20%20%23%23%20Effect%20of%20number%20of%20trees%20and%20early%20stopping%0A%20%20%20%20For%20the%20sake%20of%20illustrating%20the%20effect%20of%20the%20(maximum)%20number%20of%20trees%2C%20we%0A%20%20%20%20train%20a%20%3Aclass%3A%60~sklearn.ensemble.HistGradientBoostingRegressor%60%20over%20the%0A%20%20%20%20daily%20electricity%20transfer%20using%20the%20whole%20dataset.%20Then%20we%20visualize%20its%0A%20%20%20%20predictions%20depending%20on%20the%20%60max_iter%60%20parameter.%20Here%20we%20don't%20try%20to%0A%20%20%20%20evaluate%20the%20performance%20of%20the%20model%20and%20its%20capacity%20to%20generalize%20but%0A%20%20%20%20rather%20its%20capability%20to%20learn%20from%20the%20training%20data.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X%2C%20y)%3A%0A%20%20%20%20from%20sklearn.ensemble%20import%20HistGradientBoostingRegressor%0A%20%20%20%20from%20sklearn.model_selection%20import%20train_test_split%0A%0A%20%20%20%20X_train%2C%20X_test%2C%20y_train%2C%20y_test%20%3D%20train_test_split(X%2C%20y%2C%20test_size%3D0.4%2C%20shuffle%3DFalse)%0A%0A%20%20%20%20print(f%22Training%20sample%20size%3A%20%7BX_train.shape%5B0%5D%7D%22)%0A%20%20%20%20print(f%22Test%20sample%20size%3A%20%7BX_test.shape%5B0%5D%7D%22)%0A%20%20%20%20print(f%22Number%20of%20features%3A%20%7BX_train.shape%5B1%5D%7D%22)%0A%20%20%20%20return%20HistGradientBoostingRegressor%2C%20X_test%2C%20X_train%2C%20y_test%2C%20y_train%0A%0A%0A%40app.cell%0Adef%20_(HistGradientBoostingRegressor%2C%20X_test%2C%20X_train%2C%20df_1%2C%20plt%2C%20sns%2C%20y_train)%3A%0A%20%20%20%20max_iter_list%20%3D%20%5B5%2C%2050%5D%0A%20%20%20%20average_week_demand%20%3D%20df_1.loc%5BX_test.index%5D.groupby(%5B'day'%2C%20'period'%5D%2C%20observed%3DFalse)%5B'transfer'%5D.mean()%0A%20%20%20%20colors%20%3D%20sns.color_palette('colorblind')%0A%20%20%20%20_fig%2C%20_ax%20%3D%20plt.subplots(figsize%3D(10%2C%205))%0A%20%20%20%20average_week_demand.plot(color%3Dcolors%5B0%5D%2C%20label%3D'recorded%20average'%2C%20linewidth%3D2%2C%20ax%3D_ax)%0A%20%20%20%20for%20idx%2C%20max_iter%20in%20enumerate(max_iter_list)%3A%0A%20%20%20%20%20%20%20%20hgbt%20%3D%20HistGradientBoostingRegressor(max_iter%3Dmax_iter%2C%20categorical_features%3DNone%2C%20random_state%3D42)%0A%20%20%20%20%20%20%20%20hgbt.fit(X_train%2C%20y_train)%0A%20%20%20%20%20%20%20%20_y_pred%20%3D%20hgbt.predict(X_test)%0A%20%20%20%20%20%20%20%20prediction_df%20%3D%20df_1.loc%5BX_test.index%5D.copy()%0A%20%20%20%20%20%20%20%20prediction_df%5B'y_pred'%5D%20%3D%20_y_pred%0A%20%20%20%20%20%20%20%20average_pred%20%3D%20prediction_df.groupby(%5B'day'%2C%20'period'%5D%2C%20observed%3DFalse)%5B'y_pred'%5D.mean()%0A%20%20%20%20%20%20%20%20average_pred.plot(color%3Dcolors%5Bidx%20%2B%201%5D%2C%20label%3Df'max_iter%3D%7Bmax_iter%7D'%2C%20linewidth%3D2%2C%20ax%3D_ax)%0A%20%20%20%20_ax.set(title%3D'Predicted%20average%20energy%20transfer%20during%20the%20week'%2C%20xticks%3D%5B(i%20%2B%200.2)%20*%2048%20for%20i%20in%20range(7)%5D%2C%20xticklabels%3D%5B'Sun'%2C%20'Mon'%2C%20'Tue'%2C%20'Wed'%2C%20'Thu'%2C%20'Fri'%2C%20'Sat'%5D%2C%20xlabel%3D'Time%20of%20the%20week'%2C%20ylabel%3D'Normalized%20energy%20transfer')%0A%20%20%20%20_%20%3D%20_ax.legend()%0A%20%20%20%20return%20(colors%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20With%20just%20a%20few%20iterations%2C%20HGBT%20models%20can%20achieve%20convergence%20(see%0A%20%20%20%20%60sphx_glr_auto_examples_ensemble_plot_forest_hist_grad_boosting_comparison.py%60)%2C%0A%20%20%20%20meaning%20that%20adding%20more%20trees%20does%20not%20improve%20the%20model%20anymore.%20In%20the%0A%20%20%20%20figure%20above%2C%205%20iterations%20are%20not%20enough%20to%20get%20good%20predictions.%20With%2050%0A%20%20%20%20iterations%2C%20we%20are%20already%20able%20to%20do%20a%20good%20job.%0A%0A%20%20%20%20Setting%20%60max_iter%60%20too%20high%20might%20degrade%20the%20prediction%20quality%20and%20cost%20a%20lot%20of%0A%20%20%20%20avoidable%20computing%20resources.%20Therefore%2C%20the%20HGBT%20implementation%20in%20scikit-learn%0A%20%20%20%20provides%20an%20automatic%20**early%20stopping**%20strategy.%20With%20it%2C%20the%20model%0A%20%20%20%20uses%20a%20fraction%20of%20the%20training%20data%20as%20internal%20validation%20set%0A%20%20%20%20(%60validation_fraction%60)%20and%20stops%20training%20if%20the%20validation%20score%20does%20not%0A%20%20%20%20improve%20(or%20degrades)%20after%20%60n_iter_no_change%60%20iterations%20up%20to%20a%20certain%0A%20%20%20%20tolerance%20(%60tol%60).%0A%0A%20%20%20%20Notice%20that%20there%20is%20a%20trade-off%20between%20%60learning_rate%60%20and%20%60max_iter%60%3A%0A%20%20%20%20Generally%2C%20smaller%20learning%20rates%20are%20preferable%20but%20require%20more%20iterations%0A%20%20%20%20to%20converge%20to%20the%20minimum%20loss%2C%20while%20larger%20learning%20rates%20converge%20faster%0A%20%20%20%20(less%20iterations%2Ftrees%20needed)%20but%20at%20the%20cost%20of%20a%20larger%20minimum%20loss.%0A%0A%20%20%20%20Because%20of%20this%20high%20correlation%20between%20the%20learning%20rate%20the%20number%20of%20iterations%2C%0A%20%20%20%20a%20good%20practice%20is%20to%20tune%20the%20learning%20rate%20along%20with%20all%20(important)%20other%0A%20%20%20%20hyperparameters%2C%20fit%20the%20HBGT%20on%20the%20training%20set%20with%20a%20large%20enough%20value%0A%20%20%20%20for%20%60max_iter%60%20and%20determine%20the%20best%20%60max_iter%60%20via%20early%20stopping%20and%20some%0A%20%20%20%20explicit%20%60validation_fraction%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(HistGradientBoostingRegressor%2C%20X_train%2C%20plt%2C%20y_train)%3A%0A%20%20%20%20common_params%20%3D%20%7B'max_iter'%3A%201000%2C%20'learning_rate'%3A%200.3%2C%20'validation_fraction'%3A%200.2%2C%20'random_state'%3A%2042%2C%20'categorical_features'%3A%20None%2C%20'scoring'%3A%20'neg_root_mean_squared_error'%7D%0A%20%20%20%20hgbt_1%20%3D%20HistGradientBoostingRegressor(early_stopping%3DTrue%2C%20**common_params)%0A%20%20%20%20hgbt_1.fit(X_train%2C%20y_train)%0A%20%20%20%20_%2C%20_ax%20%3D%20plt.subplots()%0A%20%20%20%20plt.plot(-hgbt_1.validation_score_)%0A%20%20%20%20_%20%3D%20_ax.set(xlabel%3D'number%20of%20iterations'%2C%20ylabel%3D'root%20mean%20squared%20error'%2C%20title%3Df'Loss%20of%20hgbt%20with%20early%20stopping%20(n_iter%3D%7Bhgbt_1.n_iter_%7D)')%0A%20%20%20%20return%20common_params%2C%20hgbt_1%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20We%20can%20then%20overwrite%20the%20value%20for%20%60max_iter%60%20to%20a%20reasonable%20value%20and%20avoid%0A%20%20%20%20the%20extra%20computational%20cost%20of%20the%20inner%20validation.%20Rounding%20up%20the%20number%0A%20%20%20%20of%20iterations%20may%20account%20for%20variability%20of%20the%20training%20set%3A%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(HistGradientBoostingRegressor%2C%20common_params%2C%20hgbt_1)%3A%0A%20%20%20%20import%20math%0A%20%20%20%20common_params%5B'max_iter'%5D%20%3D%20math.ceil(hgbt_1.n_iter_%20%2F%20100)%20*%20100%0A%20%20%20%20common_params%5B'early_stopping'%5D%20%3D%20False%0A%20%20%20%20hgbt_2%20%3D%20HistGradientBoostingRegressor(**common_params)%0A%20%20%20%20return%20(hgbt_2%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%3Cdiv%20class%3D%22alert%20alert-info%22%3E%3Ch4%3ENote%3C%2Fh4%3E%3Cp%3EThe%20inner%20validation%20done%20during%20early%20stopping%20is%20not%20optimal%20for%0A%20%20%20%20%20%20%20time%20series.%3C%2Fp%3E%3C%2Fdiv%3E%0A%0A%20%20%20%20%23%23%20Support%20for%20missing%20values%0A%20%20%20%20HGBT%20models%20have%20native%20support%20of%20missing%20values.%20During%20training%2C%20the%20tree%0A%20%20%20%20grower%20decides%20where%20samples%20with%20missing%20values%20should%20go%20(left%20or%20right%0A%20%20%20%20child)%20at%20each%20split%2C%20based%20on%20the%20potential%20gain.%20When%20predicting%2C%20these%0A%20%20%20%20samples%20are%20sent%20to%20the%20learnt%20child%20accordingly.%20If%20a%20feature%20had%20no%20missing%0A%20%20%20%20values%20during%20training%2C%20then%20for%20prediction%2C%20samples%20with%20missing%20values%20for%20that%0A%20%20%20%20feature%20are%20sent%20to%20the%20child%20with%20the%20most%20samples%20(as%20seen%20during%20fit).%0A%0A%20%20%20%20The%20present%20example%20shows%20how%20HGBT%20regressions%20deal%20with%20values%20missing%0A%20%20%20%20completely%20at%20random%20(MCAR)%2C%20i.e.%20the%20missingness%20does%20not%20depend%20on%20the%0A%20%20%20%20observed%20data%20or%20the%20unobserved%20data.%20We%20can%20simulate%20such%20scenario%20by%0A%20%20%20%20randomly%20replacing%20values%20from%20randomly%20selected%20features%20with%20%60nan%60%20values.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X_test%2C%20X_train%2C%20hgbt_2%2C%20plt%2C%20y_test%2C%20y_train)%3A%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20from%20sklearn.metrics%20import%20root_mean_squared_error%0A%20%20%20%20rng%20%3D%20np.random.RandomState(42)%0A%20%20%20%20first_week%20%3D%20slice(0%2C%20336)%0A%20%20%20%20missing_fraction_list%20%3D%20%5B0%2C%200.01%2C%200.03%5D%0A%0A%20%20%20%20def%20generate_missing_values(X%2C%20missing_fraction)%3A%0A%20%20%20%20%20%20%20%20total_cells%20%3D%20X.shape%5B0%5D%20*%20X.shape%5B1%5D%0A%20%20%20%20%20%20%20%20num_missing_cells%20%3D%20int(total_cells%20*%20missing_fraction)%0A%20%20%20%20%20%20%20%20row_indices%20%3D%20rng.choice(X.shape%5B0%5D%2C%20num_missing_cells%2C%20replace%3DTrue)%0A%20%20%20%20%20%20%20%20col_indices%20%3D%20rng.choice(X.shape%5B1%5D%2C%20num_missing_cells%2C%20replace%3DTrue)%0A%20%20%20%20%20%20%20%20X_missing%20%3D%20X.copy()%0A%20%20%20%20%20%20%20%20X_missing.iloc%5Brow_indices%2C%20col_indices%5D%20%3D%20np.nan%0A%20%20%20%20%20%20%20%20return%20X_missing%0A%20%20%20%20_fig%2C%20_ax%20%3D%20plt.subplots(figsize%3D(12%2C%206))%0A%20%20%20%20_ax.plot(y_test.values%5Bfirst_week%5D%2C%20label%3D'Actual%20transfer')%0A%20%20%20%20for%20missing_fraction%20in%20missing_fraction_list%3A%0A%20%20%20%20%20%20%20%20X_train_missing%20%3D%20generate_missing_values(X_train%2C%20missing_fraction)%0A%20%20%20%20%20%20%20%20X_test_missing%20%3D%20generate_missing_values(X_test%2C%20missing_fraction)%0A%20%20%20%20%20%20%20%20hgbt_2.fit(X_train_missing%2C%20y_train)%0A%20%20%20%20%20%20%20%20_y_pred%20%3D%20hgbt_2.predict(X_test_missing%5Bfirst_week%5D)%0A%20%20%20%20%20%20%20%20_rmse%20%3D%20root_mean_squared_error(y_test%5Bfirst_week%5D%2C%20_y_pred)%0A%20%20%20%20%20%20%20%20_ax.plot(_y_pred%5Bfirst_week%5D%2C%20label%3Df'missing_fraction%3D%7Bmissing_fraction%7D%2C%20RMSE%3D%7B_rmse%3A.3f%7D'%2C%20alpha%3D0.5)%0A%20%20%20%20_ax.set(title%3D'Daily%20energy%20transfer%20predictions%20on%20data%20with%20MCAR%20values'%2C%20xticks%3D%5B(i%20%2B%200.2)%20*%2048%20for%20i%20in%20range(7)%5D%2C%20xticklabels%3D%5B'Mon'%2C%20'Tue'%2C%20'Wed'%2C%20'Thu'%2C%20'Fri'%2C%20'Sat'%2C%20'Sun'%5D%2C%20xlabel%3D'Time%20of%20the%20week'%2C%20ylabel%3D'Normalized%20energy%20transfer')%0A%20%20%20%20_%20%3D%20_ax.legend(loc%3D'lower%20right')%0A%20%20%20%20return%20first_week%2C%20root_mean_squared_error%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20As%20expected%2C%20the%20model%20degrades%20as%20the%20proportion%20of%20missing%20values%20increases.%0A%0A%20%20%20%20%23%23%20Support%20for%20quantile%20loss%0A%0A%20%20%20%20The%20quantile%20loss%20in%20regression%20enables%20a%20view%20of%20the%20variability%20or%0A%20%20%20%20uncertainty%20of%20the%20target%20variable.%20For%20instance%2C%20predicting%20the%205th%20and%2095th%0A%20%20%20%20percentiles%20can%20provide%20a%2090%25%20prediction%20interval%2C%20i.e.%20the%20range%20within%20which%0A%20%20%20%20we%20expect%20a%20new%20observed%20value%20to%20fall%20with%2090%25%20probability.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20HistGradientBoostingRegressor%2C%0A%20%20%20%20X_test%2C%0A%20%20%20%20X_train%2C%0A%20%20%20%20colors%2C%0A%20%20%20%20common_params%2C%0A%20%20%20%20first_week%2C%0A%20%20%20%20plt%2C%0A%20%20%20%20y_test%2C%0A%20%20%20%20y_train%2C%0A)%3A%0A%20%20%20%20from%20sklearn.metrics%20import%20mean_pinball_loss%0A%20%20%20%20quantiles%20%3D%20%5B0.95%2C%200.05%5D%0A%20%20%20%20predictions%20%3D%20%5B%5D%0A%20%20%20%20_fig%2C%20_ax%20%3D%20plt.subplots(figsize%3D(12%2C%206))%0A%20%20%20%20_ax.plot(y_test.values%5Bfirst_week%5D%2C%20label%3D'Actual%20transfer')%0A%20%20%20%20for%20quantile%20in%20quantiles%3A%0A%20%20%20%20%20%20%20%20hgbt_quantile%20%3D%20HistGradientBoostingRegressor(loss%3D'quantile'%2C%20quantile%3Dquantile%2C%20**common_params)%0A%20%20%20%20%20%20%20%20hgbt_quantile.fit(X_train%2C%20y_train)%0A%20%20%20%20%20%20%20%20_y_pred%20%3D%20hgbt_quantile.predict(X_test%5Bfirst_week%5D)%0A%20%20%20%20%20%20%20%20predictions.append(_y_pred)%0A%20%20%20%20%20%20%20%20score%20%3D%20mean_pinball_loss(y_test%5Bfirst_week%5D%2C%20_y_pred)%0A%20%20%20%20%20%20%20%20_ax.plot(_y_pred%5Bfirst_week%5D%2C%20label%3Df'quantile%3D%7Bquantile%7D%2C%20pinball%20loss%3D%7Bscore%3A.2f%7D'%2C%20alpha%3D0.5)%0A%20%20%20%20_ax.fill_between(range(len(predictions%5B0%5D%5Bfirst_week%5D))%2C%20predictions%5B0%5D%5Bfirst_week%5D%2C%20predictions%5B1%5D%5Bfirst_week%5D%2C%20color%3Dcolors%5B0%5D%2C%20alpha%3D0.1)%0A%20%20%20%20_ax.set(title%3D'Daily%20energy%20transfer%20predictions%20with%20quantile%20loss'%2C%20xticks%3D%5B(i%20%2B%200.2)%20*%2048%20for%20i%20in%20range(7)%5D%2C%20xticklabels%3D%5B'Mon'%2C%20'Tue'%2C%20'Wed'%2C%20'Thu'%2C%20'Fri'%2C%20'Sat'%2C%20'Sun'%5D%2C%20xlabel%3D'Time%20of%20the%20week'%2C%20ylabel%3D'Normalized%20energy%20transfer')%0A%20%20%20%20_%20%3D%20_ax.legend(loc%3D'lower%20right')%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20We%20observe%20a%20tendence%20to%20over-estimate%20the%20energy%20transfer.%20This%20could%20be%20be%0A%20%20%20%20quantitatively%20confirmed%20by%20computing%20empirical%20coverage%20numbers%20as%20done%20in%0A%20%20%20%20the%20%60calibration%20of%20confidence%20intervals%20section%20%3Ccalibration-section%3E%60.%0A%20%20%20%20Keep%20in%20mind%20that%20those%20predicted%20percentiles%20are%20just%20estimations%20from%20a%0A%20%20%20%20model.%20One%20can%20still%20improve%20the%20quality%20of%20such%20estimations%20by%3A%0A%0A%20%20%20%20-%20collecting%20more%20data-points%3B%0A%20%20%20%20-%20better%20tuning%20of%20the%20model%20hyperparameters%2C%20see%0A%20%20%20%20%20%20%60sphx_glr_auto_examples_ensemble_plot_gradient_boosting_quantile.py%60%3B%0A%20%20%20%20-%20engineering%20more%20predictive%20features%20from%20the%20same%20data%2C%20see%0A%20%20%20%20%20%20%60sphx_glr_auto_examples_applications_plot_cyclical_feature_engineering.py%60.%0A%0A%20%20%20%20%23%23%20Monotonic%20constraints%0A%0A%20%20%20%20Given%20specific%20domain%20knowledge%20that%20requires%20the%20relationship%20between%20a%0A%20%20%20%20feature%20and%20the%20target%20to%20be%20monotonically%20increasing%20or%20decreasing%2C%20one%20can%0A%20%20%20%20enforce%20such%20behaviour%20in%20the%20predictions%20of%20a%20HGBT%20model%20using%20monotonic%0A%20%20%20%20constraints.%20This%20makes%20the%20model%20more%20interpretable%20and%20can%20reduce%20its%0A%20%20%20%20variance%20(and%20potentially%20mitigate%20overfitting)%20at%20the%20risk%20of%20increasing%0A%20%20%20%20bias.%20Monotonic%20constraints%20can%20also%20be%20used%20to%20enforce%20specific%20regulatory%0A%20%20%20%20requirements%2C%20ensure%20compliance%20and%20align%20with%20ethical%20considerations.%0A%0A%20%20%20%20In%20the%20present%20example%2C%20the%20policy%20of%20transferring%20energy%20from%20Victoria%20to%20New%0A%20%20%20%20South%20Wales%20is%20meant%20to%20alleviate%20price%20fluctuations%2C%20meaning%20that%20the%20model%0A%20%20%20%20predictions%20have%20to%20enforce%20such%20goal%2C%20i.e.%20transfer%20should%20increase%20with%0A%20%20%20%20price%20and%20demand%20in%20New%20South%20Wales%2C%20but%20also%20decrease%20with%20price%20and%20demand%0A%20%20%20%20in%20Victoria%2C%20in%20order%20to%20benefit%20both%20populations.%0A%0A%20%20%20%20If%20the%20training%20data%20has%20feature%20names%2C%20it%E2%80%99s%20possible%20to%20specify%20the%20monotonic%0A%20%20%20%20constraints%20by%20passing%20a%20dictionary%20with%20the%20convention%3A%0A%0A%20%20%20%20-%201%3A%20monotonic%20increase%0A%20%20%20%20-%200%3A%20no%20constraint%0A%20%20%20%20-%20-1%3A%20monotonic%20decrease%0A%0A%20%20%20%20Alternatively%2C%20one%20can%20pass%20an%20array-like%20object%20encoding%20the%20above%20convention%20by%0A%20%20%20%20position.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(HistGradientBoostingRegressor%2C%20X%2C%20plt%2C%20y)%3A%0A%20%20%20%20from%20sklearn.inspection%20import%20PartialDependenceDisplay%0A%20%20%20%20monotonic_cst%20%3D%20%7B'date'%3A%200%2C%20'day'%3A%200%2C%20'period'%3A%200%2C%20'nswdemand'%3A%201%2C%20'nswprice'%3A%201%2C%20'vicdemand'%3A%20-1%2C%20'vicprice'%3A%20-1%7D%0A%20%20%20%20hgbt_no_cst%20%3D%20HistGradientBoostingRegressor(categorical_features%3DNone%2C%20random_state%3D42).fit(X%2C%20y)%0A%20%20%20%20hgbt_cst%20%3D%20HistGradientBoostingRegressor(monotonic_cst%3Dmonotonic_cst%2C%20categorical_features%3DNone%2C%20random_state%3D42).fit(X%2C%20y)%0A%20%20%20%20_fig%2C%20_ax%20%3D%20plt.subplots(nrows%3D2%2C%20figsize%3D(15%2C%2010))%0A%20%20%20%20disp%20%3D%20PartialDependenceDisplay.from_estimator(hgbt_no_cst%2C%20X%2C%20features%3D%5B'nswdemand'%2C%20'nswprice'%5D%2C%20line_kw%3D%7B'linewidth'%3A%202%2C%20'label'%3A%20'unconstrained'%2C%20'color'%3A%20'tab%3Ablue'%7D%2C%20ax%3D_ax%5B0%5D)%0A%20%20%20%20PartialDependenceDisplay.from_estimator(hgbt_cst%2C%20X%2C%20features%3D%5B'nswdemand'%2C%20'nswprice'%5D%2C%20line_kw%3D%7B'linewidth'%3A%202%2C%20'label'%3A%20'constrained'%2C%20'color'%3A%20'tab%3Aorange'%7D%2C%20ax%3Ddisp.axes_)%0A%20%20%20%20disp%20%3D%20PartialDependenceDisplay.from_estimator(hgbt_no_cst%2C%20X%2C%20features%3D%5B'vicdemand'%2C%20'vicprice'%5D%2C%20line_kw%3D%7B'linewidth'%3A%202%2C%20'label'%3A%20'unconstrained'%2C%20'color'%3A%20'tab%3Ablue'%7D%2C%20ax%3D_ax%5B1%5D)%0A%20%20%20%20PartialDependenceDisplay.from_estimator(hgbt_cst%2C%20X%2C%20features%3D%5B'vicdemand'%2C%20'vicprice'%5D%2C%20line_kw%3D%7B'linewidth'%3A%202%2C%20'label'%3A%20'constrained'%2C%20'color'%3A%20'tab%3Aorange'%7D%2C%20ax%3Ddisp.axes_)%0A%20%20%20%20_%20%3D%20plt.legend()%0A%20%20%20%20return%20hgbt_cst%2C%20hgbt_no_cst%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Observe%20that%20%60nswdemand%60%20and%20%60vicdemand%60%20seem%20already%20monotonic%20without%20constraint.%0A%20%20%20%20This%20is%20a%20good%20example%20to%20show%20that%20the%20model%20with%20monotonicity%20constraints%20is%0A%20%20%20%20%22overconstraining%22.%0A%0A%20%20%20%20Additionally%2C%20we%20can%20verify%20that%20the%20predictive%20quality%20of%20the%20model%20is%20not%0A%20%20%20%20significantly%20degraded%20by%20introducing%20the%20monotonic%20constraints.%20For%20such%0A%20%20%20%20purpose%20we%20use%20%3Aclass%3A%60~sklearn.model_selection.TimeSeriesSplit%60%0A%20%20%20%20cross-validation%20to%20estimate%20the%20variance%20of%20the%20test%20score.%20By%20doing%20so%20we%0A%20%20%20%20guarantee%20that%20the%20training%20data%20does%20not%20succeed%20the%20testing%20data%2C%20which%20is%0A%20%20%20%20crucial%20when%20dealing%20with%20data%20that%20have%20a%20temporal%20relationship.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X%2C%20hgbt_cst%2C%20hgbt_no_cst%2C%20root_mean_squared_error%2C%20y)%3A%0A%20%20%20%20from%20sklearn.metrics%20import%20make_scorer%0A%20%20%20%20from%20sklearn.model_selection%20import%20TimeSeriesSplit%2C%20cross_validate%0A%20%20%20%20ts_cv%20%3D%20TimeSeriesSplit(n_splits%3D5%2C%20gap%3D48%2C%20test_size%3D336)%0A%20%20%20%20scorer%20%3D%20make_scorer(root_mean_squared_error)%0A%20%20%20%20cv_results%20%3D%20cross_validate(hgbt_no_cst%2C%20X%2C%20y%2C%20cv%3Dts_cv%2C%20scoring%3Dscorer)%0A%20%20%20%20_rmse%20%3D%20cv_results%5B'test_score'%5D%0A%20%20%20%20print(f'RMSE%20without%20constraints%20%3D%20%7B_rmse.mean()%3A.3f%7D%20%2B%2F-%20%7B_rmse.std()%3A.3f%7D')%0A%20%20%20%20cv_results%20%3D%20cross_validate(hgbt_cst%2C%20X%2C%20y%2C%20cv%3Dts_cv%2C%20scoring%3Dscorer)%0A%20%20%20%20_rmse%20%3D%20cv_results%5B'test_score'%5D%0A%20%20%20%20print(f'RMSE%20with%20constraints%20%20%20%20%3D%20%7B_rmse.mean()%3A.3f%7D%20%2B%2F-%20%7B_rmse.std()%3A.3f%7D')%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20That%20being%20said%2C%20notice%20the%20comparison%20is%20between%20two%20different%20models%20that%0A%20%20%20%20may%20be%20optimized%20by%20a%20different%20combination%20of%20hyperparameters.%20That%20is%20the%0A%20%20%20%20reason%20why%20we%20do%20no%20use%20the%20%60common_params%60%20in%20this%20section%20as%20done%20before.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

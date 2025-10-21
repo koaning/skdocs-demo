@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot svm kernels</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%E2%9A%A0%EF%B8%8F%20**Note**%3A%20This%20notebook%20was%20automatically%20converted%20from%20Jupyter.%0A%20%20%20%20Some%20features%20may%20behave%20differently%20in%20marimo.%0A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Plot%20classification%20boundaries%20with%20different%20SVM%20Kernels%0A%20%20%20%20This%20example%20shows%20how%20different%20kernels%20in%20a%20%3Aclass%3A%60~sklearn.svm.SVC%60%20(Support%20Vector%0A%20%20%20%20Classifier)%20influence%20the%20classification%20boundaries%20in%20a%20binary%2C%20two-dimensional%0A%20%20%20%20classification%20problem.%0A%0A%20%20%20%20SVCs%20aim%20to%20find%20a%20hyperplane%20that%20effectively%20separates%20the%20classes%20in%20their%20training%0A%20%20%20%20data%20by%20maximizing%20the%20margin%20between%20the%20outermost%20data%20points%20of%20each%20class.%20This%20is%0A%20%20%20%20achieved%20by%20finding%20the%20best%20weight%20vector%20%24w%24%20that%20defines%20the%20decision%20boundary%0A%20%20%20%20hyperplane%20and%20minimizes%20the%20sum%20of%20hinge%20losses%20for%20misclassified%20samples%2C%20as%20measured%0A%20%20%20%20by%20the%20%3Afunc%3A%60~sklearn.metrics.hinge_loss%60%20function.%20By%20default%2C%20regularization%20is%0A%20%20%20%20applied%20with%20the%20parameter%20%60C%3D1%60%2C%20which%20allows%20for%20a%20certain%20degree%20of%20misclassification%0A%20%20%20%20tolerance.%0A%0A%20%20%20%20If%20the%20data%20is%20not%20linearly%20separable%20in%20the%20original%20feature%20space%2C%20a%20non-linear%20kernel%0A%20%20%20%20parameter%20can%20be%20set.%20Depending%20on%20the%20kernel%2C%20the%20process%20involves%20adding%20new%20features%0A%20%20%20%20or%20transforming%20existing%20features%20to%20enrich%20and%20potentially%20add%20meaning%20to%20the%20data.%0A%20%20%20%20When%20a%20kernel%20other%20than%20%60%22linear%22%60%20is%20set%2C%20the%20SVC%20applies%20the%20%5Bkernel%20trick%5D(https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FKernel_method%23Mathematics%3A_the_kernel_trick)_%2C%20which%0A%20%20%20%20computes%20the%20similarity%20between%20pairs%20of%20data%20points%20using%20the%20kernel%20function%20without%0A%20%20%20%20explicitly%20transforming%20the%20entire%20dataset.%20The%20kernel%20trick%20surpasses%20the%20otherwise%0A%20%20%20%20necessary%20matrix%20transformation%20of%20the%20whole%20dataset%20by%20only%20considering%20the%20relations%0A%20%20%20%20between%20all%20pairs%20of%20data%20points.%20The%20kernel%20function%20maps%20two%20vectors%20(each%20pair%20of%0A%20%20%20%20observations)%20to%20their%20similarity%20using%20their%20dot%20product.%0A%0A%20%20%20%20The%20hyperplane%20can%20then%20be%20calculated%20using%20the%20kernel%20function%20as%20if%20the%20dataset%20were%0A%20%20%20%20represented%20in%20a%20higher-dimensional%20space.%20Using%20a%20kernel%20function%20instead%20of%20an%0A%20%20%20%20explicit%20matrix%20transformation%20improves%20performance%2C%20as%20the%20kernel%20function%20has%20a%20time%0A%20%20%20%20complexity%20of%20%24O(%7Bn%7D%5E2)%24%2C%20whereas%20matrix%20transformation%20scales%20according%20to%20the%0A%20%20%20%20specific%20transformation%20being%20applied.%0A%0A%20%20%20%20In%20this%20example%2C%20we%20compare%20the%20most%20common%20kernel%20types%20of%20Support%20Vector%20Machines%3A%20the%0A%20%20%20%20linear%20kernel%20(%60%22linear%22%60)%2C%20the%20polynomial%20kernel%20(%60%22poly%22%60)%2C%20the%20radial%20basis%20function%0A%20%20%20%20kernel%20(%60%22rbf%22%60)%20and%20the%20sigmoid%20kernel%20(%60%22sigmoid%22%60).%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Creating%20a%20dataset%0A%20%20%20%20We%20create%20a%20two-dimensional%20classification%20dataset%20with%2016%20samples%20and%20two%20classes.%20We%0A%20%20%20%20plot%20the%20samples%20with%20the%20colors%20matching%20their%20respective%20targets.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20X%20%3D%20np.array(%5B%5B0.4%2C%20-0.7%5D%2C%20%5B-1.5%2C%20-1.0%5D%2C%20%5B-1.4%2C%20-0.9%5D%2C%20%5B-1.3%2C%20-1.2%5D%2C%20%5B-1.1%2C%20-0.2%5D%2C%20%5B-1.2%2C%20-0.4%5D%2C%20%5B-0.5%2C%201.2%5D%2C%20%5B-1.5%2C%202.1%5D%2C%20%5B1.0%2C%201.0%5D%2C%20%5B1.3%2C%200.8%5D%2C%20%5B1.2%2C%200.5%5D%2C%20%5B0.2%2C%20-2.0%5D%2C%20%5B0.5%2C%20-2.4%5D%2C%20%5B0.2%2C%20-2.3%5D%2C%20%5B0.0%2C%20-2.7%5D%2C%20%5B1.3%2C%202.1%5D%5D)%0A%20%20%20%20y%20%3D%20np.array(%5B0%2C%200%2C%200%2C%200%2C%200%2C%200%2C%200%2C%200%2C%201%2C%201%2C%201%2C%201%2C%201%2C%201%2C%201%2C%201%5D)%0A%20%20%20%20fig%2C%20_ax%20%3D%20plt.subplots(figsize%3D(4%2C%203))%0A%20%20%20%20x_min%2C%20x_max%2C%20y_min%2C%20y_max%20%3D%20(-3%2C%203%2C%20-3%2C%203)%0A%20%20%20%20_ax.set(xlim%3D(x_min%2C%20x_max)%2C%20ylim%3D(y_min%2C%20y_max))%0A%20%20%20%20scatter%20%3D%20_ax.scatter(X%5B%3A%2C%200%5D%2C%20X%5B%3A%2C%201%5D%2C%20s%3D150%2C%20c%3Dy%2C%20label%3Dy%2C%20edgecolors%3D'k')%0A%20%20%20%20_ax.legend(*scatter.legend_elements()%2C%20loc%3D'upper%20right'%2C%20title%3D'Classes')%0A%20%20%20%20_ax.set_title('Samples%20in%20two-dimensional%20feature%20space')%0A%20%20%20%20%23%20Plotting%20settings%0A%20%20%20%20%23%20Plot%20samples%20by%20color%20and%20add%20legend%0A%20%20%20%20plt.show()%0A%20%20%20%20return%20X%2C%20np%2C%20plt%2C%20scatter%2C%20y%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20We%20can%20see%20that%20the%20samples%20are%20not%20clearly%20separable%20by%20a%20straight%20line.%0A%0A%20%20%20%20%23%23%20Training%20SVC%20model%20and%20plotting%20decision%20boundaries%0A%20%20%20%20We%20define%20a%20function%20that%20fits%20a%20%3Aclass%3A%60~sklearn.svm.SVC%60%20classifier%2C%0A%20%20%20%20allowing%20the%20%60kernel%60%20parameter%20as%20an%20input%2C%20and%20then%20plots%20the%20decision%0A%20%20%20%20boundaries%20learned%20by%20the%20model%20using%0A%20%20%20%20%3Aclass%3A%60~sklearn.inspection.DecisionBoundaryDisplay%60.%0A%0A%20%20%20%20Notice%20that%20for%20the%20sake%20of%20simplicity%2C%20the%20%60C%60%20parameter%20is%20set%20to%20its%0A%20%20%20%20default%20value%20(%60C%3D1%60)%20in%20this%20example%20and%20the%20%60gamma%60%20parameter%20is%20set%20to%0A%20%20%20%20%60gamma%3D2%60%20across%20all%20kernels%2C%20although%20it%20is%20automatically%20ignored%20for%20the%0A%20%20%20%20linear%20kernel.%20In%20a%20real%20classification%20task%2C%20where%20performance%20matters%2C%0A%20%20%20%20parameter%20tuning%20(by%20using%20%3Aclass%3A%60~sklearn.model_selection.GridSearchCV%60%20for%0A%20%20%20%20instance)%20is%20highly%20recommended%20to%20capture%20different%20structures%20within%20the%0A%20%20%20%20data.%0A%0A%20%20%20%20Setting%20%60response_method%3D%22predict%22%60%20in%0A%20%20%20%20%3Aclass%3A%60~sklearn.inspection.DecisionBoundaryDisplay%60%20colors%20the%20areas%20based%0A%20%20%20%20on%20their%20predicted%20class.%20Using%20%60response_method%3D%22decision_function%22%60%20allows%0A%20%20%20%20us%20to%20also%20plot%20the%20decision%20boundary%20and%20the%20margins%20to%20both%20sides%20of%20it.%0A%20%20%20%20Finally%20the%20support%20vectors%20used%20during%20training%20(which%20always%20lay%20on%20the%0A%20%20%20%20margins)%20are%20identified%20by%20means%20of%20the%20%60support_vectors_%60%20attribute%20of%0A%20%20%20%20the%20trained%20SVCs%2C%20and%20plotted%20as%20well.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(X%2C%20plt%2C%20scatter%2C%20y)%3A%0A%20%20%20%20from%20sklearn%20import%20svm%0A%20%20%20%20from%20sklearn.inspection%20import%20DecisionBoundaryDisplay%0A%0A%20%20%20%20def%20plot_training_data_with_decision_boundary(kernel%2C%20ax%3DNone%2C%20long_title%3DTrue%2C%20support_vectors%3DTrue)%3A%0A%20%20%20%20%20%20%20%20clf%20%3D%20svm.SVC(kernel%3Dkernel%2C%20gamma%3D2).fit(X%2C%20y)%0A%20%20%20%20%20%20%20%20if%20_ax%20is%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_%2C%20_ax%20%3D%20plt.subplots(figsize%3D(4%2C%203))%0A%20%20%20%20%20%20%20%20x_min%2C%20x_max%2C%20y_min%2C%20y_max%20%3D%20(-3%2C%203%2C%20-3%2C%203)%20%20%23%20Train%20the%20SVC%0A%20%20%20%20%20%20%20%20_ax.set(xlim%3D(x_min%2C%20x_max)%2C%20ylim%3D(y_min%2C%20y_max))%0A%20%20%20%20%20%20%20%20common_params%20%3D%20%7B'estimator'%3A%20clf%2C%20'X'%3A%20X%2C%20'ax'%3A%20_ax%7D%0A%20%20%20%20%20%20%20%20DecisionBoundaryDisplay.from_estimator(**common_params%2C%20response_method%3D'predict'%2C%20plot_method%3D'pcolormesh'%2C%20alpha%3D0.3)%20%20%23%20Settings%20for%20plotting%0A%20%20%20%20%20%20%20%20DecisionBoundaryDisplay.from_estimator(**common_params%2C%20response_method%3D'decision_function'%2C%20plot_method%3D'contour'%2C%20levels%3D%5B-1%2C%200%2C%201%5D%2C%20colors%3D%5B'k'%2C%20'k'%2C%20'k'%5D%2C%20linestyles%3D%5B'--'%2C%20'-'%2C%20'--'%5D)%0A%20%20%20%20%20%20%20%20if%20support_vectors%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_ax.scatter(clf.support_vectors_%5B%3A%2C%200%5D%2C%20clf.support_vectors_%5B%3A%2C%201%5D%2C%20s%3D150%2C%20facecolors%3D'none'%2C%20edgecolors%3D'k')%0A%20%20%20%20%20%20%20%20_ax.scatter(X%5B%3A%2C%200%5D%2C%20X%5B%3A%2C%201%5D%2C%20c%3Dy%2C%20s%3D30%2C%20edgecolors%3D'k')%0A%20%20%20%20%20%20%20%20_ax.legend(*scatter.legend_elements()%2C%20loc%3D'upper%20right'%2C%20title%3D'Classes')%0A%20%20%20%20%20%20%20%20if%20long_title%3A%20%20%23%20Plot%20decision%20boundary%20and%20margins%0A%20%20%20%20%20%20%20%20%20%20%20%20_ax.set_title(f'%20Decision%20boundaries%20of%20%7Bkernel%7D%20kernel%20in%20SVC')%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_ax.set_title(kernel)%0A%20%20%20%20%20%20%20%20if%20_ax%20is%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20plt.show()%20%20%23%20Plot%20bigger%20circles%20around%20samples%20that%20serve%20as%20support%20vectors%20%20%23%20Plot%20samples%20by%20color%20and%20add%20legend%0A%20%20%20%20return%20(plot_training_data_with_decision_boundary%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Linear%20kernel%0A%20%20%20%20Linear%20kernel%20is%20the%20dot%20product%20of%20the%20input%20samples%3A%0A%0A%20%20%20%20%5Cbegin%7Balign%7DK(%5Cmathbf%7Bx%7D_1%2C%20%5Cmathbf%7Bx%7D_2)%20%3D%20%5Cmathbf%7Bx%7D_1%5E%5Ctop%20%5Cmathbf%7Bx%7D_2%5Cend%7Balign%7D%0A%0A%20%20%20%20It%20is%20then%20applied%20to%20any%20combination%20of%20two%20data%20points%20(samples)%20in%20the%0A%20%20%20%20dataset.%20The%20dot%20product%20of%20the%20two%20points%20determines%20the%0A%20%20%20%20%3Afunc%3A%60~sklearn.metrics.pairwise.cosine_similarity%60%20between%20both%20points.%20The%0A%20%20%20%20higher%20the%20value%2C%20the%20more%20similar%20the%20points%20are.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(plot_training_data_with_decision_boundary)%3A%0A%20%20%20%20plot_training_data_with_decision_boundary(%22linear%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Training%20a%20%3Aclass%3A%60~sklearn.svm.SVC%60%20on%20a%20linear%20kernel%20results%20in%20an%0A%20%20%20%20untransformed%20feature%20space%2C%20where%20the%20hyperplane%20and%20the%20margins%20are%0A%20%20%20%20straight%20lines.%20Due%20to%20the%20lack%20of%20expressivity%20of%20the%20linear%20kernel%2C%20the%0A%20%20%20%20trained%20classes%20do%20not%20perfectly%20capture%20the%20training%20data.%0A%0A%20%20%20%20%23%23%23%20Polynomial%20kernel%0A%20%20%20%20The%20polynomial%20kernel%20changes%20the%20notion%20of%20similarity.%20The%20kernel%20function%0A%20%20%20%20is%20defined%20as%3A%0A%0A%20%20%20%20%5Cbegin%7Balign%7DK(%5Cmathbf%7Bx%7D_1%2C%20%5Cmathbf%7Bx%7D_2)%20%3D%20(%5Cgamma%20%5Ccdot%20%5C%0A%20%20%20%20%20%20%20%20%20%20%5Cmathbf%7Bx%7D_1%5E%5Ctop%5Cmathbf%7Bx%7D_2%20%2B%20r)%5Ed%5Cend%7Balign%7D%0A%0A%20%20%20%20where%20%24%7Bd%7D%24%20is%20the%20degree%20(%60degree%60)%20of%20the%20polynomial%2C%20%24%7B%5Cgamma%7D%24%0A%20%20%20%20(%60gamma%60)%20controls%20the%20influence%20of%20each%20individual%20training%20sample%20on%20the%0A%20%20%20%20decision%20boundary%20and%20%24%7Br%7D%24%20is%20the%20bias%20term%20(%60coef0%60)%20that%20shifts%20the%0A%20%20%20%20data%20up%20or%20down.%20Here%2C%20we%20use%20the%20default%20value%20for%20the%20degree%20of%20the%0A%20%20%20%20polynomial%20in%20the%20kernel%20function%20(%60degree%3D3%60).%20When%20%60coef0%3D0%60%20(the%20default)%2C%0A%20%20%20%20the%20data%20is%20only%20transformed%2C%20but%20no%20additional%20dimension%20is%20added.%20Using%20a%0A%20%20%20%20polynomial%20kernel%20is%20equivalent%20to%20creating%0A%20%20%20%20%3Aclass%3A%60~sklearn.preprocessing.PolynomialFeatures%60%20and%20then%20fitting%20a%0A%20%20%20%20%3Aclass%3A%60~sklearn.svm.SVC%60%20with%20a%20linear%20kernel%20on%20the%20transformed%20data%2C%0A%20%20%20%20although%20this%20alternative%20approach%20would%20be%20computationally%20expensive%20for%20most%0A%20%20%20%20datasets.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(plot_training_data_with_decision_boundary)%3A%0A%20%20%20%20plot_training_data_with_decision_boundary(%22poly%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20The%20polynomial%20kernel%20with%20%60gamma%3D2%60%20adapts%20well%20to%20the%20training%20data%2C%0A%20%20%20%20causing%20the%20margins%20on%20both%20sides%20of%20the%20hyperplane%20to%20bend%20accordingly.%0A%0A%20%20%20%20%23%23%23%20RBF%20kernel%0A%20%20%20%20The%20radial%20basis%20function%20(RBF)%20kernel%2C%20also%20known%20as%20the%20Gaussian%20kernel%2C%20is%0A%20%20%20%20the%20default%20kernel%20for%20Support%20Vector%20Machines%20in%20scikit-learn.%20It%20measures%0A%20%20%20%20similarity%20between%20two%20data%20points%20in%20infinite%20dimensions%20and%20then%20approaches%0A%20%20%20%20classification%20by%20majority%20vote.%20The%20kernel%20function%20is%20defined%20as%3A%0A%0A%20%20%20%20%5Cbegin%7Balign%7DK(%5Cmathbf%7Bx%7D_1%2C%20%5Cmathbf%7Bx%7D_2)%20%3D%20%5Cexp%5Cleft(-%5Cgamma%20%5Ccdot%0A%20%20%20%20%20%20%20%20%20%20%7B%5C%7C%5Cmathbf%7Bx%7D_1%20-%20%5Cmathbf%7Bx%7D_2%5C%7C%5E2%7D%5Cright)%5Cend%7Balign%7D%0A%0A%20%20%20%20where%20%24%7B%5Cgamma%7D%24%20(%60gamma%60)%20controls%20the%20influence%20of%20each%20individual%0A%20%20%20%20training%20sample%20on%20the%20decision%20boundary.%0A%0A%20%20%20%20The%20larger%20the%20euclidean%20distance%20between%20two%20points%0A%20%20%20%20%24%5C%7C%5Cmathbf%7Bx%7D_1%20-%20%5Cmathbf%7Bx%7D_2%5C%7C%5E2%24%0A%20%20%20%20the%20closer%20the%20kernel%20function%20is%20to%20zero.%20This%20means%20that%20two%20points%20far%20away%0A%20%20%20%20are%20more%20likely%20to%20be%20dissimilar.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(plot_training_data_with_decision_boundary)%3A%0A%20%20%20%20plot_training_data_with_decision_boundary(%22rbf%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20In%20the%20plot%20we%20can%20see%20how%20the%20decision%20boundaries%20tend%20to%20contract%20around%0A%20%20%20%20data%20points%20that%20are%20close%20to%20each%20other.%0A%0A%20%20%20%20%23%23%23%20Sigmoid%20kernel%0A%20%20%20%20The%20sigmoid%20kernel%20function%20is%20defined%20as%3A%0A%0A%20%20%20%20%5Cbegin%7Balign%7DK(%5Cmathbf%7Bx%7D_1%2C%20%5Cmathbf%7Bx%7D_2)%20%3D%20%5Ctanh(%5Cgamma%20%5Ccdot%0A%20%20%20%20%20%20%20%20%20%20%5Cmathbf%7Bx%7D_1%5E%5Ctop%5Cmathbf%7Bx%7D_2%20%2B%20r)%5Cend%7Balign%7D%0A%0A%20%20%20%20where%20the%20kernel%20coefficient%20%24%7B%5Cgamma%7D%24%20(%60gamma%60)%20controls%20the%20influence%0A%20%20%20%20of%20each%20individual%20training%20sample%20on%20the%20decision%20boundary%20and%20%24%7Br%7D%24%20is%0A%20%20%20%20the%20bias%20term%20(%60coef0%60)%20that%20shifts%20the%20data%20up%20or%20down.%0A%0A%20%20%20%20In%20the%20sigmoid%20kernel%2C%20the%20similarity%20between%20two%20data%20points%20is%20computed%0A%20%20%20%20using%20the%20hyperbolic%20tangent%20function%20(%24%5Ctanh%24).%20The%20kernel%20function%0A%20%20%20%20scales%20and%20possibly%20shifts%20the%20dot%20product%20of%20the%20two%20points%0A%20%20%20%20(%24%5Cmathbf%7Bx%7D_1%24%20and%20%24%5Cmathbf%7Bx%7D_2%24).%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(plot_training_data_with_decision_boundary)%3A%0A%20%20%20%20plot_training_data_with_decision_boundary(%22sigmoid%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20We%20can%20see%20that%20the%20decision%20boundaries%20obtained%20with%20the%20sigmoid%20kernel%0A%20%20%20%20appear%20curved%20and%20irregular.%20The%20decision%20boundary%20tries%20to%20separate%20the%0A%20%20%20%20classes%20by%20fitting%20a%20sigmoid-shaped%20curve%2C%20resulting%20in%20a%20complex%20boundary%0A%20%20%20%20that%20may%20not%20generalize%20well%20to%20unseen%20data.%20From%20this%20example%20it%20becomes%0A%20%20%20%20obvious%2C%20that%20the%20sigmoid%20kernel%20has%20very%20specific%20use%20cases%2C%20when%20dealing%0A%20%20%20%20with%20data%20that%20exhibits%20a%20sigmoidal%20shape.%20In%20this%20example%2C%20careful%20fine%0A%20%20%20%20tuning%20might%20find%20more%20generalizable%20decision%20boundaries.%20Because%20of%20its%0A%20%20%20%20specificity%2C%20the%20sigmoid%20kernel%20is%20less%20commonly%20used%20in%20practice%20compared%20to%0A%20%20%20%20other%20kernels.%0A%0A%20%20%20%20%23%23%20Conclusion%0A%20%20%20%20In%20this%20example%2C%20we%20have%20visualized%20the%20decision%20boundaries%20trained%20with%20the%0A%20%20%20%20provided%20dataset.%20The%20plots%20serve%20as%20an%20intuitive%20demonstration%20of%20how%0A%20%20%20%20different%20kernels%20utilize%20the%20training%20data%20to%20determine%20the%20classification%0A%20%20%20%20boundaries.%0A%0A%20%20%20%20The%20hyperplanes%20and%20margins%2C%20although%20computed%20indirectly%2C%20can%20be%20imagined%20as%0A%20%20%20%20planes%20in%20the%20transformed%20feature%20space.%20However%2C%20in%20the%20plots%2C%20they%20are%0A%20%20%20%20represented%20relative%20to%20the%20original%20feature%20space%2C%20resulting%20in%20curved%0A%20%20%20%20decision%20boundaries%20for%20the%20polynomial%2C%20RBF%2C%20and%20sigmoid%20kernels.%0A%0A%20%20%20%20Please%20note%20that%20the%20plots%20do%20not%20evaluate%20the%20individual%20kernel's%20accuracy%20or%0A%20%20%20%20quality.%20They%20are%20intended%20to%20provide%20a%20visual%20understanding%20of%20how%20the%0A%20%20%20%20different%20kernels%20use%20the%20training%20data.%0A%0A%20%20%20%20For%20a%20comprehensive%20evaluation%2C%20fine-tuning%20of%20%3Aclass%3A%60~sklearn.svm.SVC%60%0A%20%20%20%20parameters%20using%20techniques%20such%20as%0A%20%20%20%20%3Aclass%3A%60~sklearn.model_selection.GridSearchCV%60%20is%20recommended%20to%20capture%20the%0A%20%20%20%20underlying%20structures%20within%20the%20data.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20XOR%20dataset%0A%20%20%20%20A%20classical%20example%20of%20a%20dataset%20which%20is%20not%20linearly%20separable%20is%20the%20XOR%0A%20%20%20%20pattern.%20HEre%20we%20demonstrate%20how%20different%20kernels%20work%20on%20such%20a%20dataset.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(np%2C%20plot_training_data_with_decision_boundary%2C%20plt)%3A%0A%20%20%20%20xx%2C%20yy%20%3D%20np.meshgrid(np.linspace(-3%2C%203%2C%20500)%2C%20np.linspace(-3%2C%203%2C%20500))%0A%20%20%20%20np.random.seed(0)%0A%20%20%20%20X_1%20%3D%20np.random.randn(300%2C%202)%0A%20%20%20%20y_1%20%3D%20np.logical_xor(X_1%5B%3A%2C%200%5D%20%3E%200%2C%20X_1%5B%3A%2C%201%5D%20%3E%200)%0A%20%20%20%20_%2C%20_ax%20%3D%20plt.subplots(2%2C%202%2C%20figsize%3D(8%2C%208))%0A%20%20%20%20args%20%3D%20dict(long_title%3DFalse%2C%20support_vectors%3DFalse)%0A%20%20%20%20plot_training_data_with_decision_boundary('linear'%2C%20_ax%5B0%2C%200%5D%2C%20**args)%0A%20%20%20%20plot_training_data_with_decision_boundary('poly'%2C%20_ax%5B0%2C%201%5D%2C%20**args)%0A%20%20%20%20plot_training_data_with_decision_boundary('rbf'%2C%20_ax%5B1%2C%200%5D%2C%20**args)%0A%20%20%20%20plot_training_data_with_decision_boundary('sigmoid'%2C%20_ax%5B1%2C%201%5D%2C%20**args)%0A%20%20%20%20plt.show()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20As%20you%20can%20see%20from%20the%20plots%20above%2C%20only%20the%20%60rbf%60%20kernel%20can%20find%20a%0A%20%20%20%20reasonable%20decision%20boundary%20for%20the%20above%20dataset.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

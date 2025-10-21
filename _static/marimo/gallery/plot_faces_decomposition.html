@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>plot faces decomposition</title>
+    <script type="module" crossorigin src="./assets/index-CmLKiEd5.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DvsdsEjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CLazWf1X.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/namespace-Cw55ynVb.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-CwmWKpZ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BiHHvE7B.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CE6I2UvI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-g9rPKvBX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tslib.es6-C9vXkBtU.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-DoREeXhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-BGfCi1Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DT6vyuIM.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-Dz-D6iuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CmOWIaur.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DIqNYEaz.js">
+    <link rel="modulepreload" crossorigin href="./assets/accordion-D8h6M7fo.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-kGH9aJGk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D3tww20d.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CW-4dtRh.js">
+    <link rel="modulepreload" crossorigin href="./assets/Logger-BkkOJyg0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ZAWHeY7d.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-7g8sREeT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BF8660ot.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-B43sqCFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BgA7kxZb.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DLuqCLqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-BW3DqHQI.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-4nUTgcVU.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BNd9AHNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-B27Cqkm6.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-CPHpt5EV.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-DOlTOwhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CkrfIDeS.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-D-i9tuGn.js">
+    <link rel="modulepreload" crossorigin href="./assets/documentation-B7z6bB-t.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-Cbb7s63B.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-g1jf7cM6.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BKA5A0CC.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-Cv7-oioA.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BeIk_wvs.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-Pb6bybhb.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-UyRAkvTk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DmdhGVVs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DvpkYOW9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-BWXNjHkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CFr1RdS2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BNtnpgX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8v7AWk6.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ct0a8Isf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-AWYmVWdt.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Q2QzNScK.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFifaB39.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D80s9YgJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Nl79A0iO.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CtJ8WONl.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-CIKnF2iY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-B6JN1xKT.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-70y9MzDK.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CYsuWFDa.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BEhFXxEH.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CrDndhyw.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Bjp5Xukk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-CIqS2s5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-15z_NdNZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-fS9J74Ro.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-CwGVmPnG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-0FwDfOhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/ansi_up-CAiCs1Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BC4M7Onc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dom-Ckypy4pz.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-CmwnOe1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-B47kqttt.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-ClrKK0Xi.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-Bp1Lbm07.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Ctpp-mTr.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-C5VC4Hal.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DLotTEZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-BQY4AwHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bj7QJPi8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DiIW1jDy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-gSaRWBIN.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BZnPO5jA.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-P4hvbAnW.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BwP_-Md9.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BQOmTFFk.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DGY-1Oes.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-DSAh6fUR.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-dpoTdlj9.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D8x9Ez3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-D4GhiyiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-DH7hmhHO.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-5DtoeNLQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CD3rG7IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BxPDuBrN.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CGWkBrzb.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-7_c6G_tO.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-B398JcWn.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-Tm8TdcWf.js">
+    <link rel="modulepreload" crossorigin href="./assets/with-selector-ChXsBWGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BU4PIFXg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DDpPg0Qh.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-DOk4LYuA.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CrHTFiMt.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-W6QvsWS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-IOch2AIR.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CMFDmrFM.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CswUuyA0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BB0ZlY9B.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-CInCxHCy.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-CHF-jGs2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser.module-B3yPAbRZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/loader-BcHzCbiy.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dbfcbsil.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-D7J6fBFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BxWQIw0s.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-D2l0yAKQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-RtEDTktT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-duCv2i7k.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BapFytxP.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BB1DXJJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/list-filter-DQ2_e3bh.js">
+    <link rel="modulepreload" crossorigin href="./assets/columns-BeFC1dXm.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BP3h9dJJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CDwTdPy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CC6unPyM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-ClSRUhA6.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-DL9DPBMc.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-CivJpvvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BGEnYYSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-kUHLEZT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-ChWJhz87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-CAcr7Wct.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-Di_xoXjD.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-Dmzd-CnA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-Dj3BexHh.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CwHsH4x8.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-wMFrY47K.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-Ckxr6pwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DI18L7Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-D5oKA5-e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Ds68BFYI.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BX8VjCCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Zo5TA9DG.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-CFxcdBki.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-mBAxBzPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-BcNYHZLG.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-CPCvpiTN.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-D1hQMnx_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-Cex53SxB.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CN-qI0dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D-WfasXC.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-C2Bk9ykO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-7LAl9weo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbO9MTKn.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-TRUculCV.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-ShpF60yB.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-W4OhtMWM.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BfudlHw2.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-8yEsQJi9.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BYzWDFJH.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-WaG0qjy7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-6ZBTv_cn.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BZA77Trx.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DpWGO_-7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-3piSAXMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-CHejLEQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-TqnwljOq.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-D9MERKWw.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-CmHE3eNl.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-ByREbWaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-B5j-8u3J.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-BoludFkg.js">
+    <link rel="stylesheet" crossorigin href="./assets/documentation-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/columns-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrbV-Ps3.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%E2%9A%A0%EF%B8%8F%20**Note**%3A%20This%20notebook%20was%20automatically%20converted%20from%20Jupyter.%0A%20%20%20%20Some%20features%20may%20behave%20differently%20in%20marimo.%0A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%0A%20%20%20%20%23%20Faces%20dataset%20decompositions%0A%0A%20%20%20%20This%20example%20applies%20to%20%60olivetti_faces_dataset%60%20different%20unsupervised%0A%20%20%20%20matrix%20decomposition%20(dimension%20reduction)%20methods%20from%20the%20module%0A%20%20%20%20%3Amod%3A%60sklearn.decomposition%60%20(see%20the%20documentation%20chapter%0A%20%20%20%20%60decompositions%60).%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Authors%3A%20The%20scikit-learn%20developers%0A%20%20%20%20%23%20SPDX-License-Identifier%3A%20BSD-3-Clause%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Dataset%20preparation%0A%0A%20%20%20%20Loading%20and%20preprocessing%20the%20Olivetti%20faces%20dataset.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20logging%0A%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20from%20numpy.random%20import%20RandomState%0A%0A%20%20%20%20from%20sklearn%20import%20cluster%2C%20decomposition%0A%20%20%20%20from%20sklearn.datasets%20import%20fetch_olivetti_faces%0A%0A%20%20%20%20rng%20%3D%20RandomState(0)%0A%0A%20%20%20%20%23%20Display%20progress%20logs%20on%20stdout%0A%20%20%20%20logging.basicConfig(level%3Dlogging.INFO%2C%20format%3D%22%25(asctime)s%20%25(levelname)s%20%25(message)s%22)%0A%0A%20%20%20%20faces%2C%20_%20%3D%20fetch_olivetti_faces(return_X_y%3DTrue%2C%20shuffle%3DTrue%2C%20random_state%3Drng)%0A%20%20%20%20n_samples%2C%20n_features%20%3D%20faces.shape%0A%0A%20%20%20%20%23%20Global%20centering%20(focus%20on%20one%20feature%2C%20centering%20all%20samples)%0A%20%20%20%20faces_centered%20%3D%20faces%20-%20faces.mean(axis%3D0)%0A%0A%20%20%20%20%23%20Local%20centering%20(focus%20on%20one%20sample%2C%20centering%20all%20features)%0A%20%20%20%20faces_centered%20-%3D%20faces_centered.mean(axis%3D1).reshape(n_samples%2C%20-1)%0A%0A%20%20%20%20print(%22Dataset%20consists%20of%20%25d%20faces%22%20%25%20n_samples)%0A%20%20%20%20return%20cluster%2C%20decomposition%2C%20faces%2C%20faces_centered%2C%20plt%2C%20rng%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Define%20a%20base%20function%20to%20plot%20the%20gallery%20of%20faces.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(plt)%3A%0A%20%20%20%20n_row%2C%20n_col%20%3D%202%2C%203%0A%20%20%20%20n_components%20%3D%20n_row%20*%20n_col%0A%20%20%20%20image_shape%20%3D%20(64%2C%2064)%0A%0A%0A%20%20%20%20def%20plot_gallery(title%2C%20images%2C%20n_col%3Dn_col%2C%20n_row%3Dn_row%2C%20cmap%3Dplt.cm.gray)%3A%0A%20%20%20%20%20%20%20%20fig%2C%20axs%20%3D%20plt.subplots(%0A%20%20%20%20%20%20%20%20%20%20%20%20nrows%3Dn_row%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20ncols%3Dn_col%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20figsize%3D(2.0%20*%20n_col%2C%202.3%20*%20n_row)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20facecolor%3D%22white%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20constrained_layout%3DTrue%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20fig.set_constrained_layout_pads(w_pad%3D0.01%2C%20h_pad%3D0.02%2C%20hspace%3D0%2C%20wspace%3D0)%0A%20%20%20%20%20%20%20%20fig.set_edgecolor(%22black%22)%0A%20%20%20%20%20%20%20%20fig.suptitle(title%2C%20size%3D16)%0A%20%20%20%20%20%20%20%20for%20ax%2C%20vec%20in%20zip(axs.flat%2C%20images)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20vmax%20%3D%20max(vec.max()%2C%20-vec.min())%0A%20%20%20%20%20%20%20%20%20%20%20%20im%20%3D%20ax.imshow(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20vec.reshape(image_shape)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20cmap%3Dcmap%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20interpolation%3D%22nearest%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20vmin%3D-vmax%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20vmax%3Dvmax%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.axis(%22off%22)%0A%0A%20%20%20%20%20%20%20%20fig.colorbar(im%2C%20ax%3Daxs%2C%20orientation%3D%22horizontal%22%2C%20shrink%3D0.99%2C%20aspect%3D40%2C%20pad%3D0.01)%0A%20%20%20%20%20%20%20%20plt.show()%0A%20%20%20%20return%20image_shape%2C%20n_components%2C%20plot_gallery%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Let's%20take%20a%20look%20at%20our%20data.%20Gray%20color%20indicates%20negative%20values%2C%0A%20%20%20%20white%20indicates%20positive%20values.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(faces_centered%2C%20n_components%2C%20plot_gallery)%3A%0A%20%20%20%20plot_gallery(%22Faces%20from%20dataset%22%2C%20faces_centered%5B%3An_components%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Decomposition%0A%0A%20%20%20%20Initialise%20different%20estimators%20for%20decomposition%20and%20fit%20each%0A%20%20%20%20of%20them%20on%20all%20images%20and%20plot%20some%20results.%20Each%20estimator%20extracts%0A%20%20%20%206%20components%20as%20vectors%20%24h%20%5Cin%20%5Cmathbb%7BR%7D%5E%7B4096%7D%24.%0A%20%20%20%20We%20just%20displayed%20these%20vectors%20in%20human-friendly%20visualisation%20as%2064x64%20pixel%20images.%0A%0A%20%20%20%20Read%20more%20in%20the%20%60User%20Guide%20%3Cdecompositions%3E%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Eigenfaces%20-%20PCA%20using%20randomized%20SVD%0A%20%20%20%20Linear%20dimensionality%20reduction%20using%20Singular%20Value%20Decomposition%20(SVD)%20of%20the%20data%0A%20%20%20%20to%20project%20it%20to%20a%20lower%20dimensional%20space.%0A%0A%0A%20%20%20%20%3Cdiv%20class%3D%22alert%20alert-info%22%3E%3Ch4%3ENote%3C%2Fh4%3E%3Cp%3EThe%20Eigenfaces%20estimator%2C%20via%20the%20%3Apy%3Amod%3A%60sklearn.decomposition.PCA%60%2C%0A%20%20%20%20%20%20%20%20also%20provides%20a%20scalar%20%60noise_variance_%60%20(the%20mean%20of%20pixelwise%20variance)%0A%20%20%20%20%20%20%20%20that%20cannot%20be%20displayed%20as%20an%20image.%3C%2Fp%3E%3C%2Fdiv%3E%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(decomposition%2C%20faces_centered%2C%20n_components%2C%20plot_gallery)%3A%0A%20%20%20%20pca_estimator%20%3D%20decomposition.PCA(%0A%20%20%20%20%20%20%20%20n_components%3Dn_components%2C%20svd_solver%3D%22randomized%22%2C%20whiten%3DTrue%0A%20%20%20%20)%0A%20%20%20%20pca_estimator.fit(faces_centered)%0A%20%20%20%20plot_gallery(%0A%20%20%20%20%20%20%20%20%22Eigenfaces%20-%20PCA%20using%20randomized%20SVD%22%2C%20pca_estimator.components_%5B%3An_components%5D%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Non-negative%20components%20-%20NMF%0A%0A%20%20%20%20Estimate%20non-negative%20original%20data%20as%20production%20of%20two%20non-negative%20matrices.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(decomposition%2C%20faces%2C%20n_components%2C%20plot_gallery)%3A%0A%20%20%20%20nmf_estimator%20%3D%20decomposition.NMF(n_components%3Dn_components%2C%20tol%3D5e-3)%0A%20%20%20%20nmf_estimator.fit(faces)%20%20%23%20original%20non-%20negative%20dataset%0A%20%20%20%20plot_gallery(%22Non-negative%20components%20-%20NMF%22%2C%20nmf_estimator.components_%5B%3An_components%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Independent%20components%20-%20FastICA%0A%20%20%20%20Independent%20component%20analysis%20separates%20a%20multivariate%20vectors%20into%20additive%0A%20%20%20%20subcomponents%20that%20are%20maximally%20independent.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(decomposition%2C%20faces_centered%2C%20n_components%2C%20plot_gallery)%3A%0A%20%20%20%20ica_estimator%20%3D%20decomposition.FastICA(%0A%20%20%20%20%20%20%20%20n_components%3Dn_components%2C%20max_iter%3D400%2C%20whiten%3D%22arbitrary-variance%22%2C%20tol%3D15e-5%0A%20%20%20%20)%0A%20%20%20%20ica_estimator.fit(faces_centered)%0A%20%20%20%20plot_gallery(%0A%20%20%20%20%20%20%20%20%22Independent%20components%20-%20FastICA%22%2C%20ica_estimator.components_%5B%3An_components%5D%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Sparse%20components%20-%20MiniBatchSparsePCA%0A%0A%20%20%20%20Mini-batch%20sparse%20PCA%20(%3Aclass%3A%60~sklearn.decomposition.MiniBatchSparsePCA%60)%0A%20%20%20%20extracts%20the%20set%20of%20sparse%20components%20that%20best%20reconstruct%20the%20data.%20This%0A%20%20%20%20variant%20is%20faster%20but%20less%20accurate%20than%20the%20similar%0A%20%20%20%20%3Aclass%3A%60~sklearn.decomposition.SparsePCA%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(decomposition%2C%20faces_centered%2C%20n_components%2C%20plot_gallery%2C%20rng)%3A%0A%20%20%20%20batch_pca_estimator%20%3D%20decomposition.MiniBatchSparsePCA(%0A%20%20%20%20%20%20%20%20n_components%3Dn_components%2C%20alpha%3D0.1%2C%20max_iter%3D100%2C%20batch_size%3D3%2C%20random_state%3Drng%0A%20%20%20%20)%0A%20%20%20%20batch_pca_estimator.fit(faces_centered)%0A%20%20%20%20plot_gallery(%0A%20%20%20%20%20%20%20%20%22Sparse%20components%20-%20MiniBatchSparsePCA%22%2C%0A%20%20%20%20%20%20%20%20batch_pca_estimator.components_%5B%3An_components%5D%2C%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Dictionary%20learning%0A%0A%20%20%20%20By%20default%2C%20%3Aclass%3A%60~sklearn.decomposition.MiniBatchDictionaryLearning%60%0A%20%20%20%20divides%20the%20data%20into%20mini-batches%20and%20optimizes%20in%20an%20online%20manner%20by%0A%20%20%20%20cycling%20over%20the%20mini-batches%20for%20the%20specified%20number%20of%20iterations.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(decomposition%2C%20faces_centered%2C%20n_components%2C%20plot_gallery%2C%20rng)%3A%0A%20%20%20%20batch_dict_estimator%20%3D%20decomposition.MiniBatchDictionaryLearning(%0A%20%20%20%20%20%20%20%20n_components%3Dn_components%2C%20alpha%3D0.1%2C%20max_iter%3D50%2C%20batch_size%3D3%2C%20random_state%3Drng%0A%20%20%20%20)%0A%20%20%20%20batch_dict_estimator.fit(faces_centered)%0A%20%20%20%20plot_gallery(%22Dictionary%20learning%22%2C%20batch_dict_estimator.components_%5B%3An_components%5D)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Cluster%20centers%20-%20MiniBatchKMeans%0A%0A%20%20%20%20%3Aclass%3A%60sklearn.cluster.MiniBatchKMeans%60%20is%20computationally%20efficient%20and%0A%20%20%20%20implements%20on-line%20learning%20with%20a%0A%20%20%20%20%3Ameth%3A%60~sklearn.cluster.MiniBatchKMeans.partial_fit%60%20method.%20That%20is%0A%20%20%20%20why%20it%20could%20be%20beneficial%20to%20enhance%20some%20time-consuming%20algorithms%20with%0A%20%20%20%20%3Aclass%3A%60~sklearn.cluster.MiniBatchKMeans%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(cluster%2C%20faces_centered%2C%20n_components%2C%20plot_gallery%2C%20rng)%3A%0A%20%20%20%20kmeans_estimator%20%3D%20cluster.MiniBatchKMeans(%0A%20%20%20%20%20%20%20%20n_clusters%3Dn_components%2C%0A%20%20%20%20%20%20%20%20tol%3D1e-3%2C%0A%20%20%20%20%20%20%20%20batch_size%3D20%2C%0A%20%20%20%20%20%20%20%20max_iter%3D50%2C%0A%20%20%20%20%20%20%20%20random_state%3Drng%2C%0A%20%20%20%20)%0A%20%20%20%20kmeans_estimator.fit(faces_centered)%0A%20%20%20%20plot_gallery(%0A%20%20%20%20%20%20%20%20%22Cluster%20centers%20-%20MiniBatchKMeans%22%2C%0A%20%20%20%20%20%20%20%20kmeans_estimator.cluster_centers_%5B%3An_components%5D%2C%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Factor%20Analysis%20components%20-%20FA%0A%0A%20%20%20%20%3Aclass%3A%60~sklearn.decomposition.FactorAnalysis%60%20is%20similar%20to%0A%20%20%20%20%3Aclass%3A%60~sklearn.decomposition.PCA%60%20but%20has%20the%20advantage%20of%20modelling%20the%0A%20%20%20%20variance%20in%20every%20direction%20of%20the%20input%20space%20independently%20(heteroscedastic%0A%20%20%20%20noise).%20Read%20more%20in%20the%20%60User%20Guide%20%3CFA%3E%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20decomposition%2C%0A%20%20%20%20faces_centered%2C%0A%20%20%20%20image_shape%2C%0A%20%20%20%20n_components%2C%0A%20%20%20%20plot_gallery%2C%0A%20%20%20%20plt%2C%0A)%3A%0A%20%20%20%20fa_estimator%20%3D%20decomposition.FactorAnalysis(n_components%3Dn_components%2C%20max_iter%3D20)%0A%20%20%20%20fa_estimator.fit(faces_centered)%0A%20%20%20%20plot_gallery(%22Factor%20Analysis%20(FA)%22%2C%20fa_estimator.components_%5B%3An_components%5D)%0A%0A%20%20%20%20%23%20---%20Pixelwise%20variance%0A%20%20%20%20plt.figure(figsize%3D(3.2%2C%203.6)%2C%20facecolor%3D%22white%22%2C%20tight_layout%3DTrue)%0A%20%20%20%20vec%20%3D%20fa_estimator.noise_variance_%0A%20%20%20%20vmax%20%3D%20max(vec.max()%2C%20-vec.min())%0A%20%20%20%20plt.imshow(%0A%20%20%20%20%20%20%20%20vec.reshape(image_shape)%2C%0A%20%20%20%20%20%20%20%20cmap%3Dplt.cm.gray%2C%0A%20%20%20%20%20%20%20%20interpolation%3D%22nearest%22%2C%0A%20%20%20%20%20%20%20%20vmin%3D-vmax%2C%0A%20%20%20%20%20%20%20%20vmax%3Dvmax%2C%0A%20%20%20%20)%0A%20%20%20%20plt.axis(%22off%22)%0A%20%20%20%20plt.title(%22Pixelwise%20variance%20from%20%5Cn%20Factor%20Analysis%20(FA)%22%2C%20size%3D16%2C%20wrap%3DTrue)%0A%20%20%20%20plt.colorbar(orientation%3D%22horizontal%22%2C%20shrink%3D0.8%2C%20pad%3D0.03)%0A%20%20%20%20plt.show()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Decomposition%3A%20Dictionary%20learning%0A%0A%20%20%20%20In%20the%20further%20section%2C%20let's%20consider%20%60DictionaryLearning%60%20more%20precisely.%0A%20%20%20%20Dictionary%20learning%20is%20a%20problem%20that%20amounts%20to%20finding%20a%20sparse%20representation%0A%20%20%20%20of%20the%20input%20data%20as%20a%20combination%20of%20simple%20elements.%20These%20simple%20elements%20form%0A%20%20%20%20a%20dictionary.%20It%20is%20possible%20to%20constrain%20the%20dictionary%20and%2For%20coding%20coefficients%0A%20%20%20%20to%20be%20positive%20to%20match%20constraints%20that%20may%20be%20present%20in%20the%20data.%0A%0A%20%20%20%20%3Aclass%3A%60~sklearn.decomposition.MiniBatchDictionaryLearning%60%20implements%20a%0A%20%20%20%20faster%2C%20but%20less%20accurate%20version%20of%20the%20dictionary%20learning%20algorithm%20that%0A%20%20%20%20is%20better%20suited%20for%20large%20datasets.%20Read%20more%20in%20the%20%60User%20Guide%0A%20%20%20%20%3CMiniBatchDictionaryLearning%3E%60.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Plot%20the%20same%20samples%20from%20our%20dataset%20but%20with%20another%20colormap.%0A%20%20%20%20Red%20indicates%20negative%20values%2C%20blue%20indicates%20positive%20values%2C%0A%20%20%20%20and%20white%20represents%20zeros.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(faces_centered%2C%20n_components%2C%20plot_gallery%2C%20plt)%3A%0A%20%20%20%20plot_gallery(%22Faces%20from%20dataset%22%2C%20faces_centered%5B%3An_components%5D%2C%20cmap%3Dplt.cm.RdBu)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20Similar%20to%20the%20previous%20examples%2C%20we%20change%20parameters%20and%20train%0A%20%20%20%20%3Aclass%3A%60~sklearn.decomposition.MiniBatchDictionaryLearning%60%20estimator%20on%20all%0A%20%20%20%20images.%20Generally%2C%20the%20dictionary%20learning%20and%20sparse%20encoding%20decompose%0A%20%20%20%20input%20data%20into%20the%20dictionary%20and%20the%20coding%20coefficients%20matrices.%20%24X%0A%20%20%20%20%5Capprox%20UV%24%2C%20where%20%24X%20%3D%20%5Bx_1%2C%20.%20.%20.%20%2C%20x_n%5D%24%2C%20%24X%20%5Cin%0A%20%20%20%20%5Cmathbb%7BR%7D%5E%7Bm%C3%97n%7D%24%2C%20dictionary%20%24U%20%5Cin%20%5Cmathbb%7BR%7D%5E%7Bm%C3%97k%7D%24%2C%20coding%0A%20%20%20%20coefficients%20%24V%20%5Cin%20%5Cmathbb%7BR%7D%5E%7Bk%C3%97n%7D%24.%0A%0A%20%20%20%20Also%20below%20are%20the%20results%20when%20the%20dictionary%20and%20coding%0A%20%20%20%20coefficients%20are%20positively%20constrained.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Dictionary%20learning%20-%20positive%20dictionary%0A%0A%20%20%20%20In%20the%20following%20section%20we%20enforce%20positivity%20when%20finding%20the%20dictionary.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(decomposition%2C%20faces_centered%2C%20n_components%2C%20plot_gallery%2C%20plt%2C%20rng)%3A%0A%20%20%20%20dict_pos_dict_estimator%20%3D%20decomposition.MiniBatchDictionaryLearning(%0A%20%20%20%20%20%20%20%20n_components%3Dn_components%2C%0A%20%20%20%20%20%20%20%20alpha%3D0.1%2C%0A%20%20%20%20%20%20%20%20max_iter%3D50%2C%0A%20%20%20%20%20%20%20%20batch_size%3D3%2C%0A%20%20%20%20%20%20%20%20random_state%3Drng%2C%0A%20%20%20%20%20%20%20%20positive_dict%3DTrue%2C%0A%20%20%20%20)%0A%20%20%20%20dict_pos_dict_estimator.fit(faces_centered)%0A%20%20%20%20plot_gallery(%0A%20%20%20%20%20%20%20%20%22Dictionary%20learning%20-%20positive%20dictionary%22%2C%0A%20%20%20%20%20%20%20%20dict_pos_dict_estimator.components_%5B%3An_components%5D%2C%0A%20%20%20%20%20%20%20%20cmap%3Dplt.cm.RdBu%2C%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Dictionary%20learning%20-%20positive%20code%0A%0A%20%20%20%20Below%20we%20constrain%20the%20coding%20coefficients%20as%20a%20positive%20matrix.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(decomposition%2C%20faces_centered%2C%20n_components%2C%20plot_gallery%2C%20plt%2C%20rng)%3A%0A%20%20%20%20dict_pos_code_estimator%20%3D%20decomposition.MiniBatchDictionaryLearning(%0A%20%20%20%20%20%20%20%20n_components%3Dn_components%2C%0A%20%20%20%20%20%20%20%20alpha%3D0.1%2C%0A%20%20%20%20%20%20%20%20max_iter%3D50%2C%0A%20%20%20%20%20%20%20%20batch_size%3D3%2C%0A%20%20%20%20%20%20%20%20fit_algorithm%3D%22cd%22%2C%0A%20%20%20%20%20%20%20%20random_state%3Drng%2C%0A%20%20%20%20%20%20%20%20positive_code%3DTrue%2C%0A%20%20%20%20)%0A%20%20%20%20dict_pos_code_estimator.fit(faces_centered)%0A%20%20%20%20plot_gallery(%0A%20%20%20%20%20%20%20%20%22Dictionary%20learning%20-%20positive%20code%22%2C%0A%20%20%20%20%20%20%20%20dict_pos_code_estimator.components_%5B%3An_components%5D%2C%0A%20%20%20%20%20%20%20%20cmap%3Dplt.cm.RdBu%2C%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%23%20Dictionary%20learning%20-%20positive%20dictionary%20%26%20code%0A%0A%20%20%20%20Also%20below%20are%20the%20results%20if%20the%20dictionary%20values%20and%20coding%0A%20%20%20%20coefficients%20are%20positively%20constrained.%0A%0A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(decomposition%2C%20faces_centered%2C%20n_components%2C%20plot_gallery%2C%20plt%2C%20rng)%3A%0A%20%20%20%20dict_pos_estimator%20%3D%20decomposition.MiniBatchDictionaryLearning(%0A%20%20%20%20%20%20%20%20n_components%3Dn_components%2C%0A%20%20%20%20%20%20%20%20alpha%3D0.1%2C%0A%20%20%20%20%20%20%20%20max_iter%3D50%2C%0A%20%20%20%20%20%20%20%20batch_size%3D3%2C%0A%20%20%20%20%20%20%20%20fit_algorithm%3D%22cd%22%2C%0A%20%20%20%20%20%20%20%20random_state%3Drng%2C%0A%20%20%20%20%20%20%20%20positive_dict%3DTrue%2C%0A%20%20%20%20%20%20%20%20positive_code%3DTrue%2C%0A%20%20%20%20)%0A%20%20%20%20dict_pos_estimator.fit(faces_centered)%0A%20%20%20%20plot_gallery(%0A%20%20%20%20%20%20%20%20%22Dictionary%20learning%20-%20positive%20dictionary%20%26%20code%22%2C%0A%20%20%20%20%20%20%20%20dict_pos_estimator.components_%5B%3An_components%5D%2C%0A%20%20%20%20%20%20%20%20cmap%3Dplt.cm.RdBu%2C%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "edit",
+            "version": "0.17.0",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "custom_css": [], "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "columns", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>
